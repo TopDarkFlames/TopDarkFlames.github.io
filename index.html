@@ -1,1 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braian Ribeiro | TopDarkFlames</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
+    <style>
+        /* --- Reset & Variáveis Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #050505; /* Preto quase absoluto */
+            --bg-card: #0d0d0d;  /* Cinza muito escuro para contraste */
+            --text-main: #cccccc; /* Cinza claro para leitura relaxada */
+            --text-quote: #8B0000; /* Dark Red (o sangue) */
+            --accent: #DC143C;     /* Crimson Red (o Hellsing) */
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Fira Code', monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+            color: inherit;
+        }
+
+        ul { list-style: none; }
+
+        /* --- Utilitários --- */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .crimson { color: var(--accent); }
+        .dark-red { color: var(--text-quote); }
+
+        /* --- Header / Nav --- */
+        header {
+            background-color: rgba(5, 5, 5, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(220, 20, 60, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 5px var(--accent);
+        }
+
+        /* --- Seção Hero (Apresentação) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background-image: url('https://raw.githubusercontent.com/TopDarkFlames/TopDarkFlames/main/Hellsing%20Bats%20(1).gif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Overlay escuro para garantir leitura sobre o GIF */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            margin-top: 80px; /* Compensa o header fixo */
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .btn-crimson {
+            border: 2px solid var(--accent);
+            padding: 12px 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: var(--accent);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn-crimson:hover {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.6);
+        }
+
+        /* --- Seção Status/Quote (O Blood Dripping SVG) --- */
+        .status-quote {
+            padding: 80px 0;
+            background-color: var(--bg-card);
+            border-top: 1px solid rgba(139, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(139, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .status-quote img {
+            max-width: 100%;
+            height: auto;
+            /* Invertemos a cor para garantir que o SVG feito para fundo escuro 
+               funcione aqui, caso necessário. Mas o fundo já é #0d0d0d */
+        }
+
+        /* --- Seção Sobre --- */
+        .about {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            color: var(--accent);
+            text-align: center;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .about-content {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        /* Simulação dos Status (vibe Dark Souls) */
+        .hunter-stats {
+            background-color: var(--bg-card);
+            border: 1px solid var(--text-quote);
+            padding: 30px;
+            min-width: 300px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .stat-name { color: var(--text-quote); font-weight: bold; }
+        .stat-val { color: var(--accent); font-weight: bold; }
+
+        /* --- Seção Projetos --- */
+        .projects {
+            padding: 100px 0;
+            background-color: var(--bg-card);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--bg-color);
+            border: 1px solid rgba(220, 20, 60, 0.2);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(220, 20, 60, 0.2);
+        }
+
+        .project-title {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+            color: #aaaaaa;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            font-size: 0.7rem;
+            background-color: rgba(139, 0, 0, 0.2);
+            color: var(--text-quote);
+            padding: 3px 8px;
+            border: 1px solid var(--text-quote);
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid rgba(220, 20, 60, 0.1);
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a { font-size: 1.2rem; }
+        .footer-links a:hover { color: var(--accent); }
+
+        .vibe-hunter {
+            color: var(--text-quote);
+            font-style: italic;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        /* --- Responsividade --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.2rem; }
+            .about-content { flex-direction: column-reverse; }
+            .nav-links { display: none; } /* Simplicidade para mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">TopDarkFlames</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="https://github.com/TopDarkFlames" target="_blank">GitHub</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content container">
+            <h1 class="hero-title">Braian Ribeiro</h1>
+            <p class="hero-subtitle">Full-Stack Developer | C, Java, Rust & Web Technologies</p>
+            <a href="#about" class="btn-crimson">Initiate Hunt</a>
+        </div>
+    </section>
+
+    <section class="status-quote">
+        <div class="container">
+            <img src="https://raw.githubusercontent.com/TopDarkFlames/TopDarkFlames/main/frase-sangue.svg" alt="Blood Quote">
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Class: Hunter</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Atualmente cursando <span class="crimson">Ciência da Computação</span>. Desenvolvedor Full-Stack apaixonado por sistemas de baixo nível e tecnologias web modernas.</p>
+                    <p>Meu ambiente é o Linux (Arch + CachyOS), focado em performance, ricing e produtividade via terminal com Neovim.</p>
+                </div>
+                
+                <div class="hunter-stats">
+                    <div class="stat-item"><span class="stat-name">Level</span><span class="stat-val">2</span></div>
+                    <div class="stat-item"><span class="stat-name">System</span><span class="stat-val">CachyOS</span></div>
+                    <div class="stat-item"><span class="stat-name">Focus</span><span class="stat-val">Full-Stack</span></div>
+                    <div class="stat-item"><span class="stat-name">Primary</span><span class="stat-val">C / Java / Rust</span></div>
+                    <div class="stat-item"><span class="stat-name">Status</span><span class="stat-val">Refuses to go hollow</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Complete Hunts</h2>
+            <div class="project-grid">
+                
+                <a href="#" class="project-card">
+                    <h3 class="project-title">Nome do Projeto 1</h3>
+                    <p>Descrição breve e direta do desafio que foi superado neste desenvolvimento.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">Rust</span>
+                        <span class="tech-item">WebAssembly</span>
+                        <span class="tech-item">Backend</span>
+                    </div>
+                </a>
+
+                <a href="#" class="project-card">
+                    <h3 class="project-title">Nome do Projeto 2</h3>
+                    <p>Interface responsiva focada em performance e estética sombria.</p>
+                    <div class="tech-stack">
+                        <span class="tech-item">HTML/CSS</span>
+                        <span class="tech-item">JavaScript</span>
+                        <span class="tech-item">GitHub Pages</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/TopDarkFlames" target="_blank" title="GitHub">GH</a>
+                </div>
+            <p>&copy; 2023 TopDarkFlames.</p>
+            <p class="vibe-hunter">† Seek misery. For it will lead you to a greater goal. †</p>
+        </div>
+    </footer>
+
+</body>
+</html>
