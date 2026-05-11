@@ -3,31 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TopDarkFlames | GitHub Portfolio</title>
-  <meta name="description" content="Portfólio estilo GitHub de TopDarkFlames, desenvolvedor full-stack." />
+  <title>TopDarkFlames | RGB Clean Portfolio</title>
+  <meta name="description" content="Portfólio RGB clean de TopDarkFlames, desenvolvedor full-stack." />
 
   <style>
     :root {
-      --bg: #0d1117;
-      --bg-soft: #010409;
-      --panel: #161b22;
-      --panel-2: #0d1117;
-      --border: #30363d;
-      --border-soft: rgba(240, 246, 252, 0.1);
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --muted-2: #6e7681;
-      --green: #3fb950;
-      --green-soft: rgba(63, 185, 80, 0.12);
-      --blue: #58a6ff;
-      --purple: #bc8cff;
-      --orange: #f0883e;
-      --red: #f85149;
-      --yellow: #d29922;
-      --radius: 12px;
-      --shadow: 0 20px 55px rgba(1, 4, 9, 0.45);
-      --mono: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      --bg: #07080d;
+      --bg-2: #0b0d14;
+      --card: rgba(255, 255, 255, 0.055);
+      --card-2: rgba(255, 255, 255, 0.035);
+      --line: rgba(255, 255, 255, 0.11);
+      --text: #f6f8ff;
+      --muted: #9aa3b8;
+      --soft: #cdd4e8;
+      --r: #ff3b7f;
+      --g: #30f2a2;
+      --b: #43a5ff;
+      --p: #a855f7;
+      --y: #facc15;
+      --radius: 26px;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * {
@@ -43,12 +40,26 @@
     body {
       min-height: 100vh;
       background:
-        radial-gradient(circle at top left, rgba(88, 166, 255, 0.13), transparent 32rem),
-        radial-gradient(circle at 80% 20%, rgba(188, 140, 255, 0.10), transparent 28rem),
-        linear-gradient(180deg, var(--bg-soft), var(--bg) 18rem);
+        radial-gradient(circle at 10% 10%, rgba(67, 165, 255, .18), transparent 30rem),
+        radial-gradient(circle at 85% 15%, rgba(255, 59, 127, .16), transparent 26rem),
+        radial-gradient(circle at 50% 100%, rgba(48, 242, 162, .13), transparent 32rem),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
       color: var(--text);
       font-family: var(--sans);
       line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
     }
 
     a {
@@ -56,880 +67,879 @@
       text-decoration: none;
     }
 
-    ::selection {
-      background: rgba(88, 166, 255, 0.32);
-    }
-
-    .container {
-      width: min(1216px, calc(100% - 32px));
+    .wrap {
+      width: min(1160px, calc(100% - 32px));
       margin: 0 auto;
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: rgba(1, 4, 9, 0.82);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(16px);
+    .rgb-border {
+      position: relative;
     }
 
-    .topbar-inner {
+    .rgb-border::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(120deg, var(--r), var(--b), var(--g), var(--p), var(--r));
+      background-size: 280% 280%;
+      animation: rgbMove 9s ease infinite;
+      opacity: .72;
+    }
+
+    @keyframes rgbMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 8, 13, .72);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      min-height: 64px;
+      gap: 20px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 700;
+      font-weight: 850;
+      letter-spacing: -0.03em;
     }
 
-    .octo {
-      width: 34px;
-      height: 34px;
+    .logo {
+      width: 38px;
+      height: 38px;
       display: grid;
       place-items: center;
-      border-radius: 50%;
-      background: var(--text);
-      color: var(--bg-soft);
-      font-size: 19px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 0 40px rgba(88,166,255,.17);
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      box-shadow:
+        0 0 24px rgba(67, 165, 255, .20),
+        inset 0 0 0 1px rgba(255,255,255,.12);
     }
 
-    .search {
-      flex: 1;
-      max-width: 420px;
-      height: 36px;
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 9px;
-      padding: 0 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--muted);
-      background: rgba(13, 17, 23, .75);
-      font-size: 14px;
+      gap: 10px;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.035);
     }
 
-    .search kbd {
-      margin-left: auto;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1px 6px;
-      color: var(--muted-2);
-      font: 12px var(--mono);
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 18px;
+    .nav-links a {
+      padding: 8px 13px;
+      border-radius: 999px;
       color: var(--muted);
       font-size: 14px;
+      transition: .18s ease;
     }
 
-    .nav a:hover {
-      color: var(--text);
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,.07);
     }
 
-    .hero {
-      padding: 38px 0 18px;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(22,27,34,.32), transparent);
-    }
-
-    .profile-grid {
-      display: grid;
-      grid-template-columns: 296px 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-
-    .sidebar {
-      position: sticky;
-      top: 86px;
-    }
-
-    .avatar-wrap {
-      position: relative;
-      width: 296px;
-      max-width: 100%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      padding: 4px;
-      border: 1px solid var(--border);
-      background:
-        conic-gradient(from 180deg, var(--green), var(--blue), var(--purple), var(--orange), var(--green));
-      box-shadow: var(--shadow);
-    }
-
-    .avatar {
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(circle at 40% 35%, rgba(248,81,73,.18), transparent 30%),
-        radial-gradient(circle at 65% 70%, rgba(88,166,255,.16), transparent 34%),
-        #0d1117;
-      border: 8px solid var(--bg);
-      overflow: hidden;
-    }
-
-    .avatar svg {
-      width: 72%;
-      filter: drop-shadow(0 18px 30px rgba(0,0,0,.55));
-    }
-
-    .status-bubble {
-      position: absolute;
-      right: 18px;
-      bottom: 34px;
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--panel);
-      box-shadow: 0 10px 30px rgba(1,4,9,.55);
-    }
-
-    .profile-name {
-      margin-top: 20px;
-    }
-
-    .profile-name h1 {
-      font-size: 28px;
-      line-height: 1.15;
-      letter-spacing: -.03em;
-    }
-
-    .profile-name p {
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 20px;
-      font-weight: 300;
-    }
-
-    .bio {
-      margin-top: 16px;
-      color: var(--text);
-      font-size: 16px;
-    }
-
-    .btn {
-      width: 100%;
+    .nav-cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-height: 36px;
-      margin-top: 16px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: #21262d;
-      color: var(--text);
-      font-weight: 600;
+      min-height: 40px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.055);
+      color: white;
+      font-weight: 750;
       font-size: 14px;
-      transition: .16s ease;
+      transition: .2s ease;
     }
 
-    .btn:hover {
-      background: #30363d;
-      border-color: #8b949e;
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.25);
+      box-shadow: 0 0 28px rgba(67,165,255,.18);
     }
 
-    .meta {
-      margin-top: 18px;
-      display: grid;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .meta span {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .meta strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .tabs {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      overflow-x: auto;
-      margin-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .tab {
+    .hero {
       position: relative;
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 44px;
+      align-items: center;
+      min-height: calc(100vh - 72px);
+      padding: 76px 0;
+    }
+
+    .tagline {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 14px 12px;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      background: rgba(255,255,255,.04);
+      color: var(--soft);
+      font: 13px var(--mono);
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--g);
+      box-shadow: 0 0 18px var(--g);
+    }
+
+    h1 {
+      margin-top: 22px;
+      max-width: 780px;
+      font-size: clamp(46px, 7.4vw, 92px);
+      line-height: .95;
+      letter-spacing: -0.075em;
+      font-weight: 950;
+    }
+
+    .rgb-text {
+      display: block;
+      background: linear-gradient(90deg, var(--r), var(--b), var(--g), var(--p));
+      background-size: 250% 250%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rgbMove 7s ease infinite;
+    }
+
+    .lead {
+      margin-top: 24px;
+      max-width: 650px;
       color: var(--muted);
-      font-size: 14px;
-      white-space: nowrap;
+      font-size: 18px;
+      line-height: 1.8;
     }
 
-    .tab.active {
-      color: var(--text);
-      font-weight: 600;
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
     }
 
-    .tab.active::after {
-      content: "";
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.055);
+      color: white;
+      font-weight: 800;
+      transition: .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.085);
+    }
+
+    .button-primary {
+      border: 0;
+      background: linear-gradient(120deg, var(--b), var(--p), var(--r));
+      box-shadow: 0 18px 42px rgba(168, 85, 247, .22);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 20px 54px rgba(67, 165, 255, .24);
+    }
+
+    .panel-stage {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+    }
+
+    .glow-ring {
       position: absolute;
-      left: 10px;
-      right: 10px;
-      bottom: -1px;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--orange);
+      width: min(520px, 88vw);
+      aspect-ratio: 1;
+      border-radius: 36px;
+      background:
+        linear-gradient(120deg, rgba(255,59,127,.28), rgba(67,165,255,.26), rgba(48,242,162,.22), rgba(168,85,247,.24));
+      filter: blur(26px);
+      opacity: .6;
+      animation: breathe 6s ease-in-out infinite;
     }
 
-    .readme {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: rgba(13,17,23,.66);
-      overflow: hidden;
+    @keyframes breathe {
+      0%, 100% { transform: scale(.96) rotate(0deg); opacity: .46; }
+      50% { transform: scale(1.04) rotate(3deg); opacity: .72; }
+    }
+
+    .dashboard {
+      width: min(470px, 100%);
+      border-radius: 30px;
+      background: rgba(10, 12, 20, .78);
+      backdrop-filter: blur(20px);
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .readme-head {
-      min-height: 52px;
+    .dash-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 0 16px;
-      border-bottom: 1px solid var(--border);
-      background: var(--panel);
+      gap: 14px;
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
     }
 
-    .readme-title {
+    .dots {
       display: flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--text);
-      font: 600 14px var(--sans);
-    }
-
-    .readme-body {
-      padding: 26px;
-    }
-
-    .intro {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 26px;
-      align-items: center;
-    }
-
-    .intro h2 {
-      font-size: clamp(30px, 5vw, 56px);
-      line-height: 1;
-      letter-spacing: -.055em;
-      margin-bottom: 16px;
-    }
-
-    .intro h2 span {
-      color: var(--blue);
-    }
-
-    .intro p {
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 660px;
-    }
-
-    .terminal {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--bg-soft);
-    }
-
-    .terminal-head {
-      display: flex;
-      align-items: center;
       gap: 8px;
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--border);
-      background: #161b22;
     }
 
     .dot {
       width: 11px;
       height: 11px;
       border-radius: 50%;
-      background: var(--red);
     }
 
-    .dot:nth-child(2) { background: var(--yellow); }
-    .dot:nth-child(3) { background: var(--green); }
+    .dot:nth-child(1) { background: var(--r); box-shadow: 0 0 12px var(--r); }
+    .dot:nth-child(2) { background: var(--y); box-shadow: 0 0 12px var(--y); }
+    .dot:nth-child(3) { background: var(--g); box-shadow: 0 0 12px var(--g); }
 
-    .terminal pre {
-      padding: 18px;
-      color: #c9d1d9;
-      font: 13px/1.8 var(--mono);
-      white-space: pre-wrap;
+    .dash-label {
+      color: var(--muted);
+      font: 12px var(--mono);
     }
 
-    .prompt { color: var(--green); }
-    .cmd { color: var(--blue); }
-    .comment { color: var(--muted-2); }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 34px 0 14px;
+    .dash-body {
+      padding: 20px;
     }
 
-    .section-title h3 {
-      font-size: 16px;
-      font-weight: 600;
-    }
-
-    .section-title a {
-      color: var(--blue);
-      font-size: 12px;
-    }
-
-    .pinned-grid {
+    .profile-card {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 84px 1fr;
       gap: 16px;
-    }
-
-    .repo-card {
-      min-height: 148px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: rgba(13,17,23,.74);
-      padding: 16px;
-      transition: .16s ease;
-    }
-
-    .repo-card:hover {
-      border-color: #8b949e;
-      transform: translateY(-2px);
-    }
-
-    .repo-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .repo-name {
-      display: flex;
       align-items: center;
-      gap: 8px;
-      color: var(--blue);
-      font-weight: 600;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
     }
 
-    .repo-visibility {
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 0 7px;
+    .avatar {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 20%),
+        linear-gradient(135deg, var(--r), var(--b), var(--g));
+      box-shadow: 0 0 36px rgba(67,165,255,.24);
+      font-size: 38px;
+    }
+
+    .profile-card h2 {
+      font-size: 22px;
+      letter-spacing: -.03em;
+    }
+
+    .profile-card p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .mini-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini-stat {
+      padding: 14px 10px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.035);
+      text-align: center;
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    .mini-stat span {
       color: var(--muted);
       font-size: 12px;
-      line-height: 18px;
     }
 
-    .repo-card p {
-      min-height: 42px;
+    .code-box {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+
+    .code-box pre {
+      padding: 17px;
+      color: #dce5ff;
+      white-space: pre-wrap;
+      font: 13px/1.8 var(--mono);
+    }
+
+    .key { color: var(--b); }
+    .str { color: var(--g); }
+    .arr { color: var(--p); }
+
+    section {
+      padding: 76px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin-bottom: 10px;
+      color: var(--g);
+      font: 13px var(--mono);
+    }
+
+    h3.section-title {
+      font-size: clamp(30px, 4.5vw, 52px);
+      line-height: 1;
+      letter-spacing: -.055em;
+      font-weight: 940;
+    }
+
+    .section-copy {
+      max-width: 520px;
       color: var(--muted);
-      font-size: 13px;
+      line-height: 1.75;
     }
 
-    .repo-foot {
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      position: relative;
+      min-height: 250px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      overflow: hidden;
+      transition: .22s ease;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -90px auto;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: var(--card-glow, rgba(67,165,255,.18));
+      filter: blur(34px);
+      opacity: .75;
+      transition: .22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,.26);
+      background: rgba(255,255,255,.07);
+    }
+
+    .card:hover::after {
+      opacity: 1;
+      transform: scale(1.12);
+    }
+
+    .card small, .repo-type {
+      position: relative;
+      z-index: 1;
+      color: var(--muted);
+      font: 12px var(--mono);
+    }
+
+    .card h4 {
+      position: relative;
+      z-index: 1;
+      margin-top: 12px;
+      font-size: 23px;
+      letter-spacing: -.03em;
+    }
+
+    .card p {
+      position: relative;
+      z-index: 1;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .chips {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 14px;
+      gap: 8px;
       margin-top: 18px;
-      color: var(--muted);
-      font-size: 12px;
     }
 
-    .lang {
+    .chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-    }
-
-    .lang::before {
-      content: "";
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--blue);
-    }
-
-    .lang.html::before { background: #e34c26; }
-    .lang.css::before { background: #563d7c; }
-    .lang.md::before { background: #8b949e; }
-    .lang.js::before { background: #f1e05a; }
-
-    .contrib {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
-      background: rgba(13,17,23,.66);
-    }
-
-    .contrib-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 10px;
+      background: rgba(255,255,255,.045);
+      color: var(--soft);
       font-size: 12px;
+    }
+
+    .skills-layout {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .skill-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 24px;
+    }
+
+    .skill-panel h4 {
+      font-size: 22px;
+      letter-spacing: -.03em;
       margin-bottom: 12px;
     }
 
-    .heatmap {
+    .skill-panel p {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .skill-grid {
       display: grid;
-      grid-template-columns: repeat(26, 1fr);
-      gap: 4px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
-    .day {
-      aspect-ratio: 1;
-      border-radius: 3px;
-      background: #161b22;
-      outline: 1px solid rgba(255,255,255,.02);
-    }
-
-    .l1 { background: #0e4429; }
-    .l2 { background: #006d32; }
-    .l3 { background: #26a641; }
-    .l4 { background: #39d353; }
-    .skills-cloud {
+    .skill-item {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      background: rgba(13,17,23,.66);
-    }
-
-    .skill-pill {
-      display: inline-flex;
       align-items: center;
-      gap: 7px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 7px 11px;
-      background: #161b22;
-      color: #c9d1d9;
-      font-size: 13px;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,.04);
     }
 
-    .skill-pill:hover {
-      border-color: var(--blue);
-      color: var(--text);
+    .skill-item span:first-child {
+      font-weight: 750;
+    }
+
+    .skill-item span:last-child {
+      color: var(--muted);
+      font: 12px var(--mono);
     }
 
     .timeline {
-      position: relative;
       display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      padding-left: 28px;
     }
 
-    .timeline::before {
-      content: "";
-      position: absolute;
-      top: 6px;
-      bottom: 6px;
-      left: 8px;
-      width: 2px;
-      background: var(--border);
+    .time-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card-2);
+      padding: 22px;
     }
 
-    .timeline-item {
-      position: relative;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      background: rgba(13,17,23,.66);
+    .time-card .num {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--b), var(--p));
+      font-weight: 900;
+      box-shadow: 0 0 24px rgba(168,85,247,.2);
     }
 
-    .timeline-item::before {
-      content: "";
-      position: absolute;
-      left: -26px;
-      top: 19px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 0 4px var(--bg);
+    .time-card h4 {
+      font-size: 19px;
+      margin-bottom: 8px;
     }
 
-    .timeline-item h4 {
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-
-    .timeline-item p {
+    .time-card p {
       color: var(--muted);
-      font-size: 13px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .contact-box {
+      position: relative;
+      padding: 34px;
+      border-radius: 34px;
+      background: rgba(255,255,255,.055);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .contact-box::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--r), var(--b), var(--g));
+      filter: blur(46px);
+      opacity: .32;
+    }
+
+    .contact-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .contact-content h3 {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+
+    .contact-content p {
+      margin-top: 14px;
+      max-width: 620px;
+      color: var(--muted);
+      line-height: 1.75;
     }
 
     .footer {
-      margin-top: 28px;
       padding: 28px 0 44px;
       color: var(--muted);
       text-align: center;
-      font-size: 12px;
+      font: 12px var(--mono);
     }
 
-    .blink {
-      display: inline-block;
-      width: 8px;
-      height: 16px;
-      margin-left: 4px;
-      vertical-align: -3px;
-      background: var(--green);
-      animation: blink 1s steps(1) infinite;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    .fade-in {
+    .reveal {
       opacity: 0;
-      transform: translateY(14px);
-      transition: .55s ease;
+      transform: translateY(18px);
+      transition: .65s ease;
     }
 
-    .fade-in.visible {
+    .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    @media (max-width: 960px) {
-      .profile-grid,
-      .intro {
+    @media (max-width: 940px) {
+      .hero,
+      .skills-layout,
+      .contact-content {
         grid-template-columns: 1fr;
       }
 
-      .sidebar {
-        position: static;
-        display: grid;
-        grid-template-columns: 180px 1fr;
-        gap: 18px;
-        align-items: center;
+      .panel-stage {
+        min-height: auto;
+        padding-top: 12px;
       }
 
-      .avatar-wrap {
-        width: 180px;
+      .cards,
+      .timeline {
+        grid-template-columns: 1fr;
       }
 
-      .profile-name {
-        margin-top: 0;
-      }
-
-      .btn {
-        width: auto;
-        padding-inline: 18px;
+      .section-head {
+        align-items: start;
+        flex-direction: column;
       }
     }
 
     @media (max-width: 720px) {
-      .topbar-inner {
+      .nav-inner {
+        min-height: auto;
+        padding: 14px 0;
         flex-wrap: wrap;
-        padding: 12px 0;
       }
 
-      .search {
+      .nav-links {
         order: 3;
-        max-width: none;
-        flex-basis: 100%;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: space-between;
       }
 
-      .nav {
-        gap: 12px;
+      .hero {
+        padding: 50px 0;
       }
 
-      .sidebar {
+      .mini-stats,
+      .skill-grid {
         grid-template-columns: 1fr;
       }
 
-      .avatar-wrap {
-        width: 168px;
-      }
-
-      .pinned-grid {
+      .profile-card {
         grid-template-columns: 1fr;
       }
 
-      .readme-body {
-        padding: 18px;
-      }
-
-      .heatmap {
-        grid-template-columns: repeat(13, 1fr);
+      .dashboard {
+        border-radius: 24px;
       }
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <a class="brand" href="#overview" aria-label="TopDarkFlames home">
-        <span class="octo">⌘</span>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#home">
+        <span class="logo">🔥</span>
         <span>TopDarkFlames</span>
       </a>
 
-      <div class="search" aria-label="fake search bar">
-        <span>🔎</span>
-        <span>Search or jump to...</span>
-        <kbd>/</kbd>
+      <div class="nav-links">
+        <a href="#projects">Projetos</a>
+        <a href="#skills">Stack</a>
+        <a href="#journey">Jornada</a>
+        <a href="#contact">Contato</a>
       </div>
 
-      <nav class="nav" aria-label="main navigation">
-        <a href="#overview">Overview</a>
-        <a href="#repositories">Repositories</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <a class="nav-cta" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
     </div>
-  </header>
+  </nav>
 
-  <section class="hero" id="overview">
-    <div class="container profile-grid">
-      <aside class="sidebar fade-in">
-        <div class="avatar-wrap">
-          <div class="avatar" aria-label="TopDarkFlames avatar illustration">
-            <svg viewBox="0 0 220 220" role="img" aria-hidden="true">
-              <defs>
-                <linearGradient id="flame" x1="0" x2="1" y1="0" y2="1">
-                  <stop offset="0%" stop-color="#58a6ff"/>
-                  <stop offset="45%" stop-color="#bc8cff"/>
-                  <stop offset="100%" stop-color="#f85149"/>
-                </linearGradient>
-              </defs>
-              <path d="M112 18c8 35 43 45 43 88 0 29-20 55-45 55-26 0-46-20-46-48 0-18 10-35 23-48-2 17 8 28 19 34 18-19 3-43 6-81Z" fill="url(#flame)" opacity=".95"/>
-              <path d="M110 88c5 17 22 24 22 46 0 18-12 33-28 33-15 0-27-12-27-29 0-12 7-22 16-31-1 12 5 20 13 24 11-12 2-27 4-43Z" fill="#0d1117" opacity=".86"/>
-              <circle cx="76" cy="178" r="7" fill="#3fb950"/>
-              <circle cx="112" cy="183" r="7" fill="#58a6ff"/>
-              <circle cx="148" cy="178" r="7" fill="#bc8cff"/>
-            </svg>
-          </div>
-          <span class="status-bubble" title="Available">🔥</span>
-        </div>
-
-        <div class="profile-name">
-          <h1>TopDarkFlames</h1>
-          <p>TopDarkFlames</p>
-        </div>
-
-        <p class="bio">
-          Full-stack developer em formação. Gosto de web, back-end, banco de dados e de entender como as coisas funcionam antes de fingir que era fácil.
+  <main id="home" class="wrap">
+    <section class="hero">
+      <div class="reveal">
+        <div class="tagline"><span class="live-dot"></span> full-stack developer • github pages • rgb mode</div>
+        <h1>
+          Código limpo,
+          <span class="rgb-text">visual RGB.</span>
+        </h1>
+        <p class="lead">
+          Sou o TopDarkFlames, desenvolvedor full-stack em formação. Estou construindo projetos web, estudando Java, SQL e Rust, e deixando meu GitHub com uma identidade visual que não parece saída de um formulário chato, porque já basta imposto e reunião.
         </p>
 
-        <a class="btn" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">Follow</a>
-
-        <div class="meta">
-          <span>📍 Brazil</span>
-          <span>🎓 Computer Science</span>
-          <span>🧠 Java, SQL, Rust</span>
-          <span>🔗 <strong>github.com/TopDarkFlames</strong></span>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">Ver projetos</a>
+          <a class="button" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">Abrir GitHub</a>
         </div>
-      </aside>
+      </div>
 
-      <main>
-        <div class="tabs fade-in">
-          <a class="tab active" href="#overview">📌 Overview</a>
-          <a class="tab" href="#repositories">📁 Repositories</a>
-          <a class="tab" href="#skills">🧩 Skills</a>
-          <a class="tab" href="#contact">💬 Contact</a>
-        </div>
-
-        <article class="readme fade-in">
-          <div class="readme-head">
-            <div class="readme-title">📄 TopDarkFlames / README.md</div>
-            <span style="color: var(--muted); font-size: 12px;">Public</span>
+      <div class="panel-stage reveal">
+        <div class="glow-ring"></div>
+        <div class="dashboard rgb-border">
+          <div class="dash-head">
+            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <span class="dash-label">profile.config</span>
           </div>
-
-          <div class="readme-body">
-            <div class="intro">
+          <div class="dash-body">
+            <div class="profile-card">
+              <div class="avatar">TF</div>
               <div>
-                <h2>Hi, I'm <span>TopDarkFlames</span><span class="blink"></span></h2>
-                <p>
-                  Esse é meu espaço para organizar projetos, estudos e experimentos. A ideia é simples: aprender construindo, versionar o progresso e deixar tudo visível sem precisar transformar cada card em propaganda de startup.
-                </p>
-              </div>
-
-              <div class="terminal">
-                <div class="terminal-head">
-                  <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                </div>
-                <pre><span class="prompt">topdarkflames@github</span>:<span class="cmd">~</span>$ whoami
-Full-Stack Developer
-
-<span class="prompt">topdarkflames@github</span>:<span class="cmd">~</span>$ current_focus
-Java • SQL • Rust • Web
-
-<span class="prompt">topdarkflames@github</span>:<span class="cmd">~</span>$ status
-building, learning, committing</pre>
+                <h2>TopDarkFlames</h2>
+                <p>Full-Stack Developer • Brazil</p>
               </div>
             </div>
 
-            <div class="section-title" id="repositories">
-              <h3>Pinned repositories</h3>
-              <a href="https://github.com/TopDarkFlames?tab=repositories" target="_blank" rel="noreferrer">View all</a>
+            <div class="mini-stats">
+              <div class="mini-stat"><strong>5</strong><span>Repos</span></div>
+              <div class="mini-stat"><strong>12</strong><span>Techs</span></div>
+              <div class="mini-stat"><strong>∞</strong><span>Curiosity</span></div>
             </div>
 
-            <div class="pinned-grid">
-              <a class="repo-card" href="https://github.com/TopDarkFlames/TopDarkFlames.github.io" target="_blank" rel="noreferrer">
-                <div class="repo-top">
-                  <span class="repo-name">📘 TopDarkFlames.github.io</span>
-                  <span class="repo-visibility">Public</span>
-                </div>
-                <p>Site pessoal publicado no GitHub Pages. Sim, este aqui. Agora sem React jogado dentro de HTML como se o navegador fosse adivinhar.</p>
-                <div class="repo-foot"><span class="lang html">HTML</span><span>★ Portfolio</span><span>Updated recently</span></div>
-              </a>
-
-              <a class="repo-card" href="https://github.com/TopDarkFlames/portfolio" target="_blank" rel="noreferrer">
-                <div class="repo-top">
-                  <span class="repo-name">📘 portfolio</span>
-                  <span class="repo-visibility">Public</span>
-                </div>
-                <p>Experimentos de layout, responsividade e identidade visual para portfólio.</p>
-                <div class="repo-foot"><span class="lang css">CSS</span><span>UI</span><span>Front-end</span></div>
-              </a>
-
-              <a class="repo-card" href="https://github.com/TopDarkFlames/TopDarkFlames" target="_blank" rel="noreferrer">
-                <div class="repo-top">
-                  <span class="repo-name">📘 TopDarkFlames</span>
-                  <span class="repo-visibility">Public</span>
-                </div>
-                <p>README do perfil com stack, estudos, identidade dev e aquele toque de lore que impede tudo de virar currículo sem alma.</p>
-                <div class="repo-foot"><span class="lang md">Markdown</span><span>Profile</span><span>README</span></div>
-              </a>
-
-              <a class="repo-card" href="https://github.com/TopDarkFlames?tab=repositories" target="_blank" rel="noreferrer">
-                <div class="repo-top">
-                  <span class="repo-name">📘 more-projects</span>
-                  <span class="repo-visibility">Public</span>
-                </div>
-                <p>Outros estudos, forks e testes que fazem parte do caminho. Nem todo repo precisa ser perfeito, alguns só precisam ensinar algo.</p>
-                <div class="repo-foot"><span class="lang js">Mixed</span><span>Learning</span><span>Open source</span></div>
-              </a>
-            </div>
-
-            <div class="section-title">
-              <h3>Contribution activity</h3>
-              <a href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">Profile</a>
-            </div>
-
-            <div class="contrib">
-              <div class="contrib-top">
-                <span>Learning activity, commits, tests and probably a few fixes named “final-final-agora-vai”.</span>
-                <span>2026</span>
-              </div>
-              <div class="heatmap" aria-label="decorative contribution heatmap">
-                <span class="day l1"></span><span class="day"></span><span class="day l2"></span><span class="day l3"></span><span class="day"></span><span class="day l1"></span><span class="day l4"></span><span class="day"></span><span class="day l2"></span><span class="day"></span><span class="day"></span><span class="day l3"></span><span class="day l1"></span>
-                <span class="day"></span><span class="day l2"></span><span class="day l1"></span><span class="day"></span><span class="day l3"></span><span class="day l4"></span><span class="day l1"></span><span class="day"></span><span class="day l2"></span><span class="day"></span><span class="day l3"></span><span class="day l1"></span><span class="day"></span>
-                <span class="day l3"></span><span class="day l1"></span><span class="day"></span><span class="day l2"></span><span class="day"></span><span class="day"></span><span class="day l1"></span><span class="day l3"></span><span class="day l4"></span><span class="day"></span><span class="day l2"></span><span class="day l1"></span><span class="day"></span>
-                <span class="day"></span><span class="day l1"></span><span class="day l4"></span><span class="day l2"></span><span class="day"></span><span class="day l3"></span><span class="day"></span><span class="day l1"></span><span class="day"></span><span class="day l2"></span><span class="day l3"></span><span class="day"></span><span class="day l1"></span>
-                <span class="day l2"></span><span class="day"></span><span class="day"></span><span class="day l1"></span><span class="day l3"></span><span class="day"></span><span class="day l2"></span><span class="day l4"></span><span class="day l1"></span><span class="day"></span><span class="day"></span><span class="day l3"></span><span class="day l2"></span>
-                <span class="day"></span><span class="day l3"></span><span class="day l1"></span><span class="day"></span><span class="day l2"></span><span class="day l1"></span><span class="day"></span><span class="day"></span><span class="day l3"></span><span class="day l4"></span><span class="day"></span><span class="day l1"></span><span class="day l2"></span>
-                <span class="day l1"></span><span class="day"></span><span class="day l2"></span><span class="day"></span><span class="day l3"></span><span class="day l1"></span><span class="day l4"></span><span class="day"></span><span class="day l2"></span><span class="day"></span><span class="day l1"></span><span class="day l3"></span><span class="day"></span>
-                <span class="day"></span><span class="day l2"></span><span class="day l4"></span><span class="day l1"></span><span class="day"></span><span class="day"></span><span class="day l3"></span><span class="day l2"></span><span class="day"></span><span class="day l1"></span><span class="day l3"></span><span class="day"></span><span class="day l2"></span>
-              </div>
-            </div>
-
-            <div class="section-title" id="skills">
-              <h3>Languages and tools</h3>
-              <a href="#overview">Back to top</a>
-            </div>
-
-            <div class="skills-cloud">
-              <span class="skill-pill">☕ Java</span>
-              <span class="skill-pill">🗄️ SQL</span>
-              <span class="skill-pill">🦀 Rust</span>
-              <span class="skill-pill">🌐 HTML</span>
-              <span class="skill-pill">🎨 CSS</span>
-              <span class="skill-pill">🟨 JavaScript</span>
-              <span class="skill-pill">🔷 TypeScript</span>
-              <span class="skill-pill">⚛️ React</span>
-              <span class="skill-pill">🟢 Node.js</span>
-              <span class="skill-pill">🐍 Python</span>
-              <span class="skill-pill">🔧 Git</span>
-              <span class="skill-pill">☁️ AWS</span>
-            </div>
-
-            <div class="section-title">
-              <h3>Timeline</h3>
-              <a href="#contact">Contact</a>
-            </div>
-
-            <div class="timeline">
-              <div class="timeline-item">
-                <h4>Computer Science</h4>
-                <p>Estudando na EEP Piracicaba e fortalecendo base em programação, lógica e desenvolvimento.</p>
-              </div>
-              <div class="timeline-item">
-                <h4>CyberSecurity</h4>
-                <p>Estudos em andamento, com foco em entender segurança de sistemas e boas práticas.</p>
-              </div>
-              <div class="timeline-item">
-                <h4>Blockchain</h4>
-                <p>Curso concluído e interesse em tecnologias descentralizadas, sem precisar prometer revolucionar o planeta em três parágrafos.</p>
-              </div>
-            </div>
-
-            <div class="section-title" id="contact">
-              <h3>Contact</h3>
-              <a href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
-            </div>
-
-            <div class="terminal">
-              <div class="terminal-head">
-                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              </div>
-              <pre><span class="prompt">visitor@portfolio</span>:<span class="cmd">~</span>$ ./contact.sh
-GitHub: https://github.com/TopDarkFlames
-LinkedIn: add-your-link-here
-Status: open to learn, build and collaborate</pre>
+            <div class="code-box">
+              <pre>{
+  <span class="key">"focus"</span>: <span class="arr">[</span><span class="str">"web"</span>, <span class="str">"backend"</span>, <span class="str">"databases"</span><span class="arr">]</span>,
+  <span class="key">"learning"</span>: <span class="arr">[</span><span class="str">"java"</span>, <span class="str">"sql"</span>, <span class="str">"rust"</span><span class="arr">]</span>,
+  <span class="key">"status"</span>: <span class="str">"building in public"</span>
+}</pre>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">// pinned projects</p>
+          <h3 class="section-title">Projetos em destaque</h3>
+        </div>
+        <p class="section-copy">
+          Uma seleção dos repositórios que representam melhor meu momento atual: perfil, portfólio e presença web no GitHub Pages.
+        </p>
+      </div>
+
+      <div class="cards">
+        <a class="card reveal" style="--card-glow: rgba(67,165,255,.22);" href="https://github.com/TopDarkFlames/TopDarkFlames.github.io" target="_blank" rel="noreferrer">
+          <small>github-pages</small>
+          <h4>TopDarkFlames.github.io</h4>
+          <p>Meu site pessoal estático. Feito para rodar direto no GitHub Pages, sem build, sem drama, sem transformar HTML em vítima.</p>
+          <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Pages</span></div>
+        </a>
+
+        <a class="card reveal" style="--card-glow: rgba(255,59,127,.20);" href="https://github.com/TopDarkFlames/portfolio" target="_blank" rel="noreferrer">
+          <small>front-end</small>
+          <h4>portfolio</h4>
+          <p>Experimentos de layout, responsividade, animações e estilo visual para portfólio.</p>
+          <div class="chips"><span class="chip">CSS</span><span class="chip">UI</span><span class="chip">Responsive</span></div>
+        </a>
+
+        <a class="card reveal" style="--card-glow: rgba(48,242,162,.18);" href="https://github.com/TopDarkFlames/TopDarkFlames" target="_blank" rel="noreferrer">
+          <small>profile-readme</small>
+          <h4>TopDarkFlames</h4>
+          <p>Repositório do perfil no GitHub, com stack, estudos e identidade dev.</p>
+          <div class="chips"><span class="chip">Markdown</span><span class="chip">Profile</span><span class="chip">README</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">// stack</p>
+          <h3 class="section-title">Tecnologias</h3>
+        </div>
+        <p class="section-copy">
+          O foco é uma base full-stack: lógica, interface, dados, back-end e um pouco de cloud para não tratar deploy como bruxaria.
+        </p>
+      </div>
+
+      <div class="skills-layout">
+        <div class="skill-panel reveal rgb-border">
+          <h4>Build atual</h4>
+          <p>
+            Estou evoluindo principalmente em Java, SQL e Rust, enquanto mantenho contato com tecnologias web como HTML, CSS, JavaScript, TypeScript, React e Node.js.
+          </p>
+          <div class="chips">
+            <span class="chip">Brazil</span>
+            <span class="chip">Computer Science</span>
+            <span class="chip">Full-stack</span>
+          </div>
+        </div>
+
+        <div class="skill-grid reveal">
+          <div class="skill-item"><span>Java</span><span>logic/backend</span></div>
+          <div class="skill-item"><span>SQL</span><span>databases</span></div>
+          <div class="skill-item"><span>Rust</span><span>systems</span></div>
+          <div class="skill-item"><span>HTML + CSS</span><span>web base</span></div>
+          <div class="skill-item"><span>JavaScript</span><span>frontend</span></div>
+          <div class="skill-item"><span>TypeScript</span><span>typed web</span></div>
+          <div class="skill-item"><span>React</span><span>interfaces</span></div>
+          <div class="skill-item"><span>Node.js</span><span>APIs</span></div>
+          <div class="skill-item"><span>Python</span><span>scripts</span></div>
+          <div class="skill-item"><span>Git + AWS</span><span>tools/cloud</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">// journey</p>
+          <h3 class="section-title">Jornada</h3>
+        </div>
+        <p class="section-copy">
+          Um resumo direto do que estou estudando e construindo. Nada de “mudando o mundo com tecnologia”, só progresso real, que já é raro o bastante.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <article class="time-card reveal">
+          <div class="num">01</div>
+          <h4>Ciência da Computação</h4>
+          <p>Estudando na EEP Piracicaba e fortalecendo fundamentos de programação, lógica e sistemas.</p>
         </article>
-      </main>
+        <article class="time-card reveal">
+          <div class="num">02</div>
+          <h4>CyberSecurity</h4>
+          <p>Estudos em andamento para entender melhor segurança, boas práticas e funcionamento interno de aplicações.</p>
+        </article>
+        <article class="time-card reveal">
+          <div class="num">03</div>
+          <h4>Blockchain</h4>
+          <p>Curso concluído e interesse em tecnologias descentralizadas, com curiosidade técnica acima de hype.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-box rgb-border reveal">
+        <div class="contact-content">
+          <div>
+            <p class="eyebrow">// contact</p>
+            <h3>Vamos construir alguma coisa?</h3>
+            <p>
+              Aberto para projetos, estudos, colaboração e ideias envolvendo web, automações, sistemas simples e interfaces bem cuidadas.
+            </p>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="button" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <footer class="footer">
-    <div class="container">
-      Built as a static GitHub Pages site. No build step, no React drama, no dependency circus.
-    </div>
+    <div class="wrap">static site • github pages friendly • rgb without turning into a gamer keyboard crime scene</div>
   </footer>
 
   <script>
@@ -939,7 +949,7 @@ Status: open to learn, build and collaborate</pre>
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
