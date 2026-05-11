@@ -3,283 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROTOCOL :: TopDarkFlames</title>
+    <title>TERMINAL // TopDarkFlames_V4.0</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@300;500;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Configurações Nucleares & Variáveis --- */
+        /* --- Configurações Nucleares & Efeito CRT Global --- */
         * {
             margin: 0; padding: 0; box-sizing: border-box;
-            cursor: crosshair; /* Cursor gótico/tech */
+            cursor: crosshair;
+            /* Scrollbar retro */
+            scrollbar-width: thin;
+            scrollbar-color: #8B0000 #050505;
         }
 
         :root {
-            --bg-pure: #030303;    /* Preto Profundo */
-            --bg-subtle: #0a0a0a;  /* Contraste */
-            --text-main: #a0a0a0;   /* Cinza Técnico */
-            --text-darkred: #8B0000; /* Sangue Seco */
+            --bg-pure: #050505;    
+            --terminal-green: #33ff33; /* Opcional para vibe matrix */
+            --terminal-red: #ff3333;   /* Vermelho tech alerta */
             --accent-crimson: #DC143C; /* Crimson Glow (Hellsing) */
-            --glow-crimson: 0 0 15px rgba(220, 20, 60, 0.7);
-            
-            --font-tech: 'Oxanium', monospace;
-            --font-gothic: 'Uncial Antiqua', serif;
+            --glow-crimson: 0 0 10px rgba(220, 20, 60, 0.8), 0 0 20px rgba(220, 20, 60, 0.5);
+            --font-retro: 'VT323', monospace;
         }
 
         body {
             background-color: var(--bg-pure);
-            color: var(--text-main);
-            font-family: var(--font-tech);
-            font-weight: 300;
-            line-height: 1.5;
-            overflow-x: hidden;
+            color: var(--terminal-red);
+            font-family: var(--font-retro);
+            font-size: 1.2rem;
+            line-height: 1.2;
+            overflow: hidden; /* Impede scroll do body, só das janelas */
+            height: 100vh;
+            width: 100vw;
             position: relative;
         }
 
-        /* --- Efeitos de Ambiente Global (Scanlines & Ruído) --- */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px);
-            pointer-events: none; z-index: 100; opacity: 0.3;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAt4nwYAAAABnRSTlMAf0CAgIBA//89AAAAQUlEQVRIx9XSMQ4AIAgCQXn/o7u1m8YIidG5wDoDQE5Nq6XpUzR9q6bfI94YxT84DkYF3f8Kfv//3L4t4l/E32Dk4HIAAAAASUVORK5CYII=');
-            opacity: 0.03; pointer-events: none; z-index: 99;
-        }
-
-        /* --- Tipografia & Links --- */
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        h1, h2, h3 { font-family: var(--font-gothic); letter-spacing: 2px; }
-
-        .crimson-glow {
-            color: var(--accent-crimson);
-            text-shadow: var(--glow-crimson);
-            animation: pulse-glow 3s infinite ease-in-out;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { text-shadow: 0 0 15px rgba(220, 20, 60, 0.7); }
-            50% { text-shadow: 0 0 30px rgba(220, 20, 60, 1), 0 0 10px rgba(139, 0, 0, 0.5); }
-        }
-
-        /* --- Layout de Grade Angular --- */
-        .main-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(100px, auto);
-            gap: 15px;
-            padding: 15px;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .grid-item {
-            background-color: var(--bg-subtle);
-            border: 1px solid rgba(139, 0, 0, 0.3);
-            padding: 25px;
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.4s;
-        }
-
-        .grid-item:hover {
-            border-color: var(--accent-crimson);
-            box-shadow: inset 0 0 15px rgba(220, 20, 60, 0.1);
-        }
-
-        /* Cantos decorativos tech */
-        .grid-item::before, .grid-item::after {
-            content: ""; position: absolute;
-            width: 10px; height: 10px;
-            border-color: var(--text-darkred);
-            border-style: solid; opacity: 0.5;
-        }
-        .grid-item::before { top: 5px; left: 5px; border-width: 1px 0 0 1px; }
-        .grid-item::after { bottom: 5px; right: 5px; border-width: 0 1px 1px 0; }
-
-        /* --- Blocos Específicos do Layout --- */
+        /* --- Camadas de Ambiente do Monitor CRT --- */
         
-        /* 1. Header Protocol */
-        .block-header {
-            grid-column: 1 / -1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: var(--font-tech);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            border-color: rgba(220, 20, 60, 0.2);
-        }
-
-        /* 2. Banner/Hero (Onde está o GIF de morcegos) */
-        .block-hero {
-            grid-column: 1 / 4;
-            grid-row: 2 / 5;
+        /* 1. O GIF de Morcegos como Interferência de Fundo */
+        .ambient-interference {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://raw.githubusercontent.com/TopDarkFlames/TopDarkFlames/main/Hellsing%20Bats%20(1).gif');
             background-size: cover;
             background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            opacity: 0.04; /* Quase invisível, apenas um ruído de fundo */
+            filter: grayscale(100%) sepia(100%) hue-rotate(-50deg); /* Transforma em ruído vermelho */
+            pointer-events: none; z-index: 1;
+        }
+
+        /* 2. Scanlines Móveis */
+        body::after {
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px; pointer-events: none; z-index: 100;
+            animation: scanlineMobile 10s linear infinite;
+        }
+
+        /* 3. Efeito Curvatura da Tela CRT & Vinheta */
+        .crt-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+            pointer-events: none; z-index: 99;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+        }
+
+        @keyframes scanlineMobile {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        /* --- Tipografia & Links --- */
+        a { text-decoration: none; color: inherit; transition: 0.2s; position: relative;}
+        a::before { content: "> "; opacity: 0; margin-left: -15px; }
+        a:hover::before { opacity: 1; color: var(--accent-crimson); }
+        a:hover { color: var(--accent-crimson); text-shadow: var(--glow-crimson); }
+
+        .crimson-glow { color: var(--accent-crimson); text-shadow: var(--glow-crimson); }
+
+        /* --- Sistema de Janelas Flutuantes Retro --- */
+        .terminal-container {
             position: relative;
+            z-index: 10;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px;
+            width: 100%; height: 100%;
+            overflow: auto; /* Scroll apenas aqui dentro */
         }
+
+        .window {
+            background-color: rgba(10, 0, 0, 0.8);
+            border: 1px solid rgba(220, 20, 60, 0.3);
+            box-shadow: 0 0 15px rgba(220, 20, 60, 0.1);
+            position: relative;
+            display: flex; flex-direction: column;
+            animation: boot-up 0.5s ease-out both;
+        }
+
+        /* Barra de título da janela */
+        .window-header {
+            background-color: rgba(220, 20, 60, 0.1);
+            border-bottom: 1px solid rgba(220, 20, 60, 0.3);
+            padding: 5px 10px;
+            display: flex; justify-content: space-between;
+            font-weight: bold; text-transform: uppercase;
+            font-size: 1rem; color: var(--accent-crimson);
+        }
+        .window-controls { display: flex; gap: 5px; color: rgba(220, 20, 60, 0.5); }
+
+        .window-content {
+            padding: 15px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        /* --- Estilização Específica das Janelas --- */
         
-        .block-hero::after {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, var(--bg-subtle) 5%, transparent 60%);
-        }
+        /* 1. SYS_STATUS (About) */
+        .win-status { width: 350px; height: 450px; flex-shrink: 0; }
+        .stat-line { display: flex; justify-content: space-between; margin-bottom: 8px;}
+        .stat-line .label { color: rgba(255, 51, 51, 0.6); }
+        .stat-line .value { color: var(--accent-crimson); }
 
-        .hero-title-wrap {
-            position: relative; z-index: 2;
-            padding: 20px;
-            font-size: 2rem;
-        }
+        /* 2. LOGS (Projetos) */
+        .win-logs { width: 600px; height: 600px; flex-grow: 1; }
+        .log-entry { margin-bottom: 25px; border-left: 2px solid rgba(220, 20, 60, 0.2); padding-left: 10px; }
+        .log-header { font-weight: bold; color: var(--accent-crimson); margin-bottom: 5px; }
+        .log-meta { font-size: 0.9rem; color: rgba(255, 51, 51, 0.5); }
 
-        /* 3. Operative Status (Vibe Hunter Stats) */
-        .block-status {
-            grid-column: 4 / 5;
-            grid-row: 2 / 6;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .stat-line {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            border-bottom: 1px solid rgba(139, 0, 0, 0.1);
-            padding-bottom: 5px;
-        }
-        .stat-line .label { color: var(--text-darkred); font-weight: 500; }
-        .stat-line .value { color: var(--text-main); font-family: var(--font-tech); }
-
-        /* 4. Archives (Onde chamamos o SVG do Sangue) */
-        .block-archives {
-            grid-column: 1 / 4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--bg-pure);
-        }
-        .block-archives img {
+        /* 3. ARCHIVE (Blood Quote SVG) */
+        .win-archive { width: 100%; height: 150px; margin-top: 10px;}
+        .win-archive img {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 0 5px rgba(139, 0, 0, 0.5));
+            filter: drop-shadow(0 0 5px rgba(220, 20, 60, 0.5));
+            display: block; margin: 0 auto;
         }
 
-        /* 5. Hunt Logs (Projetos em formato angular) */
-        .block-projects-title { grid-column: 1 / -1; margin-top: 20px; }
-        
-        .project-card {
-            background-color: var(--bg-subtle);
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 90% 100%, 0 100%); /* Canto angular */
-            transition: 0.3s ease;
-        }
-        .project-card:hover {
-            transform: translateY(-3px) scale(1.01);
+        /* 4. LINKS (Nav) */
+        .win-nav { width: 200px; height: 180px;}
+        .nav-links { display: flex; flex-direction: column; gap: 10px; padding-left: 15px; }
+
+        /* Animação de boot das janelas */
+        @keyframes boot-up {
+            0% { transform: translateY(10px) scale(0.98); opacity: 0; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
         }
 
-        /* --- Footer & Misc --- */
-        .block-footer {
-            grid-column: 1 / -1;
-            text-align: center;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            color: var(--text-darkred);
-            opacity: 0.7;
-            margin-top: 30px;
+        /* --- Responsividade Terminal --- */
+        @media (max-width: 768px) {
+            .terminal-container { padding: 10px; flex-direction: column;}
+            .window { width: 100% !important; height: auto !important; max-height: 80vh;}
+            .win-archive img { width: 100%; }
         }
 
-        /* --- Responsividade Angular --- */
-        @media (max-width: 1000px) {
-            .main-grid { grid-template-columns: repeat(2, 1fr); }
-            .block-hero { grid-column: 1 / -1; grid-row: auto; height: 60vh; }
-            .block-status { grid-column: 1 / -1; grid-row: auto; }
-            .block-archives { grid-column: 1 / -1; }
-        }
-        
-        @media (max-width: 600px) {
-            .main-grid { grid-template-columns: 1fr; }
-            .grid-item { grid-column: 1 / -1 !important; }
-            .hero-title-wrap { font-size: 1.2rem; }
-        }
-
-        /* Animação de Entrada "Compile" */
-        .compile-in {
-            animation: compileIn 1s cubic-bezier(0.23, 1, 0.320, 1) both;
-        }
-        @keyframes compileIn {
-            0% { opacity: 0; transform: translateY(20px) scale(0.95); filter: blur(5px); }
-            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-        }
     </style>
 </head>
 <body>
 
-    <main class="main-grid">
+    <div class="ambient-interference"></div>
+    <div class="crt-overlay"></div>
 
-        <header class="grid-item block-header compile-in" style="animation-delay: 0.1s;">
-            <div class="dark-red">SYS // BRAIAN.R </div>
-            <div class="crimson-glow">TopDarkFlames</div>
-            <div class="dark-red">STATUS // HUNTING</div>
-        </header>
+    <main class="terminal-container">
 
-        <section class="grid-item block-hero compile-in" style="animation-delay: 0.3s;">
-            <div class="hero-title-wrap">
-                <h1 class="crimson-glow">Braian Ribeiro</h1>
-                <p>† Full-Stack Developer | C // Java // Rust</p>
+        <section class="window win-status" style="animation-delay: 0.1s;">
+            <header class="window-header">
+                <div>_SYS_STATUS // OPERATIVE: B.RIBEIRO</div>
+                <div class="window-controls">[X] [-] [ ]</div>
+            </header>
+            <div class="window-content">
+                <p class="crimson-glow" style="margin-bottom: 15px; font-size: 1.4rem;">STATUS: HUNTING DEMONS & BUGS</p>
+                
+                <div class="stat-line"><span class="label">ALIAS:</span><span class="value">TopDarkFlames</span></div>
+                <div class="stat-line"><span class="label">CLASS:</span><span class="value">Computer Science Student</span></div>
+                <div class="stat-line"><span class="label">OS:</span><span class="value">Linux // CachyOS [Arch]</span></div>
+                <div class="stat-line"><span class="label">EDITOR:</span><span class="value">Neovim [Lua config]</span></div>
+                <div class="stat-line"><span class="label">PRIMARY:</span><span class="value">Low-Level [C/ASM]</span></div>
+                <div class="stat-line"><span class="label">SECONDARY:</span><span class="value">Web // Java // Rust</span></div>
+                <div class="stat-line"><span class="label">ALIGN:</span><span class="value">Gothic // Dark Souls</span></div>
+                
+                <p style="color: rgba(255, 51, 51, 0.7); margin-top: 15px; font-style: italic;">> Frequentando santuários de performance e ricing terminal.</p>
             </div>
         </section>
 
-        <aside class="grid-item block-status compile-in" style="animation-delay: 0.5s;">
-            <h3 class="crimson-glow">Operative Status</h3>
-            
-            <div class="stat-line"><span class="label">ALIAS</span><span class="value">TopDarkFlames</span></div>
-            <div class="stat-line"><span class="label">LEVEL</span><span class="value">03 [CS Student]</span></div>
-            <div class="stat-line"><span class="label">SYSTEM</span><span class="value">Linux // CachyOS</span></div>
-            <div class="stat-line"><span class="label">EDITOR</span><span class="value">Neovim [Ricing]</span></div>
-            <div class="stat-line"><span class="label">PRIMARY</span><span class="value">Low Level [C/ASM]</span></div>
-            <div class="stat-line"><span class="label">SECONDARY</span><span class="value">Web // Cloud</span></div>
-            <div class="stat-line"><span class="label">STATUS</span><span class="value crimson-glow">Hollow Resistant</span></div>
-        </aside>
+        <nav class="window win-nav" style="animation-delay: 0.2s;">
+            <header class="window-header">
+                <div>_DIR // LINKS</div>
+                <div class="window-controls">[_] [ ]</div>
+            </header>
+            <div class="window-content nav-links">
+                <a href="#about">> STATUS</a>
+                <a href="#logs">> HUNT_LOGS</a>
+                <a href="https://github.com/TopDarkFlames" target="_blank">> GITHUB_REPOS</a>
+            </div>
+        </nav>
 
-        <section class="grid-item block-archives compile-in" style="animation-delay: 0.7s;">
-            <img src="https://raw.githubusercontent.com/TopDarkFlames/TopDarkFlames/main/frase-sangue.svg" alt="Blood Dripping Quote">
+        <section class="window win-archive" style="animation-delay: 0.3s;">
+            <header class="window-header">
+                <div>_KERNEL_ARCHIVE // RELIC_V1.0</div>
+                <div class="window-controls">[~] [X]</div>
+            </header>
+            <div class="window-content">
+                <img src="https://raw.githubusercontent.com/TopDarkFlames/TopDarkFlames/main/frase-sangue.svg" alt="Blood Dripping Quote Artifact">
+            </div>
         </section>
 
-        <div class="block-projects-title compile-in" style="animation-delay: 0.9s;">
-            <h2 class="crimson-glow">Hunt Logs :: Archives</h2>
-        </div>
+        <section class="window win-logs" id="logs" style="animation-delay: 0.4s;">
+            <header class="window-header">
+                <div>_HUNT_LOGS // COMPLETE_HUTS</div>
+                <div class="window-controls">[=] [-]</div>
+            </header>
+            <div class="window-content">
+                
+                <article class="log-entry">
+                    <div class="log-header">Log_Entry::01 // Rust // Wasm</div>
+                    <p style="margin: 5px 0;">Desenvolvimento Backend em Rust com foco em WebAssembly para compilação cruzada de alta performance.</p>
+                    <div class="log-meta">[STATUS: DEPLOYED] [SECTOR: LOW_LEVEL] [HASH: 0x5a1b3c]</div>
+                </article>
 
-        <a href="#" class="grid-item project-card compile-in" style="animation-delay: 1.1s;">
-            <h4 class="crimson-glow g-font">Log_Entry::01</h4>
-            <p style="font-size: 0.8rem; margin: 10px 0;">Desenvolvimento Backend em Rust com foco em WebAssembly para compilação cruzada.</p>
-            <div style="color: var(--text-darkred); font-size: 0.7rem;">[RUST] [WASM] [BACKEND]</div>
-        </a>
+                <article class="log-entry">
+                    <div class="log-header">Log_Entry::02 // C // Network</div>
+                    <p style="margin: 5px 0;">Monitor de pacotes de rede imersivo via JNI, conectando backend C a uma interface Java estática.</p>
+                    <div class="log-meta">[STATUS: COMPLETE] [SECTOR: SYS_TOOLS] [HASH: 0xd9e8f7]</div>
+                </article>
 
-        <a href="#" class="grid-item project-card compile-in" style="animation-delay: 1.2s;">
-            <h4 class="crimson-glow g-font">Log_Entry::02</h4>
-            <p style="font-size: 0.8rem; margin: 10px 0;">Interface Web imersiva para monitoramento de pacotes de rede via C/JNI.</p>
-            <div style="color: var(--text-darkred); font-size: 0.7rem;">[C] [JAVA] [WEB]</div>
-        </a>
+                <article class="log-entry">
+                    <div class="log-header">Log_Entry::03 // Lua // Ricing</div>
+                    <p style="margin: 5px 0;">Automação de ricing gótico para terminal Neovim e scripts de ambiente Fish Shell.</p>
+                    <div class="log-meta">[STATUS: ACTIVE] [SECTOR: TERMINAL] [HASH: 0xb4c1a9]</div>
+                </article>
 
-        <a href="https://github.com/TopDarkFlames" target="_blank" class="grid-item project-card compile-in" style="animation-delay: 1.3s;">
-            <h4 class="crimson-glow g-font">Log_Entry::03</h4>
-            <p style="font-size: 0.8rem; margin: 10px 0;">Configurações góticas de terminal (ricing) e scripts de automação em Fish Shell.</p>
-            <div style="color: var(--text-darkred); font-size: 0.7rem;">[LUA] [FISH] [NEOVIM]</div>
-        </a>
+                <p class="crimson-glow" style="text-align: center; margin-top: 20px;">> More logs can be retrieved via GITHUB link.</p>
+            </div>
+        </section>
 
-        <footer class="block-footer compile-in" style="animation-delay: 1.5s;">
-            <p>&copy; Braian Ribeiro // TopDarkFlames // Hunt_Protocol_V3.0</p>
-            <p style="font-style: italic;">† Seek misery. For it will lead you to a greater goal. †</p>
+        <footer style="width: 100%; text-align: center; color: rgba(255, 51, 51, 0.4); font-size: 0.9rem; margin-top: 20px; padding-bottom: 20px;">
+            <p>> SYS // TopDarkFlames PROTOCOL V4.0.5</p>
+            <p>† Seek misery. For it will lead you to a greater goal. †</p>
         </footer>
 
     </main>
