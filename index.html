@@ -3,28 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TopDarkFlames | RGB Clean Portfolio</title>
-  <meta name="description" content="Portfólio RGB clean de TopDarkFlames, desenvolvedor full-stack." />
+  <title>TopDarkFlames | RGB Forge</title>
+  <meta name="description" content="Portfolio RGB dark de TopDarkFlames, dev full-stack." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
-      --bg: #07080d;
-      --bg-2: #0b0d14;
-      --card: rgba(255, 255, 255, 0.055);
-      --card-2: rgba(255, 255, 255, 0.035);
-      --line: rgba(255, 255, 255, 0.11);
-      --text: #f6f8ff;
-      --muted: #9aa3b8;
-      --soft: #cdd4e8;
-      --r: #ff3b7f;
-      --g: #30f2a2;
-      --b: #43a5ff;
-      --p: #a855f7;
-      --y: #facc15;
-      --radius: 26px;
-      --shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg: #05060a;
+      --bg-2: #0c0f1a;
+      --bg-3: #121626;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-2: rgba(255, 255, 255, 0.1);
+      --line: rgba(255, 255, 255, 0.14);
+      --text: #f6f7ff;
+      --muted: #9aa3bf;
+      --soft: #d1d7f0;
+      --crimson: #e11d48;
+      --cyan: #3ad6ff;
+      --lime: #32f2a2;
+      --amber: #f6c453;
+      --shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+      --display: "Bebas Neue", sans-serif;
+      --sans: "Sora", sans-serif;
+      --mono: "JetBrains Mono", monospace;
     }
 
     * {
@@ -40,13 +45,13 @@
     body {
       min-height: 100vh;
       background:
-        radial-gradient(circle at 10% 10%, rgba(67, 165, 255, .18), transparent 30rem),
-        radial-gradient(circle at 85% 15%, rgba(255, 59, 127, .16), transparent 26rem),
-        radial-gradient(circle at 50% 100%, rgba(48, 242, 162, .13), transparent 32rem),
+        radial-gradient(circle at 12% 8%, rgba(225, 29, 72, 0.28), transparent 34rem),
+        radial-gradient(circle at 85% 12%, rgba(58, 214, 255, 0.22), transparent 32rem),
+        radial-gradient(circle at 50% 110%, rgba(50, 242, 162, 0.16), transparent 34rem),
         linear-gradient(180deg, var(--bg), var(--bg-2));
       color: var(--text);
       font-family: var(--sans);
-      line-height: 1.5;
+      line-height: 1.6;
       overflow-x: hidden;
     }
 
@@ -56,10 +61,16 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 76%);
+      opacity: 0.55;
+    }
+
+    ::selection {
+      background: rgba(225, 29, 72, 0.35);
+      color: white;
     }
 
     a {
@@ -74,6 +85,7 @@
 
     .rgb-border {
       position: relative;
+      z-index: 0;
     }
 
     .rgb-border::before {
@@ -82,13 +94,13 @@
       inset: -1px;
       z-index: -1;
       border-radius: inherit;
-      background: linear-gradient(120deg, var(--r), var(--b), var(--g), var(--p), var(--r));
-      background-size: 280% 280%;
-      animation: rgbMove 9s ease infinite;
-      opacity: .72;
+      background: linear-gradient(120deg, var(--crimson), var(--cyan), var(--lime), var(--crimson));
+      background-size: 260% 260%;
+      animation: rgbSweep 8s ease infinite;
+      opacity: 0.75;
     }
 
-    @keyframes rgbMove {
+    @keyframes rgbSweep {
       0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
     }
@@ -98,36 +110,53 @@
       top: 0;
       z-index: 50;
       border-bottom: 1px solid var(--line);
-      background: rgba(7, 8, 13, .72);
+      background: rgba(5, 6, 10, 0.78);
       backdrop-filter: blur(18px);
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: 0.6s ease;
     }
 
     .nav-inner {
-      min-height: 72px;
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 18px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 850;
-      letter-spacing: -0.03em;
     }
 
-    .logo {
-      width: 38px;
-      height: 38px;
+    .brand-sigil {
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
       border-radius: 14px;
-      background: rgba(255,255,255,.08);
-      box-shadow:
-        0 0 24px rgba(67, 165, 255, .20),
-        inset 0 0 0 1px rgba(255,255,255,.12);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--line);
+      font-family: var(--display);
+      letter-spacing: 0.12em;
+      box-shadow: 0 0 16px rgba(225, 29, 72, 0.35);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: var(--display);
+      font-size: 18px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .brand-text span {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
     .nav-links {
@@ -137,20 +166,50 @@
       padding: 6px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(255,255,255,.035);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     .nav-links a {
-      padding: 8px 13px;
+      padding: 8px 14px;
       border-radius: 999px;
       color: var(--muted);
-      font-size: 14px;
-      transition: .18s ease;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
     }
 
     .nav-links a:hover {
       color: white;
-      background: rgba(255,255,255,.07);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(225, 29, 72, 0.5);
+      background: rgba(225, 29, 72, 0.12);
+      color: var(--soft);
+      font: 12px var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .status-pill::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--crimson);
+      box-shadow: 0 0 10px var(--crimson);
     }
 
     .nav-cta {
@@ -159,401 +218,485 @@
       justify-content: center;
       min-height: 40px;
       padding: 0 16px;
-      border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(255,255,255,.055);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
       color: white;
-      font-weight: 750;
-      font-size: 14px;
-      transition: .2s ease;
+      font-weight: 700;
+      font-size: 13px;
+      transition: 0.2s ease;
     }
 
     .nav-cta:hover {
       transform: translateY(-2px);
-      border-color: rgba(255,255,255,.25);
-      box-shadow: 0 0 28px rgba(67,165,255,.18);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 22px rgba(58, 214, 255, 0.2);
     }
 
     .hero {
       position: relative;
       display: grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap: 44px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
       align-items: center;
-      min-height: calc(100vh - 72px);
-      padding: 76px 0;
+      min-height: calc(100vh - 76px);
+      padding: 84px 0;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: 0.8s ease;
     }
 
-    .tagline {
+    body.loaded .hero,
+    body.loaded .nav {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-shapes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-shapes span {
+      position: absolute;
+      border-radius: 999px;
+      opacity: 0.5;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .shape-1 {
+      width: 140px;
+      height: 140px;
+      top: 8%;
+      right: 8%;
+      background: rgba(225, 29, 72, 0.26);
+    }
+
+    .shape-2 {
+      width: 90px;
+      height: 90px;
+      bottom: 20%;
+      left: 4%;
+      background: rgba(58, 214, 255, 0.22);
+      animation-delay: -4s;
+    }
+
+    .shape-3 {
+      width: 110px;
+      height: 110px;
+      bottom: 8%;
+      right: 32%;
+      background: rgba(50, 242, 162, 0.22);
+      animation-delay: -7s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-16px) scale(1.08); }
+    }
+
+    .eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 9px 13px;
-      background: rgba(255,255,255,.04);
-      color: var(--soft);
-      font: 13px var(--mono);
+      font: 12px var(--mono);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--lime);
     }
 
-    .live-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--g);
-      box-shadow: 0 0 18px var(--g);
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      background: var(--lime);
+      opacity: 0.7;
     }
 
-    h1 {
-      margin-top: 22px;
-      max-width: 780px;
-      font-size: clamp(46px, 7.4vw, 92px);
-      line-height: .95;
-      letter-spacing: -0.075em;
-      font-weight: 950;
+    .hero h1 {
+      margin-top: 20px;
+      font-size: clamp(42px, 7vw, 88px);
+      line-height: 0.92;
+      letter-spacing: 0.06em;
+      font-family: var(--display);
+      text-transform: uppercase;
     }
 
     .rgb-text {
       display: block;
-      background: linear-gradient(90deg, var(--r), var(--b), var(--g), var(--p));
-      background-size: 250% 250%;
+      background: linear-gradient(90deg, var(--crimson), var(--cyan), var(--lime));
+      background-size: 260% 260%;
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      animation: rgbMove 7s ease infinite;
+      animation: rgbSweep 7s ease infinite;
     }
 
     .lead {
-      margin-top: 24px;
-      max-width: 650px;
+      margin-top: 22px;
+      max-width: 620px;
       color: var(--muted);
       font-size: 18px;
-      line-height: 1.8;
+    }
+
+    .hero-quote {
+      margin-top: 16px;
+      padding-left: 14px;
+      border-left: 2px solid var(--crimson);
+      color: var(--soft);
+      font: 13px/1.8 var(--mono);
+      letter-spacing: 0.04em;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 32px;
+      gap: 12px;
+      margin-top: 28px;
     }
 
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 9px;
-      min-height: 48px;
+      gap: 8px;
+      min-height: 46px;
       padding: 0 20px;
       border-radius: 16px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.055);
+      background: rgba(255, 255, 255, 0.06);
       color: white;
-      font-weight: 800;
-      transition: .2s ease;
+      font-weight: 700;
+      transition: 0.2s ease;
     }
 
     .button:hover {
       transform: translateY(-2px);
-      background: rgba(255,255,255,.085);
+      background: rgba(255, 255, 255, 0.1);
     }
 
     .button-primary {
-      border: 0;
-      background: linear-gradient(120deg, var(--b), var(--p), var(--r));
-      box-shadow: 0 18px 42px rgba(168, 85, 247, .22);
+      border: none;
+      background: linear-gradient(120deg, var(--cyan), var(--crimson), var(--lime));
+      box-shadow: 0 16px 38px rgba(225, 29, 72, 0.25);
     }
 
-    .button-primary:hover {
-      box-shadow: 0 20px 54px rgba(67, 165, 255, .24);
+    .sigils {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+      color: var(--soft);
+      font: 12px var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .panel-stage {
+    .sigils span {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-panel {
       position: relative;
-      min-height: 560px;
-      display: grid;
-      place-items: center;
     }
 
-    .glow-ring {
-      position: absolute;
-      width: min(520px, 88vw);
-      aspect-ratio: 1;
-      border-radius: 36px;
-      background:
-        linear-gradient(120deg, rgba(255,59,127,.28), rgba(67,165,255,.26), rgba(48,242,162,.22), rgba(168,85,247,.24));
-      filter: blur(26px);
-      opacity: .6;
-      animation: breathe 6s ease-in-out infinite;
-    }
-
-    @keyframes breathe {
-      0%, 100% { transform: scale(.96) rotate(0deg); opacity: .46; }
-      50% { transform: scale(1.04) rotate(3deg); opacity: .72; }
-    }
-
-    .dashboard {
-      width: min(470px, 100%);
-      border-radius: 30px;
-      background: rgba(10, 12, 20, .78);
-      backdrop-filter: blur(20px);
+    .panel {
+      border-radius: 26px;
+      background: rgba(9, 10, 16, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
 
-    .dash-head {
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.04) 0px,
+        rgba(255, 255, 255, 0.04) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+      opacity: 0.16;
+      pointer-events: none;
+    }
+
+    .panel-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 16px;
+      padding: 16px 18px;
       border-bottom: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
+      background: rgba(255, 255, 255, 0.04);
+      position: relative;
+      z-index: 1;
     }
 
-    .dots {
+    .panel-dots {
       display: flex;
       gap: 8px;
     }
 
-    .dot {
-      width: 11px;
-      height: 11px;
+    .panel-dot {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
     }
 
-    .dot:nth-child(1) { background: var(--r); box-shadow: 0 0 12px var(--r); }
-    .dot:nth-child(2) { background: var(--y); box-shadow: 0 0 12px var(--y); }
-    .dot:nth-child(3) { background: var(--g); box-shadow: 0 0 12px var(--g); }
+    .dot-red { background: var(--crimson); box-shadow: 0 0 10px var(--crimson); }
+    .dot-amber { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+    .dot-green { background: var(--lime); box-shadow: 0 0 10px var(--lime); }
 
-    .dash-label {
+    .panel-label {
+      font: 11px var(--mono);
       color: var(--muted);
-      font: 12px var(--mono);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
     }
 
-    .dash-body {
-      padding: 20px;
-    }
-
-    .profile-card {
+    .panel-body {
+      position: relative;
+      z-index: 1;
+      padding: 22px;
       display: grid;
-      grid-template-columns: 84px 1fr;
+      gap: 18px;
+    }
+
+    .profile-row {
+      display: grid;
+      grid-template-columns: 70px 1fr;
       gap: 16px;
       align-items: center;
-      padding: 18px;
+      padding: 16px;
+      border-radius: 20px;
       border: 1px solid var(--line);
-      border-radius: 22px;
-      background: rgba(255,255,255,.04);
+      background: rgba(255, 255, 255, 0.04);
     }
 
     .avatar {
-      width: 84px;
-      height: 84px;
+      width: 70px;
+      height: 70px;
       display: grid;
       place-items: center;
-      border-radius: 24px;
-      background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 20%),
-        linear-gradient(135deg, var(--r), var(--b), var(--g));
-      box-shadow: 0 0 36px rgba(67,165,255,.24);
-      font-size: 38px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--crimson), var(--cyan), var(--lime));
+      font-family: var(--display);
+      font-size: 20px;
+      letter-spacing: 0.14em;
+      box-shadow: 0 0 24px rgba(58, 214, 255, 0.3);
     }
 
-    .profile-card h2 {
-      font-size: 22px;
-      letter-spacing: -.03em;
+    .profile-row h2 {
+      font-family: var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 18px;
     }
 
-    .profile-card p {
+    .profile-row p {
       margin-top: 4px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    .mini-stats {
+    .stat-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-top: 14px;
     }
 
-    .mini-stat {
-      padding: 14px 10px;
+    .stat {
+      padding: 12px;
+      border-radius: 16px;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255,255,255,.035);
+      background: rgba(255, 255, 255, 0.04);
       text-align: center;
     }
 
-    .mini-stat strong {
+    .stat span {
       display: block;
-      font-size: 22px;
+      font: 11px var(--mono);
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
     }
 
-    .mini-stat span {
-      color: var(--muted);
-      font-size: 12px;
+    .stat strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 18px;
+      letter-spacing: 0.08em;
     }
 
     .code-box {
-      margin-top: 14px;
+      border-radius: 18px;
       border: 1px solid var(--line);
-      border-radius: 22px;
-      background: rgba(0,0,0,.28);
+      background: rgba(5, 6, 10, 0.8);
       overflow: hidden;
     }
 
     .code-box pre {
-      padding: 17px;
-      color: #dce5ff;
+      padding: 16px;
+      color: #dbe2ff;
+      font: 12px/1.7 var(--mono);
       white-space: pre-wrap;
-      font: 13px/1.8 var(--mono);
     }
 
-    .key { color: var(--b); }
-    .str { color: var(--g); }
-    .arr { color: var(--p); }
+    .key { color: var(--cyan); }
+    .str { color: var(--lime); }
+    .arr { color: var(--crimson); }
 
     section {
-      padding: 76px 0;
+      padding: 70px 0;
     }
 
     .section-head {
       display: flex;
-      align-items: end;
+      align-items: flex-end;
       justify-content: space-between;
       gap: 24px;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
     }
 
-    .eyebrow {
-      margin-bottom: 10px;
-      color: var(--g);
-      font: 13px var(--mono);
-    }
-
-    h3.section-title {
-      font-size: clamp(30px, 4.5vw, 52px);
-      line-height: 1;
-      letter-spacing: -.055em;
-      font-weight: 940;
+    .section-title {
+      font-family: var(--display);
+      font-size: clamp(28px, 4.5vw, 52px);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .section-copy {
       max-width: 520px;
       color: var(--muted);
-      line-height: 1.75;
+      font-size: 15px;
     }
 
-    .cards {
+    .project-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
-    .card {
+    .project-card {
       position: relative;
-      min-height: 250px;
       padding: 22px;
-      border: 1px solid var(--line);
       border-radius: var(--radius);
+      border: 1px solid var(--line);
       background: var(--card);
+      min-height: 220px;
+      transition: 0.25s ease;
       overflow: hidden;
-      transition: .22s ease;
     }
 
-    .card::after {
+    .project-card::after {
       content: "";
       position: absolute;
-      inset: auto -80px -90px auto;
-      width: 190px;
-      height: 190px;
+      inset: auto -70px -80px auto;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      background: var(--card-glow, rgba(67,165,255,.18));
-      filter: blur(34px);
-      opacity: .75;
-      transition: .22s ease;
+      background: var(--card-glow, rgba(225, 29, 72, 0.22));
+      filter: blur(32px);
+      opacity: 0.7;
+      transition: 0.25s ease;
     }
 
-    .card:hover {
+    .project-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(255,255,255,.26);
-      background: rgba(255,255,255,.07);
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.08);
     }
 
-    .card:hover::after {
+    .project-card:hover::after {
       opacity: 1;
-      transform: scale(1.12);
+      transform: scale(1.1);
     }
 
-    .card small, .repo-type {
+    .project-card small {
       position: relative;
       z-index: 1;
+      font: 11px var(--mono);
       color: var(--muted);
-      font: 12px var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
     }
 
-    .card h4 {
+    .project-card h4 {
       position: relative;
       z-index: 1;
       margin-top: 12px;
-      font-size: 23px;
-      letter-spacing: -.03em;
+      font-size: 20px;
+      letter-spacing: 0.04em;
     }
 
-    .card p {
+    .project-card p {
       position: relative;
       z-index: 1;
-      margin-top: 12px;
+      margin-top: 10px;
       color: var(--muted);
       font-size: 14px;
       line-height: 1.7;
     }
 
-    .chips {
+    .chip-row {
       position: relative;
       z-index: 1;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 18px;
+      margin-top: 16px;
     }
 
     .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 7px 10px;
-      background: rgba(255,255,255,.045);
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.05);
       color: var(--soft);
-      font-size: 12px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
-    .skills-layout {
+    .stack-layout {
       display: grid;
-      grid-template-columns: .9fr 1.1fr;
+      grid-template-columns: 0.95fr 1.05fr;
       gap: 18px;
       align-items: stretch;
     }
 
-    .skill-panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--card);
+    .stack-card {
       padding: 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--card);
     }
 
-    .skill-panel h4 {
-      font-size: 22px;
-      letter-spacing: -.03em;
-      margin-bottom: 12px;
+    .stack-card h4 {
+      font-family: var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 20px;
     }
 
-    .skill-panel p {
+    .stack-card p {
+      margin-top: 12px;
       color: var(--muted);
-      line-height: 1.75;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
     }
 
     .skill-grid {
@@ -564,22 +707,21 @@
 
     .skill-item {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 12px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
       padding: 14px;
-      background: rgba(255,255,255,.04);
-    }
-
-    .skill-item span:first-child {
-      font-weight: 750;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 14px;
     }
 
     .skill-item span:last-child {
+      font: 11px var(--mono);
       color: var(--muted);
-      font: 12px var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
     .timeline {
@@ -588,56 +730,84 @@
       gap: 18px;
     }
 
-    .time-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--card-2);
+    .timeline-card {
       padding: 22px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--card);
     }
 
-    .time-card .num {
-      width: 36px;
-      height: 36px;
+    .timeline-card .num {
+      width: 34px;
+      height: 34px;
       display: grid;
       place-items: center;
-      margin-bottom: 16px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--b), var(--p));
-      font-weight: 900;
-      box-shadow: 0 0 24px rgba(168,85,247,.2);
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--crimson));
+      font-weight: 700;
+      box-shadow: 0 0 16px rgba(225, 29, 72, 0.3);
     }
 
-    .time-card h4 {
-      font-size: 19px;
-      margin-bottom: 8px;
+    .timeline-card h4 {
+      margin-top: 14px;
+      font-family: var(--display);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 18px;
     }
 
-    .time-card p {
+    .status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      margin: 10px 0 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+      font: 11px var(--mono);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .status-tag::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    .status-progress { color: var(--amber); }
+    .status-complete { color: var(--lime); }
+
+    .timeline-card p {
       color: var(--muted);
       font-size: 14px;
       line-height: 1.7;
     }
 
-    .contact-box {
+    .contact-card {
       position: relative;
-      padding: 34px;
-      border-radius: 34px;
-      background: rgba(255,255,255,.055);
+      padding: 32px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.06);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
 
-    .contact-box::after {
+    .contact-card::after {
       content: "";
       position: absolute;
-      right: -80px;
       top: -80px;
-      width: 260px;
-      height: 260px;
+      right: -70px;
+      width: 240px;
+      height: 240px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--r), var(--b), var(--g));
-      filter: blur(46px);
-      opacity: .32;
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.55), rgba(58, 214, 255, 0.45), rgba(50, 242, 162, 0.45));
+      filter: blur(40px);
+      opacity: 0.45;
     }
 
     .contact-content {
@@ -650,29 +820,33 @@
     }
 
     .contact-content h3 {
-      font-size: clamp(28px, 4vw, 46px);
-      line-height: 1;
-      letter-spacing: -.05em;
+      font-family: var(--display);
+      font-size: clamp(26px, 4vw, 44px);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .contact-content p {
-      margin-top: 14px;
-      max-width: 620px;
+      margin-top: 12px;
       color: var(--muted);
-      line-height: 1.75;
+      max-width: 620px;
+      line-height: 1.8;
     }
 
     .footer {
-      padding: 28px 0 44px;
+      padding: 28px 0 42px;
       color: var(--muted);
       text-align: center;
-      font: 12px var(--mono);
+      font: 11px var(--mono);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
     }
 
     .reveal {
       opacity: 0;
       transform: translateY(18px);
-      transition: .65s ease;
+      transition: 0.7s ease;
+      transition-delay: var(--delay, 0s);
     }
 
     .reveal.visible {
@@ -680,25 +854,24 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 940px) {
+    @media (max-width: 960px) {
       .hero,
-      .skills-layout,
+      .stack-layout,
       .contact-content {
         grid-template-columns: 1fr;
       }
 
-      .panel-stage {
-        min-height: auto;
-        padding-top: 12px;
+      .hero {
+        padding: 64px 0;
       }
 
-      .cards,
+      .project-grid,
       .timeline {
         grid-template-columns: 1fr;
       }
 
       .section-head {
-        align-items: start;
+        align-items: flex-start;
         flex-direction: column;
       }
     }
@@ -706,32 +879,44 @@
     @media (max-width: 720px) {
       .nav-inner {
         min-height: auto;
-        padding: 14px 0;
+        padding: 16px 0;
         flex-wrap: wrap;
       }
 
       .nav-links {
         order: 3;
         width: 100%;
+        justify-content: space-between;
         overflow-x: auto;
+      }
+
+      .nav-actions {
+        width: 100%;
         justify-content: space-between;
       }
 
-      .hero {
-        padding: 50px 0;
-      }
-
-      .mini-stats,
+      .stat-grid,
       .skill-grid {
         grid-template-columns: 1fr;
       }
 
-      .profile-card {
+      .profile-row {
         grid-template-columns: 1fr;
+        text-align: center;
       }
 
-      .dashboard {
-        border-radius: 24px;
+      .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
       }
     }
   </style>
@@ -740,8 +925,11 @@
   <nav class="nav">
     <div class="wrap nav-inner">
       <a class="brand" href="#home">
-        <span class="logo">🔥</span>
-        <span>TopDarkFlames</span>
+        <span class="brand-sigil">TF</span>
+        <span class="brand-text">
+          <strong>TopDarkFlames</strong>
+          <span>Full-Stack Developer</span>
+        </span>
       </a>
 
       <div class="nav-links">
@@ -751,56 +939,234 @@
         <a href="#contact">Contato</a>
       </div>
 
-      <a class="nav-cta" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
+      <div class="nav-actions">
+        <span class="status-pill">Hunter Mode</span>
+        <a class="nav-cta" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
     </div>
   </nav>
 
-  <main id="home" class="wrap">
-    <section class="hero">
-      <div class="reveal">
-        <div class="tagline"><span class="live-dot"></span> full-stack developer • github pages • rgb mode</div>
+  <main id="home">
+    <section class="hero wrap">
+      <div class="hero-shapes" aria-hidden="true">
+        <span class="shape-1"></span>
+        <span class="shape-2"></span>
+        <span class="shape-3"></span>
+      </div>
+
+      <div class="hero-copy reveal" style="--delay: 0.05s;">
+        <span class="eyebrow">rgb forge / crimson craft</span>
         <h1>
-          Código limpo,
-          <span class="rgb-text">visual RGB.</span>
+          Dark craft,
+          <span class="rgb-text">rgb precision.</span>
         </h1>
         <p class="lead">
-          Sou o TopDarkFlames, desenvolvedor full-stack em formação. Estou construindo projetos web, estudando Java, SQL e Rust, e deixando meu GitHub com uma identidade visual que não parece saída de um formulário chato, porque já basta imposto e reunião.
+          Sou o TopDarkFlames, dev full-stack em formacao. Construo projetos web,
+          estudo Java, SQL e Rust, com uma estetica RGB que nao ignora clareza.
         </p>
+        <p class="hero-quote">"The Bird of Hermes is my name, eating my wings to make me tame."</p>
 
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">Ver projetos</a>
           <a class="button" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">Abrir GitHub</a>
         </div>
+
+        <div class="sigils">
+          <span>Classe: Full-Stack</span>
+          <span>Origem: Brazil</span>
+          <span>Pacto: Open Source</span>
+          <span>Status: Hunter</span>
+        </div>
       </div>
 
-      <div class="panel-stage reveal">
-        <div class="glow-ring"></div>
-        <div class="dashboard rgb-border">
-          <div class="dash-head">
-            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
-            <span class="dash-label">profile.config</span>
+      <div class="hero-panel reveal" style="--delay: 0.18s;">
+        <div class="panel rgb-border">
+          <div class="panel-head">
+            <div class="panel-dots">
+              <span class="panel-dot dot-red"></span>
+              <span class="panel-dot dot-amber"></span>
+              <span class="panel-dot dot-green"></span>
+            </div>
+            <span class="panel-label">forge.console</span>
           </div>
-          <div class="dash-body">
-            <div class="profile-card">
+          <div class="panel-body">
+            <div class="profile-row">
               <div class="avatar">TF</div>
               <div>
                 <h2>TopDarkFlames</h2>
-                <p>Full-Stack Developer • Brazil</p>
+                <p>Full-Stack Developer - Covenant: Open Source</p>
               </div>
             </div>
 
-            <div class="mini-stats">
-              <div class="mini-stat"><strong>5</strong><span>Repos</span></div>
-              <div class="mini-stat"><strong>12</strong><span>Techs</span></div>
-              <div class="mini-stat"><strong>∞</strong><span>Curiosity</span></div>
+            <div class="stat-grid">
+              <div class="stat">
+                <span>Repos</span>
+                <strong>05</strong>
+              </div>
+              <div class="stat">
+                <span>Techs</span>
+                <strong>12</strong>
+              </div>
+              <div class="stat">
+                <span>Status</span>
+                <strong>HNTR</strong>
+              </div>
             </div>
 
             <div class="code-box">
               <pre>{
   <span class="key">"focus"</span>: <span class="arr">[</span><span class="str">"web"</span>, <span class="str">"backend"</span>, <span class="str">"databases"</span><span class="arr">]</span>,
   <span class="key">"learning"</span>: <span class="arr">[</span><span class="str">"java"</span>, <span class="str">"sql"</span>, <span class="str">"rust"</span><span class="arr">]</span>,
-  <span class="key">"status"</span>: <span class="str">"building in public"</span>
+  <span class="key">"status"</span>: <span class="str">"building in public"</span>,
+  <span class="key">"sigil"</span>: <span class="str">"rgb forge"</span>
 }</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <div class="section-head reveal" style="--delay: 0.05s;">
+          <div>
+            <span class="eyebrow">featured repositories</span>
+            <h3 class="section-title">Projetos em destaque</h3>
+          </div>
+          <p class="section-copy">
+            Uma selecao dos repositorios que mostram meu momento atual: identidade visual,
+            portfolio e presenca no GitHub Pages.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <a class="project-card reveal" style="--delay: 0.1s; --card-glow: rgba(58, 214, 255, 0.25);" href="https://github.com/TopDarkFlames/TopDarkFlames.github.io" target="_blank" rel="noreferrer">
+            <small>github-pages</small>
+            <h4>TopDarkFlames.github.io</h4>
+            <p>Site pessoal estatico. Deploy direto no GitHub Pages, sem build.</p>
+            <div class="chip-row">
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">Pages</span>
+            </div>
+          </a>
+
+          <a class="project-card reveal" style="--delay: 0.16s; --card-glow: rgba(225, 29, 72, 0.24);" href="https://github.com/TopDarkFlames/portfolio" target="_blank" rel="noreferrer">
+            <small>front-end</small>
+            <h4>Portfolio</h4>
+            <p>Experimentos de layout, responsividade e identidade visual para interfaces.</p>
+            <div class="chip-row">
+              <span class="chip">CSS</span>
+              <span class="chip">UI</span>
+              <span class="chip">Responsive</span>
+            </div>
+          </a>
+
+          <a class="project-card reveal" style="--delay: 0.22s; --card-glow: rgba(50, 242, 162, 0.22);" href="https://github.com/TopDarkFlames/TopDarkFlames" target="_blank" rel="noreferrer">
+            <small>profile-readme</small>
+            <h4>TopDarkFlames</h4>
+            <p>Repositorio do perfil com stack, estudos e lore dev em modo dark.</p>
+            <div class="chip-row">
+              <span class="chip">Markdown</span>
+              <span class="chip">Profile</span>
+              <span class="chip">README</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head reveal" style="--delay: 0.05s;">
+          <div>
+            <span class="eyebrow">loadout</span>
+            <h3 class="section-title">Tecnologias</h3>
+          </div>
+          <p class="section-copy">
+            Base full-stack com foco em logica, interface, dados e um pouco de cloud para nao tratar deploy como magia.
+          </p>
+        </div>
+
+        <div class="stack-layout">
+          <div class="stack-card reveal" style="--delay: 0.12s;">
+            <h4>Build atual</h4>
+            <p>
+              Evoluindo principalmente em Java, SQL e Rust, enquanto mantenho contato com HTML, CSS,
+              JavaScript, TypeScript, React e Node.js.
+            </p>
+            <div class="stack-tags">
+              <span class="chip">Open Source</span>
+              <span class="chip">Hunter Mode</span>
+              <span class="chip">Brazil</span>
+            </div>
+          </div>
+
+          <div class="skill-grid reveal" style="--delay: 0.2s;">
+            <div class="skill-item"><span>Java</span><span>logic / backend</span></div>
+            <div class="skill-item"><span>SQL</span><span>databases</span></div>
+            <div class="skill-item"><span>Rust</span><span>systems</span></div>
+            <div class="skill-item"><span>HTML + CSS</span><span>web base</span></div>
+            <div class="skill-item"><span>JavaScript</span><span>frontend</span></div>
+            <div class="skill-item"><span>TypeScript</span><span>typed web</span></div>
+            <div class="skill-item"><span>React</span><span>interfaces</span></div>
+            <div class="skill-item"><span>Node.js</span><span>APIs</span></div>
+            <div class="skill-item"><span>Python</span><span>scripts</span></div>
+            <div class="skill-item"><span>Git + AWS</span><span>tools / cloud</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="wrap">
+        <div class="section-head reveal" style="--delay: 0.05s;">
+          <div>
+            <span class="eyebrow">bonfires lit</span>
+            <h3 class="section-title">Jornada</h3>
+          </div>
+          <p class="section-copy">
+            Progresso direto, sem hype: estudos, pratica e projetos em andamento.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-card reveal" style="--delay: 0.1s;">
+            <div class="num">01</div>
+            <h4>Ciencia da Computacao</h4>
+            <span class="status-tag status-progress">Em progresso</span>
+            <p>Estudando na EEP Piracicaba e fortalecendo fundamentos de programacao, logica e sistemas.</p>
+          </article>
+          <article class="timeline-card reveal" style="--delay: 0.16s;">
+            <div class="num">02</div>
+            <h4>CyberSecurity</h4>
+            <span class="status-tag status-progress">Em progresso</span>
+            <p>Estudos em andamento para entender seguranca, boas praticas e funcionamento interno de aplicacoes.</p>
+          </article>
+          <article class="timeline-card reveal" style="--delay: 0.22s;">
+            <div class="num">03</div>
+            <h4>Blockchain</h4>
+            <span class="status-tag status-complete">Concluido</span>
+            <p>Curso concluido e interesse em tecnologias descentralizadas, com curiosidade tecnica acima de hype.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-card rgb-border reveal" style="--delay: 0.05s;">
+          <div class="contact-content">
+            <div>
+              <span class="eyebrow">contact</span>
+              <h3>Vamos acender um projeto?</h3>
+              <p>
+                Aberto para projetos, estudos e colaboracao envolvendo web, automacoes e interfaces bem cuidadas.
+              </p>
+            </div>
+            <div class="hero-actions">
+              <a class="button button-primary" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
+              <a class="button" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
             </div>
           </div>
         </div>
@@ -808,141 +1174,15 @@
     </section>
   </main>
 
-  <section id="projects">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow">// pinned projects</p>
-          <h3 class="section-title">Projetos em destaque</h3>
-        </div>
-        <p class="section-copy">
-          Uma seleção dos repositórios que representam melhor meu momento atual: perfil, portfólio e presença web no GitHub Pages.
-        </p>
-      </div>
-
-      <div class="cards">
-        <a class="card reveal" style="--card-glow: rgba(67,165,255,.22);" href="https://github.com/TopDarkFlames/TopDarkFlames.github.io" target="_blank" rel="noreferrer">
-          <small>github-pages</small>
-          <h4>TopDarkFlames.github.io</h4>
-          <p>Meu site pessoal estático. Feito para rodar direto no GitHub Pages, sem build, sem drama, sem transformar HTML em vítima.</p>
-          <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Pages</span></div>
-        </a>
-
-        <a class="card reveal" style="--card-glow: rgba(255,59,127,.20);" href="https://github.com/TopDarkFlames/portfolio" target="_blank" rel="noreferrer">
-          <small>front-end</small>
-          <h4>portfolio</h4>
-          <p>Experimentos de layout, responsividade, animações e estilo visual para portfólio.</p>
-          <div class="chips"><span class="chip">CSS</span><span class="chip">UI</span><span class="chip">Responsive</span></div>
-        </a>
-
-        <a class="card reveal" style="--card-glow: rgba(48,242,162,.18);" href="https://github.com/TopDarkFlames/TopDarkFlames" target="_blank" rel="noreferrer">
-          <small>profile-readme</small>
-          <h4>TopDarkFlames</h4>
-          <p>Repositório do perfil no GitHub, com stack, estudos e identidade dev.</p>
-          <div class="chips"><span class="chip">Markdown</span><span class="chip">Profile</span><span class="chip">README</span></div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow">// stack</p>
-          <h3 class="section-title">Tecnologias</h3>
-        </div>
-        <p class="section-copy">
-          O foco é uma base full-stack: lógica, interface, dados, back-end e um pouco de cloud para não tratar deploy como bruxaria.
-        </p>
-      </div>
-
-      <div class="skills-layout">
-        <div class="skill-panel reveal rgb-border">
-          <h4>Build atual</h4>
-          <p>
-            Estou evoluindo principalmente em Java, SQL e Rust, enquanto mantenho contato com tecnologias web como HTML, CSS, JavaScript, TypeScript, React e Node.js.
-          </p>
-          <div class="chips">
-            <span class="chip">Brazil</span>
-            <span class="chip">Computer Science</span>
-            <span class="chip">Full-stack</span>
-          </div>
-        </div>
-
-        <div class="skill-grid reveal">
-          <div class="skill-item"><span>Java</span><span>logic/backend</span></div>
-          <div class="skill-item"><span>SQL</span><span>databases</span></div>
-          <div class="skill-item"><span>Rust</span><span>systems</span></div>
-          <div class="skill-item"><span>HTML + CSS</span><span>web base</span></div>
-          <div class="skill-item"><span>JavaScript</span><span>frontend</span></div>
-          <div class="skill-item"><span>TypeScript</span><span>typed web</span></div>
-          <div class="skill-item"><span>React</span><span>interfaces</span></div>
-          <div class="skill-item"><span>Node.js</span><span>APIs</span></div>
-          <div class="skill-item"><span>Python</span><span>scripts</span></div>
-          <div class="skill-item"><span>Git + AWS</span><span>tools/cloud</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="journey">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div>
-          <p class="eyebrow">// journey</p>
-          <h3 class="section-title">Jornada</h3>
-        </div>
-        <p class="section-copy">
-          Um resumo direto do que estou estudando e construindo. Nada de “mudando o mundo com tecnologia”, só progresso real, que já é raro o bastante.
-        </p>
-      </div>
-
-      <div class="timeline">
-        <article class="time-card reveal">
-          <div class="num">01</div>
-          <h4>Ciência da Computação</h4>
-          <p>Estudando na EEP Piracicaba e fortalecendo fundamentos de programação, lógica e sistemas.</p>
-        </article>
-        <article class="time-card reveal">
-          <div class="num">02</div>
-          <h4>CyberSecurity</h4>
-          <p>Estudos em andamento para entender melhor segurança, boas práticas e funcionamento interno de aplicações.</p>
-        </article>
-        <article class="time-card reveal">
-          <div class="num">03</div>
-          <h4>Blockchain</h4>
-          <p>Curso concluído e interesse em tecnologias descentralizadas, com curiosidade técnica acima de hype.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact-box rgb-border reveal">
-        <div class="contact-content">
-          <div>
-            <p class="eyebrow">// contact</p>
-            <h3>Vamos construir alguma coisa?</h3>
-            <p>
-              Aberto para projetos, estudos, colaboração e ideias envolvendo web, automações, sistemas simples e interfaces bem cuidadas.
-            </p>
-          </div>
-          <div class="hero-actions">
-            <a class="button button-primary" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
-            <a class="button" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <footer class="footer">
-    <div class="wrap">static site • github pages friendly • rgb without turning into a gamer keyboard crime scene</div>
+    <div class="wrap">rgb forge - neon without the noise</div>
   </footer>
 
   <script>
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
