@@ -78,6 +78,14 @@
       text-decoration: none;
     }
 
+    a:focus-visible,
+    .button:focus-visible,
+    .nav-cta:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
+      box-shadow: 0 0 0 3px rgba(58, 214, 255, 0.2);
+    }
+
     .wrap {
       width: min(1160px, calc(100% - 32px));
       margin: 0 auto;
@@ -321,6 +329,7 @@
       letter-spacing: 0.06em;
       font-family: var(--display);
       text-transform: uppercase;
+      text-wrap: balance;
     }
 
     .rgb-text {
@@ -354,6 +363,35 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 28px;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .metric {
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .metric span {
+      display: block;
+      font: 11px var(--mono);
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 14px;
+      letter-spacing: 0.06em;
     }
 
     .button {
@@ -406,7 +444,7 @@
 
     .panel {
       border-radius: 26px;
-      background: rgba(9, 10, 16, 0.86);
+      background: rgba(7, 9, 14, 0.94);
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: var(--shadow);
       overflow: hidden;
@@ -433,7 +471,7 @@
       justify-content: space-between;
       padding: 16px 18px;
       border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(0, 0, 0, 0.35);
       position: relative;
       z-index: 1;
     }
@@ -455,7 +493,7 @@
 
     .panel-label {
       font: 11px var(--mono);
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.6);
       letter-spacing: 0.2em;
       text-transform: uppercase;
     }
@@ -475,8 +513,8 @@
       align-items: center;
       padding: 16px;
       border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.35);
     }
 
     .avatar {
@@ -497,11 +535,13 @@
       text-transform: uppercase;
       letter-spacing: 0.12em;
       font-size: 18px;
+      color: #ffffff;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.45);
     }
 
     .profile-row p {
       margin-top: 4px;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.72);
       font-size: 13px;
     }
 
@@ -554,6 +594,7 @@
 
     section {
       padding: 70px 0;
+      scroll-margin-top: 96px;
     }
 
     .section-head {
@@ -792,9 +833,17 @@
       position: relative;
       padding: 32px;
       border-radius: 30px;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(8, 10, 16, 0.88);
       box-shadow: var(--shadow);
       overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.15));
+      z-index: 0;
     }
 
     .contact-card::after {
@@ -824,13 +873,23 @@
       font-size: clamp(26px, 4vw, 44px);
       letter-spacing: 0.12em;
       text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
     }
 
     .contact-content p {
       margin-top: 12px;
-      color: var(--muted);
+      color: rgba(255, 255, 255, 0.78);
       max-width: 620px;
       line-height: 1.8;
+    }
+
+    .contact-card .eyebrow {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .contact-card .eyebrow::before {
+      background: rgba(255, 255, 255, 0.55);
     }
 
     .footer {
@@ -909,6 +968,10 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -965,6 +1028,21 @@
           estudo Java, SQL e Rust, com uma estetica RGB que nao ignora clareza.
         </p>
         <p class="hero-quote">"The Bird of Hermes is my name, eating my wings to make me tame."</p>
+
+        <div class="hero-metrics">
+          <div class="metric">
+            <span>Focus</span>
+            <strong>Web / Backend</strong>
+          </div>
+          <div class="metric">
+            <span>Learning</span>
+            <strong>Java / SQL / Rust</strong>
+          </div>
+          <div class="metric">
+            <span>Location</span>
+            <strong>Brazil</strong>
+          </div>
+        </div>
 
         <div class="hero-actions">
           <a class="button button-primary" href="#projects">Ver projetos</a>
@@ -1112,7 +1190,7 @@
             <div class="skill-item"><span>React</span><span>interfaces</span></div>
             <div class="skill-item"><span>Node.js</span><span>APIs</span></div>
             <div class="skill-item"><span>Python</span><span>scripts</span></div>
-            <div class="skill-item"><span>Git + AWS</span><span>tools / cloud</span></div>
+            <div class="skill-item"><span>Git</span><span>tools</span></div>
           </div>
         </div>
       </div>
@@ -1140,7 +1218,7 @@
           <article class="timeline-card reveal" style="--delay: 0.16s;">
             <div class="num">02</div>
             <h4>CyberSecurity</h4>
-            <span class="status-tag status-progress">Em progresso</span>
+            <span class="status-tag status-complete">Concluido</span>
             <p>Estudos em andamento para entender seguranca, boas praticas e funcionamento interno de aplicacoes.</p>
           </article>
           <article class="timeline-card reveal" style="--delay: 0.22s;">
@@ -1166,7 +1244,7 @@
             </div>
             <div class="hero-actions">
               <a class="button button-primary" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
-              <a class="button" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a class="button" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noreferrer">LinkedIn</a>
             </div>
           </div>
         </div>
