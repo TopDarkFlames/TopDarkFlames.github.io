@@ -1,27 +1,60 @@
+<div align="center">
+
 # TopDarkFlames Portfolio
 
-Dark RGB portfolio for presenting my developer profile, current stack, studies, and public GitHub projects.
+Dark RGB portfolio built to present my developer profile, studies, stack, and live GitHub projects.
 
-Live site: [topdarkflames.github.io](https://topdarkflames.github.io/)
+[![Portfolio](https://img.shields.io/badge/OPEN_PORTFOLIO-DC143C?style=for-the-badge&logo=githubpages&logoColor=white)](https://topdarkflames.github.io/)
+[![GitHub Pages](https://img.shields.io/badge/GITHUB_PAGES-111111?style=for-the-badge&logo=github&logoColor=white)](https://topdarkflames.github.io/)
+[![Status](https://img.shields.io/badge/STATUS-LIVE-32f2a2?style=for-the-badge)](https://topdarkflames.github.io/)
+
+</div>
+
+---
 
 ## Overview
 
-This portfolio is a static GitHub Pages site built with vanilla HTML, CSS, and JavaScript. It uses a dark neon interface, animated reveal effects, responsive layouts, and a live GitHub repository section that updates from the public GitHub API.
+This repository powers my personal portfolio at:
 
-## Highlights
+```text
+https://topdarkflames.github.io/
+```
 
-- Personal landing page with a dark RGB visual identity
+The site is a static GitHub Pages project made with vanilla HTML, CSS, and JavaScript. It uses a dark neon interface, RGB accents, responsive sections, animated reveals, and a dynamic repository showcase connected to the GitHub API.
+
+## Visual Identity
+
+The portfolio follows a **dark forge / RGB precision** style:
+
+- deep dark background
+- crimson, cyan, lime, and amber highlights
+- compact project cards
+- terminal-inspired profile panel
+- smooth scroll and reveal animations
+- clean portfolio navigation for projects, stack, journey, and contact
+
+## Features
+
 - Responsive layout for desktop and mobile
-- Featured repositories loaded from GitHub in real time
-- Project cards sorted by recent activity
-- Fallback project data when the GitHub API is unavailable
-- Sections for stack, journey, projects, and contact
+- Live project cards loaded from public GitHub repositories
+- Repositories sorted by recent activity
+- Auto refresh while the page is open
+- Fallback project data if the GitHub API is unavailable
+- GitHub Pages deploy with no build step
 
 ## Stack
 
-`HTML` `CSS` `JavaScript` `GitHub Pages` `GitHub API`
+<div align="center">
 
-## Featured System
+![HTML5](https://img.shields.io/badge/HTML5-111?style=for-the-badge&logo=html5&logoColor=E34F26)
+![CSS3](https://img.shields.io/badge/CSS3-111?style=for-the-badge&logo=css3&logoColor=1572B6)
+![JavaScript](https://img.shields.io/badge/JavaScript-111?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-111?style=for-the-badge&logo=github&logoColor=FFFFFF)
+![GitHub API](https://img.shields.io/badge/GitHub_API-111?style=for-the-badge&logo=github&logoColor=32f2a2)
+
+</div>
+
+## Live GitHub Projects
 
 The projects section reads public repositories from:
 
@@ -29,14 +62,24 @@ The projects section reads public repositories from:
 https://api.github.com/users/TopDarkFlames/repos
 ```
 
-When a repository is updated on GitHub, the portfolio can reflect that activity automatically on page load and while the page remains open.
+When I update or publish a public repository, the portfolio can reflect the latest activity automatically.
 
-## Repository
-
-This repository contains the source for:
+## Project Structure
 
 ```text
-https://topdarkflames.github.io/
+.
+|-- index.html
+`-- README.md
 ```
 
-Deploy is handled directly by GitHub Pages from the `main` branch.
+## Deploy
+
+The site is deployed directly through GitHub Pages from the `main` branch.
+
+---
+
+<div align="center">
+
+Built by [TopDarkFlames](https://github.com/TopDarkFlames)
+
+</div>
