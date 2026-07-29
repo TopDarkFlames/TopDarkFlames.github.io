@@ -626,6 +626,8 @@
 
     .project-card {
       position: relative;
+      display: flex;
+      flex-direction: column;
       padding: 22px;
       border-radius: var(--radius);
       border: 1px solid var(--line);
@@ -683,6 +685,62 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.7;
+    }
+
+    .project-meta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 18px;
+      color: var(--soft);
+      font: 11px var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .repo-live-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      color: var(--muted);
+      font: 12px var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .repo-live-row::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--lime);
+      box-shadow: 0 0 10px var(--lime);
+    }
+
+    .project-card.is-loading {
+      pointer-events: none;
+    }
+
+    .project-card.is-loading h4,
+    .project-card.is-loading p,
+    .project-card.is-loading .chip,
+    .project-card.is-loading small {
+      color: transparent;
+      border-color: transparent;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+      background-size: 220% 100%;
+      animation: shimmer 1.4s ease infinite;
+      border-radius: 8px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 120% 0; }
+      100% { background-position: -120% 0; }
     }
 
     .chip-row {
@@ -1079,15 +1137,15 @@
             <div class="stat-grid">
               <div class="stat">
                 <span>Repos</span>
-                <strong>05</strong>
+                <strong id="repo-count">--</strong>
               </div>
               <div class="stat">
-                <span>Techs</span>
-                <strong>12</strong>
+                <span>Ativo</span>
+                <strong id="active-repo">LIVE</strong>
               </div>
               <div class="stat">
                 <span>Status</span>
-                <strong>HNTR</strong>
+                <strong id="sync-status">SYNC</strong>
               </div>
             </div>
 
@@ -1112,44 +1170,40 @@
             <h3 class="section-title">Projetos em destaque</h3>
           </div>
           <p class="section-copy">
-            Uma selecao dos repositorios que mostram meu momento atual: identidade visual,
-            portfolio e presenca no GitHub Pages.
+            Repositorios publicos puxados direto do GitHub. Quando voce publica
+            ou atualiza um projeto, esta vitrine acompanha automaticamente.
           </p>
+          <div class="repo-live-row" id="repo-live-status">Sincronizando com GitHub</div>
         </div>
 
-        <div class="project-grid">
-          <a class="project-card reveal" style="--delay: 0.1s; --card-glow: rgba(58, 214, 255, 0.25);" href="https://github.com/TopDarkFlames/TopDarkFlames.github.io" target="_blank" rel="noreferrer">
-            <small>github-pages</small>
-            <h4>TopDarkFlames.github.io</h4>
-            <p>Site pessoal estatico. Deploy direto no GitHub Pages, sem build.</p>
+        <div class="project-grid" id="repo-grid" aria-live="polite">
+          <article class="project-card is-loading reveal" style="--delay: 0.1s; --card-glow: rgba(58, 214, 255, 0.25);">
+            <small>github</small>
+            <h4>Carregando repositorio</h4>
+            <p>Buscando projetos atualizados no GitHub.</p>
             <div class="chip-row">
-              <span class="chip">HTML</span>
-              <span class="chip">CSS</span>
-              <span class="chip">Pages</span>
+              <span class="chip">API</span>
+              <span class="chip">LIVE</span>
             </div>
-          </a>
-
-          <a class="project-card reveal" style="--delay: 0.16s; --card-glow: rgba(225, 29, 72, 0.24);" href="https://github.com/TopDarkFlames/portfolio" target="_blank" rel="noreferrer">
-            <small>front-end</small>
-            <h4>Portfolio</h4>
-            <p>Experimentos de layout, responsividade e identidade visual para interfaces.</p>
+          </article>
+          <article class="project-card is-loading reveal" style="--delay: 0.16s; --card-glow: rgba(225, 29, 72, 0.24);">
+            <small>github</small>
+            <h4>Carregando repositorio</h4>
+            <p>Buscando projetos atualizados no GitHub.</p>
             <div class="chip-row">
-              <span class="chip">CSS</span>
-              <span class="chip">UI</span>
-              <span class="chip">Responsive</span>
+              <span class="chip">API</span>
+              <span class="chip">LIVE</span>
             </div>
-          </a>
-
-          <a class="project-card reveal" style="--delay: 0.22s; --card-glow: rgba(50, 242, 162, 0.22);" href="https://github.com/TopDarkFlames/TopDarkFlames" target="_blank" rel="noreferrer">
-            <small>profile-readme</small>
-            <h4>TopDarkFlames</h4>
-            <p>Repositorio do perfil com stack, estudos e lore dev em modo dark.</p>
+          </article>
+          <article class="project-card is-loading reveal" style="--delay: 0.22s; --card-glow: rgba(50, 242, 162, 0.22);">
+            <small>github</small>
+            <h4>Carregando repositorio</h4>
+            <p>Buscando projetos atualizados no GitHub.</p>
             <div class="chip-row">
-              <span class="chip">Markdown</span>
-              <span class="chip">Profile</span>
-              <span class="chip">README</span>
+              <span class="chip">API</span>
+              <span class="chip">LIVE</span>
             </div>
-          </a>
+          </article>
         </div>
       </div>
     </section>
@@ -1267,7 +1321,155 @@
       });
     }, { threshold: 0.12 });
 
-    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    const observeReveals = () => {
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    };
+
+    observeReveals();
+
+    const githubUser = 'TopDarkFlames';
+    const repoGrid = document.querySelector('#repo-grid');
+    const repoCount = document.querySelector('#repo-count');
+    const activeRepo = document.querySelector('#active-repo');
+    const syncStatus = document.querySelector('#sync-status');
+    const repoLiveStatus = document.querySelector('#repo-live-status');
+
+    const fallbackRepos = [
+      {
+        name: 'pixelmon-gts-signal',
+        html_url: 'https://github.com/TopDarkFlames/pixelmon-gts-signal',
+        description: 'Painel e automacao para monitorar o GTS Global do Pixelmon em tempo real.',
+        language: 'Ruby',
+        topics: ['discord-bot', 'pixelmon', 'ruby'],
+        stargazers_count: 0,
+        open_issues_count: 1,
+        pushed_at: '2026-07-29T12:22:07Z',
+        fork: false,
+        archived: false
+      },
+      {
+        name: 'TopDarkFlames.github.io',
+        html_url: 'https://github.com/TopDarkFlames/TopDarkFlames.github.io',
+        description: 'Site pessoal estatico com deploy direto no GitHub Pages.',
+        language: 'HTML',
+        topics: ['github-pages', 'portfolio'],
+        stargazers_count: 0,
+        open_issues_count: 0,
+        pushed_at: '2026-05-12T19:06:52Z',
+        fork: false,
+        archived: false
+      },
+      {
+        name: 'TopDarkFlames',
+        html_url: 'https://github.com/TopDarkFlames/TopDarkFlames',
+        description: 'Repositorio do perfil com stack, estudos e presenca no GitHub.',
+        language: 'Markdown',
+        topics: ['profile-readme'],
+        stargazers_count: 0,
+        open_issues_count: 0,
+        pushed_at: '2026-05-04T04:51:40Z',
+        fork: false,
+        archived: false
+      }
+    ];
+
+    const glowColors = [
+      'rgba(58, 214, 255, 0.25)',
+      'rgba(225, 29, 72, 0.24)',
+      'rgba(50, 242, 162, 0.22)',
+      'rgba(246, 196, 83, 0.22)',
+      'rgba(145, 94, 255, 0.22)',
+      'rgba(255, 255, 255, 0.16)'
+    ];
+
+    const escapeHtml = (value) => String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+
+    const formatRelativeDate = (dateString) => {
+      const date = new Date(dateString);
+      const seconds = Math.max(1, Math.floor((Date.now() - date.getTime()) / 1000));
+      const units = [
+        ['ano', 31536000],
+        ['mes', 2592000],
+        ['dia', 86400],
+        ['hora', 3600],
+        ['min', 60]
+      ];
+
+      const unit = units.find(([, value]) => seconds >= value);
+      if (!unit) return 'agora';
+
+      const amount = Math.floor(seconds / unit[1]);
+      const label = unit[0] === 'mes' && amount > 1 ? 'meses' : `${unit[0]}${amount > 1 ? 's' : ''}`;
+      return `ha ${amount} ${label}`;
+    };
+
+    const describeRepo = (repo) => {
+      if (repo.description) return repo.description;
+      if (repo.name === `${githubUser}.github.io`) return 'Site pessoal publicado no GitHub Pages.';
+      if (repo.name === githubUser) return 'Repositorio especial que alimenta o README do perfil.';
+      return 'Projeto publico em andamento no GitHub.';
+    };
+
+    const renderRepos = (repos, usingFallback = false) => {
+      const activeRepos = repos
+        .filter((repo) => !repo.archived)
+        .sort((a, b) => new Date(b.pushed_at) - new Date(a.pushed_at));
+      const visibleRepos = activeRepos.slice(0, 6);
+
+      repoGrid.innerHTML = visibleRepos.map((repo, index) => {
+        const tags = [
+          repo.language,
+          ...(repo.topics || [])
+        ].filter(Boolean).slice(0, 4);
+
+        return `
+          <a class="project-card reveal" style="--delay: ${0.1 + index * 0.06}s; --card-glow: ${glowColors[index % glowColors.length]};" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noreferrer">
+            <small>${repo.fork ? 'fork ativo' : 'repo publico'}</small>
+            <h4>${escapeHtml(repo.name)}</h4>
+            <p>${escapeHtml(describeRepo(repo))}</p>
+            <div class="chip-row">
+              ${tags.map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join('')}
+            </div>
+            <div class="project-meta">
+              <span>${repo.stargazers_count || 0} stars</span>
+              <span>${repo.open_issues_count || 0} issues</span>
+              <span>${formatRelativeDate(repo.pushed_at)}</span>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      repoCount.textContent = String(activeRepos.length).padStart(2, '0');
+      activeRepo.textContent = visibleRepos[0] ? visibleRepos[0].name.slice(0, 4).toUpperCase() : 'LIVE';
+      syncStatus.textContent = usingFallback ? 'CACHE' : 'LIVE';
+      repoLiveStatus.textContent = usingFallback
+        ? 'Usando fallback local; GitHub indisponivel agora'
+        : `Atualizado pelo GitHub: ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+      observeReveals();
+    };
+
+    const loadGitHubRepos = async () => {
+      try {
+        const response = await fetch(`https://api.github.com/users/${githubUser}/repos?sort=pushed&per_page=100`, {
+          headers: { Accept: 'application/vnd.github+json' }
+        });
+
+        if (!response.ok) throw new Error(`GitHub API ${response.status}`);
+
+        const repos = await response.json();
+        renderRepos(repos);
+      } catch (error) {
+        renderRepos(fallbackRepos, true);
+      }
+    };
+
+    loadGitHubRepos();
+    window.setInterval(loadGitHubRepos, 60000);
   </script>
 </body>
 </html>
