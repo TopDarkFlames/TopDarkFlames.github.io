@@ -23,13 +23,14 @@
   background: var(--ground);
 }
 .hero.vfx-fallback { background: var(--ground-2); }
-.hero-vfx { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+.hero-vfx { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; pointer-events: none; }
 /* the one allowed gradient: a neutral --ground scrim under the text so the light never washes it out */
 .hero::after {
   content: ""; position: absolute; inset: 40% 0 0; pointer-events: none;
-  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--ground) 82%, transparent) 70%);
+  background: linear-gradient(to bottom, /* taste-skill-ignore: neutral scrim under text */ transparent, color-mix(in srgb, var(--ground) 82%, transparent) 70%);
 }
 .hero-mark, .hero-copy, .hero-hint { z-index: 1; }
+.hero-name { position: relative; z-index: 1; }
 
 .hero-mark {
   position: absolute; left: var(--margin); right: var(--margin); bottom: 22%;
@@ -104,7 +105,7 @@
   .hero-mark { position: relative; left: auto; right: auto; bottom: auto; margin-bottom: 32px; }
   .hero-star { width: 32px; height: 32px; top: auto; bottom: calc(100% + 16px); }
   .hero-name { font-size: 19vw; font-stretch: 100%; font-variation-settings: "wdth" 100; }
-  .hero-copy { position: relative; right: auto; bottom: auto; max-width: none; font-size: 17px; }
+  .hero-copy { position: relative; right: auto; bottom: auto; max-width: none; font-size: 18px; }
   .intro-notes { gap: 24px; }
   .intro-notes p { width: auto; flex: 1; }
   .intro-pano-frame { aspect-ratio: 4 / 5; }

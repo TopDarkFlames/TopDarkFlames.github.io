@@ -48,10 +48,10 @@
     return (h >>> 0) % 100000;
   }
 
-  // "TopDarkFlames.github.io" -> ["TopDarkFlames.", "github.", "io"], max 3 lines.
+  // "TopDarkFlames.github.io" -> ["TopDarkFlames.", "github.", "io"], max 2 lines (the inspector holds headlines to two).
   function nameLines(name) {
     var parts = name.match(/[^-_.]+[-_.]*/g) || [name];
-    while (parts.length > 3) parts.splice(parts.length - 2, 2, parts[parts.length - 2] + parts[parts.length - 1]);
+    while (parts.length > 2) parts.splice(parts.length - 2, 2, parts[parts.length - 2] + parts[parts.length - 1]);
     return parts;
   }
 
@@ -81,7 +81,7 @@
         '<p class="proj__name">' + lines + '</p>' +
       '</a>' +
       '<p class="proj__desc" data-reveal style="--i:2">' + esc(describe(repo)) + '</p>' +
-      '<p class="proj__foot" data-reveal style="--i:3"><span aria-label="' + esc(repo.stargazers_count) + ' estrelas">★ ' + esc(repo.stargazers_count) + '</span>' +
+      '<p class="proj__foot" data-reveal style="--i:3"><span>' + esc(repo.stargazers_count) + (repo.stargazers_count == 1 ? ' estrela' : ' estrelas') + '</span>' +
         '<a class="proj__link" href="' + url + '" target="_blank" rel="noreferrer">Ver no GitHub<span class="work__sr"> — ' + esc(repo.name) + '</span></a></p>' +
     '</article>';
   }

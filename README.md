@@ -20,7 +20,7 @@ This repository powers my personal portfolio at:
 https://topdarkflames.github.io/
 ```
 
-The site is a static GitHub Pages project made with vanilla HTML, CSS, and JavaScript. It uses a dark neon interface, RGB accents, responsive sections, animated reveals, and a dynamic repository showcase connected to the GitHub API.
+The site is a static GitHub Pages project made with vanilla HTML, CSS, and JavaScript. It uses a real-time WebGL effect (blue light behind fluted glass), a monumental type hero, animated reveals, and a live repository showcase connected to the GitHub API, where every repo gets its own generated poster.
 
 ## Visual Identity
 
@@ -69,6 +69,8 @@ When I update or publish a public repository, the portfolio can reflect the late
 ```text
 .
 |-- index.html
+|-- css/   tokens, hero, work (projetos), sections
+|-- js/    vfx (WebGL), main, hero, work, sections
 `-- README.md
 ```
 

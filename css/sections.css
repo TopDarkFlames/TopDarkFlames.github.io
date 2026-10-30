@@ -47,11 +47,12 @@
 .journey__facts li + li { margin-top: 12px; }
 .journey__text {
   grid-column: 3 / -1; grid-row: 1; margin: 0;
-  font-size: clamp(24px, 2.5vw, 36px); line-height: 1.2; letter-spacing: -0.01em;
+  font-size: var(--step-lead); line-height: 1.3; letter-spacing: -0.01em;
 }
 .journey__portrait {
-  float: left; width: 3.6em; height: 3.6em; margin: 0.06em 0.5em 0 0;
+  float: left; width: 3.6em; height: 3.6em; margin: 0.12em 0.5em 0 0;
   object-fit: cover; background: var(--ground-2);
+  margin-bottom: -0.2em; /* lets line 4 return to full width under the 3-line portrait */
 }
 
 /* ---------- Contato: address in display rows ---------- */
@@ -88,7 +89,8 @@
   padding: 40px var(--margin) 20px;
   background: var(--deep); color: var(--ink); overflow: hidden;
 }
-.foot__light { position: absolute; inset: 50% 0 0; }
+/* Mask (not a UI gradient) dissolves the light's top edge into the deep field. */
+.foot__light { /* taste-skill-ignore: alpha mask, not a fill */ position: absolute; inset: 50% 0 0; -webkit-mask-image: linear-gradient(transparent, #000 45%); mask-image: linear-gradient(transparent, #000 45%); }
 .foot__light.vfx-fallback { background: var(--ground-2); }
 .foot__cols {
   position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
