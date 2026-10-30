@@ -65,11 +65,11 @@
   }
 
   function resize() {
-    const dpr = Math.min(devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(devicePixelRatio || 1, 1.25); // glow hides the softness; fill cost drops ~30%
     W = innerWidth; H = innerHeight;
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = W < 700 ? 46 : 96;
+    const n = W < 700 ? 40 : 80;
     if (n !== N) { N = n; build(); } // phone address-bar resizes keep the same strands
     bake();
     if (reduce) redraw();
@@ -111,7 +111,7 @@
   }
   function bake() {
     const narrow = W < 700, d = (narrow ? 0.42 : 0.5) * H;
-    STEP = narrow ? 12 : 10;
+    STEP = narrow ? 16 : 14; // long-radius curves need no denser sampling
     const C = corners(), cp = [C[0], C[0]];
     for (let i = 0; i < C.length - 1; i++) {
       const [x0, y0] = C[i], [x1, y1] = C[i + 1], k = Math.max(1, Math.round(Math.hypot(x1 - x0, y1 - y0) / d));
@@ -165,7 +165,7 @@
   let pts = new Float32Array(0), vis = new Int32Array(0), vx = new Float32Array(0), vy = new Float32Array(0);
   let VN = 0, runs = [];
   function slice(viewY) {
-    const y0 = viewY - 0.4 * H, y1 = viewY + 1.4 * H, cx = W / 2, cy = viewY + H / 2;
+    const y0 = viewY - 0.12 * H, y1 = viewY + 1.12 * H, cx = W / 2, cy = viewY + H / 2;
     VN = 0; runs = [];
     let open = -1, best = 1e18, bi = 0;
     for (let i = 0; i < PN; i++) {
@@ -181,7 +181,7 @@
   }
   function strandPath(s, time) {
     const pull = ptr.on > 0.01, sig = 2 * (Math.max(W, H) * 0.18) ** 2, mx = ptr.x * W, my = ptr.y * H;
-    const wk = (9 * s.f) / (Math.max(W, H) * 1.3), wa = 0.012 * W, ph = time * 0.7 + s.ph;
+    const wk = (9 * s.f) / (Math.max(W, H) * 1.3), wa = 0.012 * W, ph = time * 1.1 + s.ph;
     for (let j = 0; j < VN; j++) {
       const i = vis[j], fan = FAN[i];
       const off = s.o * SPR[i] + Math.sin(i * STEP * wk + ph) * wa * (0.4 + fan);
@@ -217,10 +217,10 @@
     return any;
   }
   function tail(s, head, len, alpha, width, core) {
-    for (let k = 0; k < 5; k++) {
-      if (traceArc(head - len * (k + 1) / 5, head - len * k / 5)) {
-        ctx.strokeStyle = col(s, s.o * 0.6, (0.55 - k * 0.1) * (0.4 + core) * alpha);
-        ctx.lineWidth = (1.6 - k * 0.2) * width; ctx.stroke();
+    for (let k = 0; k < 3; k++) {
+      if (traceArc(head - len * (k + 1) / 3, head - len * k / 3)) {
+        ctx.strokeStyle = col(s, s.o * 0.6, (0.6 - k * 0.17) * (0.4 + core) * alpha);
+        ctx.lineWidth = (1.7 - k * 0.35) * width; ctx.stroke();
       }
     }
   }
@@ -250,7 +250,7 @@
     // The light glides after the page: ~0.12 per 60fps frame, frame-rate independent, settles exactly.
     const target = scrollY;
     if (reduce) viewY = target;
-    else { viewY += (target - viewY) * (1 - Math.exp(-dt * 7.7)); if (Math.abs(target - viewY) < 0.25) viewY = target; }
+    else { viewY += (target - viewY) * (1 - Math.exp(-dt * 13)); if (Math.abs(target - viewY) < 0.25) viewY = target; } // keeps the glide, stays close to the scroll
     const k200 = reduce ? 1 : 1 - Math.exp(-dt / 0.07); // ~200ms to settle
 
     const near = slice(viewY);
@@ -274,7 +274,7 @@
       ctx.strokeStyle = col(s, s.o, (0.035 + core * 0.05) * a); ctx.lineWidth = 5 * thick; ctx.stroke();
       ctx.strokeStyle = col(s, s.o, (0.10 + core * 0.22) * a); ctx.lineWidth = 0.9 * thick; ctx.stroke();
       // Regular pulses, ~1.1 viewport heights apart along the whole path, at the repo's speed.
-      const gap = s.gapK * H, len = s.len * S, v = s.sp * S;
+      const gap = s.gapK * H, len = s.len * S, v = s.sp * S * 2.2;
       s.u = (s.u + (v * dt) / gap) % 1;
       const r0 = runs[0][2] * STEP, lr = runs[runs.length - 1];
       const r1 = (lr[2] + lr[1] - lr[0]) * STEP + len;
