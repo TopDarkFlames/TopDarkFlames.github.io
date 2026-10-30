@@ -1,0 +1,159 @@
+/* Projetos: loose scatter of repo posters with pauses between them. */
+.work {
+  padding-inline: var(--margin);
+  margin-block: var(--section-gap);
+}
+
+.work__head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(12px, 1.6vw, 24px);
+  align-items: end;
+  margin-bottom: clamp(72px, 14vh, 160px);
+}
+.work__title {
+  grid-column: 1 / 6;
+  margin: 0;
+  font-size: var(--step-head);
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+}
+.work__intro {
+  grid-column: 7 / 12;
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 34em;
+}
+.work__status {
+  grid-column: 7 / 12;
+  margin: 0.6em 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.work__list {
+  display: grid;
+  row-gap: clamp(140px, 21vh, 220px);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  --g: clamp(12px, 1.6vw, 24px);
+  column-gap: var(--g);
+  align-items: start;
+  container-type: inline-size;
+}
+.work__sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+.work__noscript { grid-column: 1 / -1; margin: 0; }
+
+.proj { grid-row: var(--row); margin: 0; min-width: 0; }
+.proj--a { grid-column: 1 / 7; --ar: 3 / 2; }
+/* shares the row with the 3:2 poster before it and starts 80px above that poster's bottom,
+   so the two overlap in height. Cols 1–6 width = (100cqi - 11 gaps) / 2 + 5 gaps; 28px = meta line. */
+.proj--b {
+  grid-column: 9 / 13; --ar: 4 / 5;
+  margin-top: calc(((100cqi - 11 * var(--g)) / 2 + 5 * var(--g)) * 2 / 3 + 28px - 80px);
+}
+.proj--c { grid-column: 3 / 10; --ar: 16 / 9; }
+
+.proj__meta {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.proj__frame {
+  position: relative;
+  display: block;
+  aspect-ratio: var(--ar);
+  overflow: hidden;
+  background: var(--ground-2);
+  color: #fff;
+  text-decoration: none;
+  container-type: inline-size;
+}
+.proj__art {
+  position: absolute;
+  inset: 0;
+  background: var(--ground-2) center / cover no-repeat;
+  transition: transform 700ms var(--ease-out);
+}
+.proj__name {
+  position: absolute;
+  left: 6cqi;
+  bottom: 6cqi;
+  margin: 0;
+  font-size: 10cqi; /* JS refines this so the longest line fits */
+  font-weight: 800;
+  font-stretch: 125%;
+  letter-spacing: -0.03em;
+  line-height: 0.86;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.proj__name span { display: block; width: max-content; }
+.proj__mark {
+  position: absolute;
+  top: 6cqi;
+  right: 6cqi;
+  width: clamp(18px, 5cqi, 34px);
+  height: clamp(18px, 5cqi, 34px);
+  transition: transform 700ms var(--ease-out);
+}
+.proj__frame:hover .proj__art,
+.proj:has(.proj__link:focus-visible) .proj__art { transform: scale(1.02); }
+.proj__frame:hover .proj__mark,
+.proj:has(.proj__link:focus-visible) .proj__mark { transform: rotate(60deg); }
+
+.proj__desc {
+  margin: 18px 0 0;
+  max-width: 38em;
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.45;
+  color: var(--ink);
+}
+.proj__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  margin: 10px 0 0;
+  font-size: clamp(15px, 1.1vw, 17px);
+}
+.proj__link { text-underline-offset: 0.2em; }
+.proj__link:hover { color: var(--glow); }
+
+.work__remark {
+  grid-column: 2 / 6;
+  grid-row: 1;
+  align-self: end;
+  margin: 0 0 clamp(120px, 14vw, 220px);
+  font-size: 20px;
+  line-height: 1.35;
+  max-width: 19em;
+}
+
+@media (max-width: 860px) {
+  .work__head { display: block; margin-bottom: 64px; }
+  .work__intro { margin-top: 16px; }
+  .work__list { --gap: 72px; display: flex; flex-direction: column; }
+  .proj, .proj--b { margin-top: var(--gap); }
+  .proj:first-child { margin-top: 0; }
+  .work__remark { order: 1; }
+  .proj:nth-child(n+3) { order: 2; } /* remark sits after the 2nd project */
+  .proj--a { width: 100%; }
+  .proj--b { width: 72%; align-self: flex-end; }
+  .proj--c { width: 86%; align-self: flex-start; }
+  .work__remark { margin: var(--gap) 0 0; max-width: none; align-self: stretch; }
+}
+@media (min-width: 861px) and (max-width: 1100px) {
+  .proj--b { grid-column: 8 / 13; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proj__frame:hover .proj__art,
+  .proj:has(.proj__link:focus-visible) .proj__art { transform: none; }
+}
