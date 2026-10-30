@@ -24,9 +24,9 @@
   };
 
   const strand = (o, extra) => ({
-    o, ph: Math.random() * 6.28, f: 0.6 + Math.random() * 1.4, u: Math.random(), gapK: 1.1 * (0.85 + Math.random() * 0.3),
-    sp: 0.05 + Math.random() * 0.09, len: 0.08 + Math.random() * 0.12, bp: -1,
-    key: null, edge: [30, 95, 255], lum: 1, hl: 1, tgt: 1, boost: 0, ...extra,
+    o, ph: Math.random() * 6.28, f: 0.6 + Math.random() * 1.4,
+    key: null, edge: [30, 95, 255], lum: 1, hl: 1, tgt: 1, boost: 0,
+    th: (o + 1) * 1.45, dash: 140 + Math.random() * 220, gapd: 520 + Math.random() * 640, ...extra,
   });
 
   function build() {
@@ -54,7 +54,7 @@
       const edge = hsl(hue, 1, 0.56), entry = { key, rgb: `rgb(${hsl(hue, 1, 0.66).join(',')})`, strands: [], rank: i };
       for (let k = 0; k < count[i]; k++) {
         const s = strand(spreadOf(q + ((k + 0.2 + Math.random() * 0.6) / count[i]) * (count[i] / total)), {
-          key, edge, lum: 0.55 + 0.6 * rec[i], sp: (0.04 + Math.random() * 0.05) * (0.6 + 1.2 * rec[i]),
+          key, edge, lum: 0.55 + 0.6 * rec[i],
         });
         strands.push(s); entry.strands.push(s);
       }
@@ -69,7 +69,7 @@
     W = innerWidth; H = innerHeight;
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = W < 700 ? 40 : 80;
+    const n = W < 700 ? 34 : 56; // fine fibres that read as one silk ribbon
     if (n !== N) { N = n; build(); } // phone address-bar resizes keep the same strands
     bake();
     if (reduce) redraw();
@@ -94,9 +94,17 @@
     const yh = (head.bot + figs.top) / 2;           // under the numbers heading row
     const yu = (figs.bot + jor.top) / 2;            // behind the opaque number panels
     const yc1 = Math.max(jor.bot, yu + H), yc2 = Math.max((card.top + card.bot) / 2, yc1 + 0.45 * H);
+    const hy = hero.top, hh = hero.bot - hero.top;
+    const cx = X(narrow ? 0.55 : 0.5), cy = hy + hh * (narrow ? 0.84 : 0.8), cr = Math.min(W, H) * (narrow ? 0.3 : 0.22);
     return [
       [X(1.05), -0.25 * H],
-      [X(narrow ? 0.7 : 0.62), (hero.top + hero.bot) / 2],
+      [X(narrow ? 0.9 : 0.8), hy + hh * 0.38],     // long sweep down-left behind the feed
+      [cx + cr * 0.2, cy - cr * 1.25],              // the curl, like the reel: over the top...
+      [cx - cr * 1.3, cy - cr * 0.1],               // ...around the left...
+      [cx - cr * 0.1, cy + cr * 1.2],               // ...under...
+      [cx + cr * 1.3, cy + cr * 0.05],              // ...and back up the right, crossing itself
+      [cx + cr * 0.6, cy - cr * 1.0],
+      [X(R1), hero.bot + 0.15 * H],                 // then away down the right side
       [X(R1), Math.min(proj.top + 0.25 * H, (proj.top + yh) / 2)],
       [X(R1), yh],                                  // vertical down the right, bends into a run right -> left
       [X(LEFT), yh],
@@ -110,7 +118,7 @@
     ];
   }
   function bake() {
-    const narrow = W < 700, d = (narrow ? 0.42 : 0.5) * H;
+    const narrow = W < 700, d = (narrow ? 0.34 : 0.42) * H;
     STEP = narrow ? 16 : 14; // long-radius curves need no denser sampling
     const C = corners(), cp = [C[0], C[0]];
     for (let i = 0; i < C.length - 1; i++) {
@@ -181,10 +189,10 @@
   }
   function strandPath(s, time) {
     const pull = ptr.on > 0.01, sig = 2 * (Math.max(W, H) * 0.18) ** 2, mx = ptr.x * W, my = ptr.y * H;
-    const wk = (9 * s.f) / (Math.max(W, H) * 1.3), wa = 0.012 * W, ph = time * 1.1 + s.ph;
+    const tw = 6.283 / (1.9 * Math.max(W, H)), ph = s.th - time * 0.55;
     for (let j = 0; j < VN; j++) {
-      const i = vis[j], fan = FAN[i];
-      const off = s.o * SPR[i] + Math.sin(i * STEP * wk + ph) * wa * (0.4 + fan);
+      const i = vis[j];
+      const off = SPR[i] * 1.15 * Math.cos(i * STEP * tw + ph);
       let px = vx[j] - TY[i] * off, py = vy[j] + TX[i] * off;
       if (pull) {
         const dx = mx - px, dy = my - py, f = ptr.on * 0.28 * Math.exp(-(dx * dx + dy * dy) / sig);
@@ -193,35 +201,12 @@
       pts[j * 2] = px; pts[j * 2 + 1] = py;
     }
   }
-  function traceAll() {
-    ctx.beginPath();
+  function traceAll(c = ctx) {
+    c.beginPath();
     for (const [a, b] of runs) {
       if (b - a < 2) continue;
-      ctx.moveTo(pts[a * 2], pts[a * 2 + 1]);
-      for (let j = a + 1; j < b; j++) ctx.lineTo(pts[j * 2], pts[j * 2 + 1]);
-    }
-  }
-  // Draw the arc-length range [lo, hi] (px) wherever it falls inside the visible runs.
-  function traceArc(lo, hi) {
-    let any = false;
-    ctx.beginPath();
-    for (const [a, b, i0] of runs) {
-      const A = i0 * STEP, B = (i0 + b - a - 1) * STEP;
-      if (hi <= A || lo >= B) continue;
-      const j0 = a + Math.floor((Math.max(lo, A) - A) / STEP), j1 = a + Math.ceil((Math.min(hi, B) - A) / STEP);
-      if (j1 <= j0) continue;
-      ctx.moveTo(pts[j0 * 2], pts[j0 * 2 + 1]);
-      for (let j = j0 + 1; j <= j1; j++) ctx.lineTo(pts[j * 2], pts[j * 2 + 1]);
-      any = true;
-    }
-    return any;
-  }
-  function tail(s, head, len, alpha, width, core) {
-    for (let k = 0; k < 3; k++) {
-      if (traceArc(head - len * (k + 1) / 3, head - len * k / 3)) {
-        ctx.strokeStyle = col(s, s.o * 0.6, (0.6 - k * 0.17) * (0.4 + core) * alpha);
-        ctx.lineWidth = (1.7 - k * 0.35) * width; ctx.stroke();
-      }
+      c.moveTo(pts[a * 2], pts[a * 2 + 1]);
+      for (let j = a + 1; j < b; j++) c.lineTo(pts[j * 2], pts[j * 2 + 1]);
     }
   }
   // White-cyan core, the strand's own blue at the edges.
@@ -238,11 +223,6 @@
   }
 
   let last = performance.now(), time = 0, raf = 0, viewY = scrollY;
-  // Arc position of the path where it first enters the top of the window (for bursts).
-  function arcAtTop() {
-    for (let j = 0; j < VN; j++) if (vy[j] >= -0.05 * H && vx[j] > -0.1 * W && vx[j] < 1.1 * W) return vis[j] * STEP;
-    return VN ? vis[0] * STEP : 0;
-  }
   function draw(now = performance.now()) {
     raf = 0;
     const dt = reduce ? 0 : Math.min(0.05, (now - last) / 1000); last = now; time += dt;
@@ -261,9 +241,8 @@
     ctx.fillStyle = '#02040b'; ctx.fillRect(0, 0, W, H);
     ctx.globalCompositeOperation = 'lighter';
     haze(viewY);
-    ctx.lineCap = 'round';
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
 
-    const S = Math.max(W, H) * 1.3, total = PN * STEP;
     for (const s of strands) {
       s.hl += (s.tgt - s.hl) * k200;
       s.boost = Math.max(0, s.boost - dt * 0.45);
@@ -271,24 +250,22 @@
       strandPath(s, time);
       const core = 1 - Math.min(1, Math.abs(s.o)), a = s.hl, thick = 1 + Math.max(0, s.hl - 1) * 0.5;
       traceAll();
-      ctx.strokeStyle = col(s, s.o, (0.035 + core * 0.05) * a); ctx.lineWidth = 5 * thick; ctx.stroke();
-      ctx.strokeStyle = col(s, s.o, (0.10 + core * 0.22) * a); ctx.lineWidth = 0.9 * thick; ctx.stroke();
-      // Regular pulses, ~1.1 viewport heights apart along the whole path, at the repo's speed.
-      const gap = s.gapK * H, len = s.len * S, v = s.sp * S * 2.2;
-      s.u = (s.u + (v * dt) / gap) % 1;
-      const r0 = runs[0][2] * STEP, lr = runs[runs.length - 1];
-      const r1 = (lr[2] + lr[1] - lr[0]) * STEP + len;
-      for (let k = Math.floor(r0 / gap - s.u); (k + s.u) * gap - len < r1 && k * gap < total + gap; k++) {
-        const h = (k + s.u) * gap;
-        if (h > 0) tail(s, h, len, a * s.lum, thick, core);
-      }
-      // The burst pulse: launched near the top of the window, brighter, faster.
-      if (s.bp >= 0) {
-        s.bp += v * 2.5 * dt + 260 * dt;
-        if (s.boost <= 0 || s.bp - len > total) s.bp = -1;
-        else tail(s, s.bp, len * 1.4, a * s.lum * (1 + s.boost * 2.2), thick * (1 + s.boost * 0.6), core);
+      ctx.setLineDash([]);
+      ctx.strokeStyle = col(s, s.o, (0.022 + core * 0.03) * a); ctx.lineWidth = 14 * thick; ctx.stroke();
+      ctx.strokeStyle = col(s, s.o, (0.09 + core * 0.17) * a); ctx.lineWidth = 0.8 * thick; ctx.stroke();
+      // Light travelling along the fibre: dashes that flow forward; offset by the run's arc start so scrolling never shifts them.
+      const flow = time * (110 + 260 * s.lum) * (1 + s.boost * 2);
+      ctx.setLineDash([s.dash, s.gapd]);
+      ctx.strokeStyle = col(s, s.o * 0.5, (0.18 + core * 0.3) * a * s.lum * (1 + s.boost * 1.5)); ctx.lineWidth = 1.4 * thick * (1 + s.boost * 0.5);
+      for (const [ra, rb, i0] of runs) {
+        if (rb - ra < 2) continue;
+        ctx.lineDashOffset = -flow + i0 * STEP;
+        ctx.beginPath(); ctx.moveTo(pts[ra * 2], pts[ra * 2 + 1]);
+        for (let j = ra + 1; j < rb; j++) ctx.lineTo(pts[j * 2], pts[j * 2 + 1]);
+        ctx.stroke();
       }
     }
+    ctx.setLineDash([]);
     if (!reduce && !document.hidden) raf = requestAnimationFrame(draw);
   }
   const redraw = () => { if (!raf && !document.hidden) raf = requestAnimationFrame(draw); };
@@ -300,8 +277,7 @@
   function burst(name) {
     const e = name && byKey.get(String(name).toLowerCase());
     if (!e || reduce) return;
-    const at = arcAtTop();
-    e.strands.forEach((s) => { s.bp = at - Math.random() * 80; s.boost = 1; });
+    e.strands.forEach((s) => { s.boost = 1; });
   }
 
   window.Trails = {
