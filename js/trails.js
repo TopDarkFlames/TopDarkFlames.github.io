@@ -4,7 +4,7 @@
 (() => {
   const cv = document.getElementById('trails');
   const ctx = cv && cv.getContext && cv.getContext('2d');
-  const GLOW = 'rgb(67,200,255)'; // --glow #43c8ff
+  const GLOW = 'rgb(216,255,90)'; // --glow #d8ff5a
   if (!ctx) { window.Trails = { highlight() {}, burst() {}, colorOf: () => GLOW }; return; }
   Object.assign(cv.style, { position: 'fixed', inset: '0', width: '100%', height: '100%', pointerEvents: 'none', zIndex: cv.style.zIndex || '0' });
 
@@ -50,7 +50,7 @@
     strands = [];
     let q = 0;
     for (const i of order) {
-      const r = list[i], key = r.name.toLowerCase(), hue = 200 + hash(key) * 25;
+      const r = list[i], key = r.name.toLowerCase(), hue = 72 + hash(key) * 28;
       const edge = hsl(hue, 1, 0.56), entry = { key, rgb: `rgb(${hsl(hue, 1, 0.66).join(',')})`, strands: [], rank: i };
       for (let k = 0; k < count[i]; k++) {
         const s = strand(spreadOf(q + ((k + 0.2 + Math.random() * 0.6) / count[i]) * (count[i] / total)), {
@@ -209,16 +209,16 @@
       for (let j = a + 1; j < b; j++) c.lineTo(pts[j * 2], pts[j * 2 + 1]);
     }
   }
-  // White-cyan core, the strand's own blue at the edges.
+  // White-lime core, the strand's own green at the edges.
   function col(s, o, a) {
     const k = Math.min(1, Math.abs(o) * 1.4), e = s.edge;
-    return `rgba(${Math.round(lerp(210, e[0], k))},${Math.round(lerp(240, e[1], k))},${Math.round(lerp(255, e[2], k))},${Math.min(1, a)})`;
+    return `rgba(${Math.round(lerp(245, e[0], k))},${Math.round(lerp(255, e[1], k))},${Math.round(lerp(215, e[2], k))},${Math.min(1, a)})`;
   }
   const glowAt = { x: 0, y: 0, set: false };
   function haze(viewY) {
     const R = Math.max(W, H) * 0.55, x = glowAt.x, y = glowAt.y - viewY;
     const g = ctx.createRadialGradient(x, y, 0, x, y, R);
-    g.addColorStop(0, 'rgba(42,107,255,0.22)'); g.addColorStop(0.45, 'rgba(20,50,160,0.08)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    g.addColorStop(0, 'rgba(170,235,50,0.18)'); g.addColorStop(0.45, 'rgba(50,90,15,0.07)'); g.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   }
 
@@ -238,7 +238,7 @@
     glowAt.x += (PX[near] - glowAt.x) * kg; glowAt.y += (PY[near] - glowAt.y) * kg; glowAt.set = true;
 
     ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = '#02040b'; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = '#050605'; ctx.fillRect(0, 0, W, H);
     ctx.globalCompositeOperation = 'lighter';
     haze(viewY);
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';

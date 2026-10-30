@@ -77,7 +77,7 @@
 .run--done .run-ic { color: var(--glow); }
 .run--now .run-ic, .run--use .run-ic { color: var(--accent); }
 .run-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.run-bar { height: 6px; border-radius: 3px; background: rgba(141, 154, 191, 0.14); overflow: hidden; }
+.run-bar { height: 6px; border-radius: 3px; background: rgba(176, 196, 150, 0.14); overflow: hidden; }
 .run-bar i { display: block; height: 100%; width: var(--w); background: var(--accent); border-radius: inherit; }
 .run--done .run-bar i { background: var(--glow); }
 .run-st { font-size: 14px; color: var(--ink-soft); white-space: nowrap; }
@@ -86,10 +86,10 @@
 .run-list--tools .run + .run { margin-top: 0; }
 
 /* ---------- #contato ---------- */
-/* #2a6bff under #eef3ff is only 4.07:1, so the card uses a deeper step of the accent (5.16:1). */
+/* #c6f432 under #eef3ff is only 4.07:1, so the card uses a deeper step of the accent (5.16:1). */
 .close-card {
-  --card: #1f5ae6;
-  background: var(--card); color: var(--ink); border-radius: calc(var(--radius) * 2);
+  --card: var(--accent);
+  background: var(--card); color: var(--ground); border-radius: calc(var(--radius) * 2);
   padding: clamp(32px, 6vw, 72px);
   display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px 64px; align-items: end;
 }
@@ -105,7 +105,7 @@
 .close-link:hover { text-decoration: underline; }
 .close-link:hover svg, .close-link:focus-visible svg { transform: translateX(6px); }
 .close-link:active svg { transform: translateX(10px); }
-.close-card :focus-visible { outline-color: var(--ink); }
+.close-card :focus-visible { outline-color: var(--ground); }
 .close-place { margin-top: 12px !important; font-size: 16px; }
 
 /* ---------- footer ---------- */

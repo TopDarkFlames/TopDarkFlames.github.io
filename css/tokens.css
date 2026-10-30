@@ -1,16 +1,17 @@
 /* Shared tokens. Every section CSS uses these only. */
 :root {
-  --ground: #02040b;     /* page */
-  --panel: #070c1c;      /* one tone step up: app fragments, bands */
-  --panel-2: #0c1430;    /* second step: rows, controls inside panels */
-  --line: rgba(141, 154, 191, 0.16); /* only inside data-ui fragments */
-  --ink: #eef3ff;
-  --ink-soft: #8d9abf;
-  --accent: #2a6bff;     /* the action, the closing card, live markers */
-  --glow: #43c8ff;       /* trail core, status dot */
+  --ground: #050605;     /* page */
+  --panel: #0b0d0a;      /* one tone step up: app fragments, bands */
+  --panel-2: #151a12;    /* second step: rows, controls inside panels */
+  --line: rgba(176, 196, 150, 0.16); /* only inside data-ui fragments */
+  --ink: #f2f5ec;
+  --ink-soft: #9ba393;
+  --accent: #c6f432;     /* the action, the closing card, live markers */
+  --glow: #d8ff5a;       /* trail core, status dot */
 
   --sans: "TikTok Sans", system-ui, sans-serif;
-  --serif: "Instrument Serif", Georgia, serif; /* italic only, one word per headline (approved reference style) */
+  --serif: "Instrument Serif", Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace; /* labels, pills, status: the reference's terminal voice */ /* italic only, one word per headline (approved reference style) */
 
   --step-small: 14px;
   --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
@@ -39,7 +40,7 @@ img, svg, canvas { display: block; max-width: 100%; }
 a { color: inherit; }
 h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.035em; line-height: 1; text-wrap: balance; }
 em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
-::selection { background: var(--accent); color: var(--ink); }
+::selection { background: var(--accent); color: var(--ground); }
 :focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
 .wrap { width: min(1280px, 100%); margin-inline: auto; padding-inline: var(--margin); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } /* taste-skill-ignore: visually-hidden text */
@@ -47,14 +48,14 @@ em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spa
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
   min-height: 48px; padding: 0 1.4em; border: 0; border-radius: var(--radius-btn);
-  background: var(--accent); color: var(--ink); text-decoration: none; cursor: pointer;
+  background: var(--accent); color: var(--ground); text-decoration: none; cursor: pointer;
   font: 600 16px/1 var(--sans);
   transition: transform 200ms var(--ease-out), background-color 200ms;
 }
-.btn:hover { background: #3f7cff; transform: translateY(-2px); }
+.btn:hover { background: #d6ff5c; transform: translateY(-2px); }
 .btn:active { transform: scale(0.97); }
-.btn--quiet { background: var(--panel-2); }
-.btn--quiet:hover { background: #142050; }
+.btn--quiet { background: var(--panel-2); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.btn--quiet:hover { background: #1d2318; }
 
 /* Entrances: visible without JS; html.js arms them, main.js plays them once. */
 .js [data-reveal] { opacity: 0; transform: translateY(24px); }

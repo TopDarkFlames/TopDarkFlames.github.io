@@ -26,7 +26,7 @@
     g.addColorStop(0, `rgba(${col},${a})`); g.addColorStop(1, `rgba(${col},0)`);
     c.fillStyle = g; c.fillRect(0, 0, 400, 250);
   };
-  const CY = '67,200,255', BL = '42,107,255', WH = '238,243,255';
+  const CY = '216,255,90', BL = '150,220,40', WH = '242,247,232';
   const stars = (c, r, n, maxA) => { for (let i = 0; i < n; i++) { c.fillStyle = `rgba(${WH},${r() * maxA})`; c.fillRect(r() * 400, r() * 250, 1.2, 1.2); } };
   const curve = (c, pts, col, w, a) => { c.strokeStyle = `rgba(${col},${a})`; c.lineWidth = w; c.beginPath(); c.moveTo(...pts[0]); c.bezierCurveTo(...pts[1], ...pts[2], ...pts[3]); c.stroke(); };
   const SCENES = {
@@ -42,18 +42,18 @@
         const g = c.createLinearGradient(0, y - h, 0, y); g.addColorStop(0, `rgba(${k % 2 ? BL : CY},0)`); g.addColorStop(1, `rgba(${k % 2 ? BL : CY},0.22)`);
         c.fillStyle = g; c.fillRect(x, y - h, 2, h);
       }
-      c.fillStyle = '#02040b'; c.beginPath(); c.moveTo(0, 250); for (let x = 0; x <= 400; x += 40) c.lineTo(x, 205 + Math.sin(x / 37) * 14); c.lineTo(400, 250); c.fill();
+      c.fillStyle = '#050605'; c.beginPath(); c.moveTo(0, 250); for (let x = 0; x <= 400; x += 40) c.lineTo(x, 205 + Math.sin(x / 37) * 14); c.lineTo(400, 250); c.fill();
     },
     drive(c, r) {
       glow(c, 200, 120, 160, CY, 0.25);
-      c.fillStyle = '#040816'; c.beginPath(); c.moveTo(0, 250); c.lineTo(185, 120); c.lineTo(215, 120); c.lineTo(400, 250); c.fill();
+      c.fillStyle = '#080a07'; c.beginPath(); c.moveTo(0, 250); c.lineTo(185, 120); c.lineTo(215, 120); c.lineTo(400, 250); c.fill();
       for (let i = 0; i < 14; i++) { const t = i / 14, w = 1 + t * 3; c.strokeStyle = `rgba(${WH},${0.2 + t * 0.6})`; c.lineWidth = w; c.beginPath(); c.moveTo(200, 125 + t * t * 125); c.lineTo(200, 125 + t * t * 125 + 4 + t * 10); c.stroke(); }
       for (let i = 0; i < 5; i++) { curve(c, [[192 - i, 122], [140, 160], [60, 220], [-20 - i * 20, 250]], BL, 1 + i * 0.5, 0.5); curve(c, [[208 + i, 122], [260, 160], [340, 220], [420 + i * 20, 250]], CY, 1 + i * 0.5, 0.6); }
     },
     city(c, r) {
       glow(c, 200, 230, 240, CY, 0.35);
       stars(c, r, 50, 0.5);
-      for (let x = 0; x < 400;) { const w = 18 + r() * 34, h = 50 + r() * 130; c.fillStyle = '#050b1d'; c.fillRect(x, 250 - h, w - 3, h);
+      for (let x = 0; x < 400;) { const w = 18 + r() * 34, h = 50 + r() * 130; c.fillStyle = '#0b0e09'; c.fillRect(x, 250 - h, w - 3, h);
         for (let wy = 250 - h + 8; wy < 245; wy += 9) for (let wx = x + 4; wx < x + w - 7; wx += 7) if (r() > 0.6) { c.fillStyle = `rgba(${r() > 0.3 ? CY : WH},${0.3 + r() * 0.5})`; c.fillRect(wx, wy, 3, 4); }
         x += w; }
     },
@@ -64,7 +64,7 @@
     orbit(c, r) {
       stars(c, r, 140, 0.9);
       glow(c, 200, 125, 90, CY, 0.55);
-      c.fillStyle = '#02040b'; c.beginPath(); c.arc(200, 125, 46, 0, 7); c.fill();
+      c.fillStyle = '#050605'; c.beginPath(); c.arc(200, 125, 46, 0, 7); c.fill();
       c.strokeStyle = `rgba(${CY},0.9)`; c.lineWidth = 2; c.beginPath(); c.arc(200, 125, 47, 0, 7); c.stroke();
       c.strokeStyle = `rgba(${WH},0.5)`; c.lineWidth = 1.2; c.beginPath(); c.ellipse(200, 125, 120, 22, -0.25, 0, 7); c.stroke();
     },
@@ -80,7 +80,7 @@
     grid(c, r) {
       glow(c, 200, 120, 220, BL, 0.4);
       stars(c, r, 60, 0.6);
-      c.fillStyle = '#040816'; c.fillRect(0, 130, 400, 120);
+      c.fillStyle = '#080a07'; c.fillRect(0, 130, 400, 120);
       c.strokeStyle = `rgba(${CY},0.55)`; c.lineWidth = 1;
       for (let i = -12; i <= 12; i++) { c.beginPath(); c.moveTo(200 + i * 6, 130); c.lineTo(200 + i * 60, 250); c.stroke(); }
       for (let k = 1; k < 9; k++) { const y = 130 + (k * k) * 1.6; c.beginPath(); c.moveTo(0, y); c.lineTo(400, y); c.stroke(); }
@@ -90,7 +90,7 @@
   section.querySelectorAll('.hb canvas[data-scene]').forEach((cv, i) => {
     const c = cv.getContext('2d'), draw = SCENES[cv.dataset.scene];
     if (!c || !draw) return;
-    c.fillStyle = '#050a1a'; c.fillRect(0, 0, 400, 250);
+    c.fillStyle = '#0a0c08'; c.fillRect(0, 0, 400, 250);
     draw(c, rnd(97 + i * 131));
   });
 
