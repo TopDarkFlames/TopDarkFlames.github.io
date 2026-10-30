@@ -22,14 +22,14 @@
 /* ---- Vexely fragment ---- */
 .vx { position: relative; aspect-ratio: 16 / 10; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; font-size: 13px; }
 .vx__canvas { position: absolute; inset: 0; background-image: radial-gradient(rgba(141, 154, 191, 0.13) 1px, transparent 1.4px); background-size: 22px 22px; } /* taste-skill-ignore: dotted canvas inside the app */
-.vx__tools { position: absolute; z-index: 2; top: 12px; left: 12px; display: flex; gap: 6px; align-items: center; padding: 5px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; color: var(--ink-soft); font-size: 13px; }
+.vx__tools { position: absolute; z-index: 3; top: 12px; left: 12px; display: flex; gap: 6px; align-items: center; padding: 5px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; color: var(--ink-soft); font-size: 13px; }
 .vx__tools span { padding: 3px 8px; border-radius: 6px; }
 .vx__tools .vx__brand { color: var(--ink); font-weight: 700; }
 .vx__tools .vx__wait { color: var(--ink); background: rgba(42, 107, 255, 0.22); }
 .vx__card { position: absolute; width: 50%; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; animation: vx-drift 9s ease-in-out infinite alternate; }
-.vx__card--a { left: 4%; top: 17%; animation-delay: -2s; }
+.vx__card--a { left: 3%; top: 19%; width: 45%; z-index: 2; animation-delay: -2s; }
 .vx__card--b { left: 47%; top: 9%; z-index: 1; border-color: rgba(42, 107, 255, 0.55); animation-delay: -5s; }
-.vx__card--c { left: 9%; top: 58%; width: 44%; animation-delay: -7s; }
+.vx__card--c { left: 8%; top: 58%; width: 43%; z-index: 2; animation-delay: -7s; }
 .vx__card--d { left: 50%; top: 55%; width: 46%; animation-delay: -1s; }
 .vx__bar { display: flex; justify-content: space-between; gap: 8px; padding: 7px 10px; border-bottom: 1px solid var(--line); background: #0a1126; white-space: nowrap; }
 .vx__bar b { font-weight: 600; color: var(--ink); }
