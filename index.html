@@ -2,175 +2,284 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TopDarkFlames — dev full-stack</title>
-  <meta name="description" content="Portfólio de TopDarkFlames (Braian Ribeiro), dev full-stack em formação no Brasil. Projetos ao vivo do GitHub.">
-  <meta name="theme-color" content="#03050c">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TopDarkFlames · dev full-stack</title>
+  <meta name="description" content="Portfólio de TopDarkFlames (Braian Ribeiro), dev full-stack em formação no Brasil. Cada fio de luz é um repositório do GitHub.">
+  <meta name="theme-color" content="#02040b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:wdth,wght@75..150,300..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:wdth,wght@75..150,300..900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/hero.css">
   <link rel="stylesheet" href="css/work.css">
-  <link rel="stylesheet" href="css/sections.css">
-  <style>main{position:relative;z-index:1;background:var(--ground)}</style>
+  <link rel="stylesheet" href="css/rest.css">
+  <style>#trails{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}body>section,main,body>footer{position:relative;z-index:1}</style>
   <script>document.documentElement.classList.add('js')</script>
-  <script defer src="js/vfx.js"></script>
+  <script defer src="js/github.js"></script>
+  <script defer src="js/trails.js"></script>
   <script defer src="js/main.js"></script>
   <script defer src="js/hero.js"></script>
   <script defer src="js/work.js"></script>
-  <script defer src="js/sections.js"></script>
+  <script defer src="js/rest.js"></script>
 </head>
 <body>
-<header class="site-nav">
-  <a class="nav-mono" href="#top" aria-label="TopDarkFlames, início">TF</a>
-  <nav class="nav-links" aria-label="Principal">
-    <a href="#projetos">Projetos</a>
-    <a href="#stack">Stack</a>
-    <a href="#jornada">Jornada</a>
-    <a href="#contato">Contato</a>
-    <a class="btn nav-btn" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
-  </nav>
+<canvas id="trails" aria-hidden="true"></canvas>
+<header class="bar" id="bar">
+  <div class="bar__in">
+    <a class="bar__brand" href="#top" aria-label="TopDarkFlames, início"><span class="bar__mono" aria-hidden="true">TF</span><span class="bar__name" aria-hidden="true">TopDarkFlames</span></a>
+    <nav class="bar__nav" aria-label="Principal">
+      <a href="#projetos">Projetos</a>
+      <a href="#numeros">Números</a>
+      <a href="#jornada">Jornada</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <p class="bar__status" role="status"><span class="bar__dot" aria-hidden="true"></span><span class="bar__status-text">Conectando ao GitHub</span></p>
+    <a class="btn bar__gh" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
+  </div>
 </header>
+<section id="top" data-trail="s" class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <h1 class="hero__title">Construo apps que eu mesmo <em>uso.</em></h1>
+      <p class="hero__lead" data-reveal style="--i:1">Sou o TopDarkFlames, dev full-stack em formação no Brasil. Publico tudo no GitHub, e cada fio de luz desta página é um dos meus repositórios.</p>
+      <div class="hero__actions" data-reveal style="--i:2">
+        <a class="btn" href="#projetos">Ver projetos</a>
+        <a class="btn btn--quiet" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="hero__side" data-reveal style="--i:3">
+      <div class="feed" data-ui>
+        <div class="feed__head">
+          <p class="feed__title">Atividade no GitHub</p>
+          <span class="feed__at" id="feed-at"></span>
+        </div>
+        <ul class="feed__list" id="feed-list">
+          <li class="feed__empty">Carregando repositórios do GitHub…</li>
+        </ul>
+        <noscript><p class="feed__empty"><a href="https://github.com/TopDarkFlames?tab=repositories">Ver os repositórios no GitHub</a></p></noscript>
+      </div>
+      <p class="hero__hint" id="feed-hint">Passe o mouse num repositório para acender o fio dele.</p>
+    </div>
+  </div>
+</section>
 <main>
-<section class="hero" id="top">
-  <canvas class="hero-vfx" aria-hidden="true"></canvas>
+<section id="projetos" class="work" data-trail="curtain" aria-labelledby="projetos-title">
+  <div class="wrap">
+    <header class="work__head">
+      <h2 id="projetos-title" data-reveal>Projetos que eu <em>uso</em> todo dia.</h2>
+      <p data-reveal style="--i:1">Dois deles eu abro todo dia. O resto está aqui embaixo, puxado ao vivo do GitHub.</p>
+    </header>
 
-  <div class="hero-mark">
-    <svg class="hero-star" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
-      <g fill="currentColor">
-        <rect x="17" y="2" width="6" height="36" rx="3"/>
-        <rect x="17" y="2" width="6" height="36" rx="3" transform="rotate(60 20 20)"/>
-        <rect x="17" y="2" width="6" height="36" rx="3" transform="rotate(120 20 20)"/>
-      </g>
-    </svg>
-    <h1 class="hero-name" aria-label="TopDarkFlames">
-      <span class="hero-line" aria-hidden="true"><span>TopDark</span></span>
-      <span class="hero-line hero-line--accent" aria-hidden="true"><span>Flames</span></span>
-    </h1>
-  </div>
+    <article class="feat feat--vexely" aria-labelledby="vexely-title">
+      <div class="feat__text" data-reveal style="--i:1">
+        <h3 id="vexely-title">Vexely</h3>
+        <p>Um quadro gratuito e de código aberto para agentes de código. Rode Claude Code, Codex, Gemini CLI e outros em terminais de verdade numa tela infinita, veja quem está trabalhando e quem está esperando você, e retome as sessões. Para Windows, Linux e macOS.</p>
+        <a class="feat__link" href="https://github.com/TopDarkFlames/Vexely">Ver no GitHub</a>
+      </div>
 
-  <div class="hero-copy">
-    <p>Dev full-stack em formação no Brasil. Construo apps próprios para Linux, Windows e macOS, e publico o código aberto.</p>
-    <div class="hero-actions">
-      <a class="btn" href="#projetos">Ver projetos</a>
-      <a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noreferrer">LinkedIn</a>
+      <div class="vx" data-ui data-repo="Vexely" data-reveal style="--i:2" role="img" aria-label="Tela do Vexely: quatro agentes de código em terminais sobre uma tela infinita; dois trabalhando, um esperando resposta e um pronto.">
+        <div class="vx__tools" aria-hidden="true">
+          <span class="vx__brand">Vexely</span>
+          <span>100%</span>
+          <span>4 agentes</span>
+          <span class="vx__wait">1 esperando você</span>
+        </div>
+        <div class="vx__canvas" aria-hidden="true">
+          <div class="vx__card vx__card--a">
+            <div class="vx__bar"><b>Claude Code</b><span class="vx__st vx__st--work">trabalhando</span></div>
+            <pre class="vx__term"><span class="p">› </span>npm run build
+editando src/board/canvas.ts
+<span class="ok">ok</span> 42 testes passaram
+<span class="dim">compilando 3 de 7 módulos…</span></pre>
+          </div>
+          <div class="vx__card vx__card--b">
+            <div class="vx__bar"><b>Codex</b><span class="vx__st vx__st--wait">esperando você</span></div>
+            <pre class="vx__term"><span class="p">› </span>refatorar sessions/store.ts
+<span class="dim">2 arquivos alterados, +38 −12</span>
+<span class="ask">Aguardando sua resposta:</span>
+aplicar a mudança? (s/n) <span class="cur"></span></pre>
+          </div>
+          <div class="vx__card vx__card--c">
+            <div class="vx__bar"><b>Gemini CLI</b><span class="vx__st vx__st--work">trabalhando</span></div>
+            <pre class="vx__term"><span class="p">› </span>gemini "revise o README"
+lendo README.md (212 linhas)
+<span class="dim">sugerindo 4 alterações…</span></pre>
+          </div>
+          <div class="vx__card vx__card--d">
+            <div class="vx__bar"><b>Claude Code</b><span class="vx__st vx__st--done">pronto</span></div>
+            <pre class="vx__term"><span class="p">› </span>git commit -m "retomar sessões"
+<span class="ok">ok</span> 1 commit criado
+<span class="dim">sessão salva há 2 min</span></pre>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="feat feat--hanabi" aria-labelledby="hanabi-title">
+      <div class="hb" data-ui data-repo="hanabi-wallpapers" data-reveal style="--i:1" role="img" aria-label="Tela do Hanabi Wallpapers: biblioteca com nove wallpapers em vídeo em grade, com barra lateral de navegação.">
+        <div class="hb__top" aria-hidden="true">
+          <b>Hanabi Wallpapers</b>
+          <span class="hb__search">Buscar na biblioteca</span>
+        </div>
+        <div class="hb__body" aria-hidden="true">
+          <nav class="hb__side">
+            <span class="is-on">Biblioteca</span>
+            <span>Favoritos</span>
+            <span>Steam Workshop</span>
+            <span>Configurações</span>
+          </nav>
+          <div class="hb__grid">
+            <figure class="hb__thumb"><canvas data-scene="rain" width="400" height="250"></canvas><i>vídeo</i><figcaption>Neon Rain</figcaption></figure>
+            <figure class="hb__thumb is-on"><canvas data-scene="aurora" width="400" height="250"></canvas><i>4K</i><figcaption>Aurora Loop</figcaption></figure>
+            <figure class="hb__thumb"><canvas data-scene="drive" width="400" height="250"></canvas><i>vídeo</i><figcaption>Night Drive</figcaption></figure>
+            <figure class="hb__thumb"><canvas data-scene="city" width="400" height="250"></canvas><i>4K</i><figcaption>City Glow</figcaption></figure>
+            <figure class="hb__thumb"><canvas data-scene="trails" width="400" height="250"></canvas><i>vídeo</i><figcaption>Light Trails</figcaption></figure>
+            <figure class="hb__thumb"><canvas data-scene="orbit" width="400" height="250"></canvas><i>4K</i><figcaption>Deep Orbit</figcaption></figure>
+            <figure class="hb__thumb"><canvas data-scene="tide" width="400" height="250"></canvas><i>vídeo</i><figcaption>Tide Lines</figcaption></figure>
+            <figure class="hb__thumb"><canvas data-scene="stars" width="400" height="250"></canvas><i>vídeo</i><figcaption>Starfield</figcaption></figure>
+            <figure class="hb__thumb"><canvas data-scene="grid" width="400" height="250"></canvas><i>4K</i><figcaption>Horizon Grid</figcaption></figure>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat__text" data-reveal style="--i:2">
+        <h3 id="hanabi-title">Hanabi Wallpapers</h3>
+        <p>Um navegador de wallpapers no estilo Wallpaper Engine para o GNOME: aplique os wallpapers em vídeo da Steam Workshop com o Hanabi, com inclinação 3D, partículas e prévias ao vivo.</p>
+        <a class="feat__link" href="https://github.com/TopDarkFlames/hanabi-wallpapers">Ver no GitHub</a>
+      </div>
+    </article>
+
+    <div class="repos" data-reveal>
+      <h3>Todos os repositórios</h3>
+      <p class="repos__status" aria-live="polite"></p>
+      <ul class="repos__list" role="list"></ul>
+      <noscript><p class="repos__none">A lista vem do GitHub e precisa de JavaScript. Veja todos em <a href="https://github.com/TopDarkFlames">github.com/TopDarkFlames</a>.</p></noscript>
     </div>
   </div>
-
-  <p class="hero-hint">Mova o cursor: a luz segue você.</p>
 </section>
-
-<section class="intro" id="sobre">
-  <h2 data-reveal>Construo o que eu mesmo uso.</h2>
-  <div class="intro-notes">
-    <p data-reveal style="--i:1">Foco: web, backend e bancos de dados.</p>
-    <p data-reveal style="--i:2">Estudando agora: Java, SQL e Rust.</p>
-  </div>
-  <figure class="intro-pano" data-reveal style="--i:3">
-    <div class="intro-pano-frame">
-      <canvas class="intro-vfx" aria-hidden="true"></canvas>
+<section id="numeros" class="rest-sec numeros" data-trail="mist" aria-labelledby="numeros-title">
+  <div class="wrap">
+    <div class="num-head">
+      <h2 id="numeros-title" data-reveal>Números que o GitHub <em>conta</em> por mim.</h2>
+      <p data-reveal style="--i:1">Contados agora, direto da API pública. Nada aqui é arredondado para impressionar.</p>
     </div>
-    <figcaption>Luz azul através de vidro canelado, renderizada em tempo real com WebGL.</figcaption>
-  </figure>
-</section>
-<section class="work" id="projetos" aria-labelledby="projetos-title">
-  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-    <symbol id="asterisk" viewBox="0 0 24 24"><path d="M12 1.5v21M2.9 6.75l18.2 10.5M2.9 17.25l18.2-10.5" fill="none" stroke="currentColor" stroke-width="3.4"/></symbol>
-  </svg>
-  <header class="work__head">
-    <h2 id="projetos-title" class="work__title">Projetos</h2>
-    <p class="work__intro">Puxados ao vivo do GitHub: quando publico ou atualizo um repositório, ele aparece aqui.</p>
-    <p class="work__status" aria-live="polite">Buscando os repositórios no GitHub…</p>
-  </header>
-  <div class="work__list">
-    <noscript><p class="work__noscript">Sem JavaScript a lista não carrega. Veja todos os projetos em <a href="https://github.com/TopDarkFlames">github.com/TopDarkFlames</a>.</p></noscript>
-  </div>
-</section>
-<section class="stack" id="stack" aria-labelledby="stack-title">
-  <h2 class="stack__title" id="stack-title" data-reveal>Ferramentas que uso<br> para construir.</h2>
-  <div class="stack__body">
-    <div class="stack__pic" data-reveal style="--i:2" aria-hidden="true"><canvas class="stack__canvas"></canvas></div>
-    <p class="stack__label" aria-hidden="true">Stack</p>
-    <table class="stack__table" data-reveal style="--i:1">
-      <caption class="sr-only">Stack: linguagens e ferramentas, para que uso cada uma e o status</caption>
-      <thead class="sr-only">
-        <tr><th scope="col">Ferramenta</th><th scope="col">Uso</th><th scope="col">Status</th></tr>
-      </thead>
-      <tbody>
-        <tr><th scope="row">Java</th><td>lógica e backend</td><td>estudando agora</td></tr>
-        <tr><th scope="row">SQL</th><td>bancos de dados</td><td>estudando agora</td></tr>
-        <tr><th scope="row">Rust</th><td>sistemas</td><td>estudando agora</td></tr>
-        <tr><th scope="row">TypeScript</th><td>web tipada</td><td>em uso</td></tr>
-        <tr><th scope="row">JavaScript</th><td>front-end</td><td>em uso</td></tr>
-        <tr><th scope="row">React</th><td>interfaces</td><td>em uso</td></tr>
-        <tr><th scope="row">Node.js</th><td>APIs</td><td>em uso</td></tr>
-        <tr><th scope="row">HTML e CSS</th><td>base da web</td><td>em uso</td></tr>
-        <tr><th scope="row">Python</th><td>scripts e automações</td><td>em uso</td></tr>
-        <tr><th scope="row">Git</th><td>versionamento</td><td>em uso</td></tr>
-      </tbody>
-    </table>
+
+    <dl class="figs" data-reveal style="--i:2">
+      <div class="fig">
+        <dt class="fig-cap">repositórios públicos</dt>
+        <dd class="fig-num" data-fig="repos">—</dd>
+      </div>
+      <div class="fig">
+        <dt class="fig-cap">linguagens diferentes</dt>
+        <dd class="fig-num" data-fig="langs">—</dd>
+      </div>
+      <div class="fig" data-fig-push>
+        <dt class="fig-cap" data-fig-cap="push">desde o último push</dt>
+        <dd class="fig-num"><a class="fig-link" data-fig-link><span data-fig="push">—</span><span class="fig-unit" data-fig-unit></span></a></dd>
+      </div>
+    </dl>
+    <noscript><p class="num-note">Os números são contados com JavaScript ativo. Os repositórios estão em <a href="https://github.com/TopDarkFlames">github.com/TopDarkFlames</a>.</p></noscript>
+
+    <div class="num-panels">
+      <div class="num-panel" data-ui data-reveal style="--i:3">
+        <div class="ui-head"><span class="ui-title">Linguagens por repositório</span><span class="ui-meta" data-langs-meta></span></div>
+        <ul class="langbars" data-langs role="list"><li class="ui-empty">Carregando dados do GitHub…</li></ul>
+      </div>
+      <div class="num-panel" data-ui data-reveal style="--i:4">
+        <div class="ui-head"><span class="ui-title">Pushes recentes por dia da semana</span><span class="ui-meta">último push de cada repositório</span></div>
+        <div class="week" data-week><p class="ui-empty">Carregando dados do GitHub…</p></div>
+        <p class="week-find" data-week-find></p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="journey" id="jornada" aria-labelledby="jornada-title">
-  <h2 class="journey__title" id="jornada-title" data-reveal>Jornada</h2>
-  <div class="journey__body">
-    <ul class="journey__facts" data-reveal style="--i:2">
-      <li>Piracicaba, Brasil</li>
-      <li>Ciência da Computação, em curso</li>
-      <li>Cibersegurança e Blockchain, concluídos</li>
-    </ul>
-    <p class="journey__text" data-reveal style="--i:1"><img class="journey__portrait" src="https://github.com/TopDarkFlames.png?size=240" width="240" height="240" alt="Avatar de TopDarkFlames no GitHub" loading="lazy">Sou o Braian, o TopDarkFlames. Estudo Ciência da Computação na EEP, em Piracicaba, e aprendo construindo: apps que eu mesmo uso, publicados no GitHub para qualquer um ler. Antes da faculdade concluí cursos de Cibersegurança e de Blockchain, por curiosidade técnica, sem hype.</p>
+<section id="jornada" class="rest-sec jornada" data-trail="s" aria-labelledby="jornada-title">
+  <div class="wrap jor-grid">
+    <h2 id="jornada-title" data-reveal>Aprendo <em>construindo</em> em público.</h2>
+    <div class="jor-copy">
+      <p data-reveal style="--i:1">Estudo Ciência da Computação na EEP, em Piracicaba. Antes da faculdade concluí cursos de Cibersegurança e de Blockchain. Hoje estudo Java, SQL e Rust, e uso TypeScript, React e Node.js nos meus projetos.</p>
+    </div>
+
+    <div class="runs" data-ui data-reveal style="--i:2">
+      <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+        <symbol id="ic-done" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 10.4l2.6 2.6L14.2 7.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+        <symbol id="ic-half" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3a7 7 0 0 1 0 14z" fill="currentColor"/></symbol>
+        <symbol id="ic-use" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="10" r="4" fill="currentColor"/></symbol>
+      </svg>
+
+      <h3 class="run-group">Formação</h3>
+      <ul class="run-list" role="list">
+        <li class="run run--done"><svg class="run-ic" aria-hidden="true"><use href="#ic-done"/></svg><span class="run-name">Cibersegurança</span><span class="run-bar" aria-hidden="true"><i style="--w:100%"></i></span><span class="run-st">concluído</span></li>
+        <li class="run run--done"><svg class="run-ic" aria-hidden="true"><use href="#ic-done"/></svg><span class="run-name">Blockchain</span><span class="run-bar" aria-hidden="true"><i style="--w:100%"></i></span><span class="run-st">concluído</span></li>
+        <li class="run run--now"><svg class="run-ic" aria-hidden="true"><use href="#ic-half"/></svg><span class="run-name">Ciência da Computação</span><span class="run-bar" aria-hidden="true"><i style="--w:50%"></i></span><span class="run-st">em curso</span></li>
+      </ul>
+
+      <h3 class="run-group">Estudando agora</h3>
+      <ul class="run-list" role="list">
+        <li class="run run--now run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-half"/></svg><span class="run-name">Java</span><span class="run-st">estudando</span></li>
+        <li class="run run--now run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-half"/></svg><span class="run-name">SQL</span><span class="run-st">estudando</span></li>
+        <li class="run run--now run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-half"/></svg><span class="run-name">Rust</span><span class="run-st">estudando</span></li>
+      </ul>
+
+      <h3 class="run-group">Uso nos projetos</h3>
+      <ul class="run-list run-list--tools" role="list">
+        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">TypeScript</span><span class="run-st">em uso</span></li>
+        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">React</span><span class="run-st">em uso</span></li>
+        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">Node.js</span><span class="run-st">em uso</span></li>
+        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">HTML e CSS</span><span class="run-st">em uso</span></li>
+        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">Python</span><span class="run-st">em uso</span></li>
+        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">Git</span><span class="run-st">em uso</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
-<section class="contact" id="contato" aria-labelledby="contato-title">
-  <h2 class="contact__row contact__title" id="contato-title"><span class="contact__text">Vamos construir algo?</span></h2>
-  <ul class="contact__list">
-    <li><a class="contact__row contact__link" href="https://github.com/TopDarkFlames"><span class="contact__text">GitHub<span class="long"> — TopDarkFlames</span></span><svg class="contact__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
-    <li><a class="contact__row contact__link" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/"><span class="contact__text">LinkedIn<span class="long"> — Braian Ribeiro</span></span><svg class="contact__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
-    <li><p class="contact__row"><span class="contact__text">Piracicaba, Brasil</span></p></li>
-    <li><p class="contact__row"><span class="contact__text">Aberto a projetos<span class="long"> e estudos</span></span></p></li>
-    <li><p class="contact__row contact__cta"><span class="contact__text">Fale comigo</span><a class="btn contact__btn" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" aria-label="Abrir LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></a></p></li>
-  </ul>
+<section id="contato" class="rest-sec contato" data-trail="wave" aria-labelledby="contato-title">
+  <div class="wrap">
+    <div class="close-card" data-reveal>
+      <div class="close-copy">
+        <h2 id="contato-title">Vamos construir <em>algo?</em></h2>
+        <p>Estou aberto a projetos, estudos e colaborações envolvendo web, automações e interfaces bem cuidadas.</p>
+      </div>
+      <div class="close-links">
+        <a class="close-link" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="close-link" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noreferrer">LinkedIn<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p class="close-place">Piracicaba, Brasil</p>
+      </div>
+    </div>
+  </div>
 </section>
 </main>
-<footer class="site-footer">
-  <div class="foot__light" aria-hidden="true"><canvas class="foot__canvas"></canvas></div>
-  <div class="foot__cols">
-    <nav class="foot__col" aria-labelledby="foot-nav">
-      <h2 id="foot-nav">Navegação</h2>
-      <ul>
-        <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#jornada">Jornada</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-    </nav>
-    <div class="foot__col">
-      <h2>Redes</h2>
-      <ul>
-        <li><a href="https://github.com/TopDarkFlames">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/">LinkedIn</a></li>
-      </ul>
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-cols">
+      <nav class="foot-col" aria-labelledby="foot-nav">
+        <h2 id="foot-nav" class="foot-h">Navegação</h2>
+        <ul role="list">
+          <li><a href="#top">Início</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#numeros">Números</a></li>
+          <li><a href="#jornada">Jornada</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+      <div class="foot-col">
+        <h2 class="foot-h">Redes</h2>
+        <ul role="list">
+          <li><a href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+        </ul>
+      </div>
+      <div class="foot-col foot-col--site">
+        <h2 class="foot-h">Este site</h2>
+        <p>HTML, CSS e Canvas, sem framework. Cada fio de luz é um repositório.</p>
+        <a href="https://github.com/TopDarkFlames/topdarkflames.github.io" target="_blank" rel="noreferrer">Código no GitHub</a>
+      </div>
     </div>
-    <div class="foot__col">
-      <h2>Onde</h2>
-      <p>Piracicaba, Brasil</p>
-    </div>
-    <div class="foot__col">
-      <h2>Este site</h2>
-      <p>HTML, CSS e WebGL, sem framework. <a href="https://github.com/TopDarkFlames/topdarkflames.github.io">Código no GitHub</a>.</p>
-    </div>
-  </div>
-  <div class="foot__bottom">
-    <div class="foot__mark" role="img" aria-label="TopDarkFlames">
-      <svg class="wordmark wordmark--one" viewBox="0 27 1270 73" preserveAspectRatio="xMinYMax meet" aria-hidden="true"><text x="0" y="100">TOPDARKFLAMES</text></svg>
-      <svg class="wordmark wordmark--two" viewBox="0 27 700 73" preserveAspectRatio="xMinYMax meet" aria-hidden="true"><text x="0" y="100">TOPDARK</text></svg>
-      <svg class="wordmark wordmark--two" viewBox="0 27 590 73" preserveAspectRatio="xMinYMax meet" aria-hidden="true"><text x="0" y="100">FLAMES</text></svg>
-    </div>
-    <p class="foot__legal">© 2026 TopDarkFlames. Feito no Brasil.</p>
+    <p class="foot-mark" aria-label="TopDarkFlames"><span aria-hidden="true">TopDark</span><span aria-hidden="true">Flames</span></p>
+    <p class="foot-legal">© 2026 TopDarkFlames. Feito no Brasil.</p>
   </div>
 </footer>
 </body>

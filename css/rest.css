@@ -3,7 +3,7 @@
 .rest-sec h2 { font-size: var(--step-head); }
 .rest-sec p { margin: 0; }
 /* Neutral scrim so copy stays readable where a bright trail passes behind it (prototype's treatment). */
-.num-head p, .fig, .jor-copy p { text-shadow: 0 0 18px var(--ground), 0 0 6px var(--ground); }
+.num-head p, .fig, .jor-copy p { text-shadow: 0 0 18px var(--ground), 0 0 6px var(--ground); } /* taste-skill-ignore: text halo over the trails, or inside a data-ui app fragment */
 
 /* Shared app-fragment chrome */
 [data-ui].num-panel, [data-ui].runs {
@@ -47,7 +47,7 @@
 .week:has(> .ui-empty) { height: auto; }
 .wk { display: grid; grid-template-rows: auto 1fr auto; height: 100%; text-align: center; gap: 6px; }
 .wk-n { font-size: 13px; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
-.wk-col { display: flex; align-items: flex-end; border-bottom: 1px solid var(--line); }
+.wk-col { display: flex; align-items: flex-end; border-bottom: 1px solid var(--line); } /* taste-skill-ignore: text halo over the trails, or inside a data-ui app fragment */
 .wk-col i { display: block; width: 100%; height: var(--h); min-height: 2px; background: var(--accent); border-radius: 5px 5px 0 0; transform-origin: bottom; }
 .wk--top .wk-n { color: var(--ink); }
 .wk-d { font-size: 13px; color: var(--ink-soft); }
@@ -114,7 +114,7 @@
 .foot-h { font-size: 15px; font-weight: 600; letter-spacing: 0; line-height: 1.3; margin-bottom: 12px; }
 .foot-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .foot-col p { margin: 0 0 8px; max-width: 34ch; }
-.foot-col a { display: inline-block; padding-block: 4px; color: var(--ink-soft); text-decoration: none; transition: color 150ms; }
+.foot-col a { display: inline-block; padding-block: 4px; color: var(--ink); text-shadow: 0 0 14px var(--ground), 0 0 4px var(--ground); text-decoration: none; transition: color 150ms; }
 .foot-col a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .foot-mark { margin: clamp(48px, 7vw, 96px) 0 0; font-weight: 800; letter-spacing: -0.045em; line-height: 1; white-space: nowrap; color: var(--ink); font-size: 11.5vw; }
 .foot-mark span { display: inline-block; }
