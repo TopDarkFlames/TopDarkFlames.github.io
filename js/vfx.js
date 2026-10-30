@@ -28,16 +28,16 @@
     ' vec2 w=vec2(fbm(q*1.3+uSeed.zw+t),fbm(q*1.3-uSeed.wz-t*.8+5.2));',
     ' q+=(w-.5)*.9;',
     ' float d=length(q*vec2(1.,.62));',
-    ' float body=exp(-d*d*3.2);',
-    ' float arm=exp(-pow(q.x+.35*sin(q.y*2.4+t*1.3+uSeed.z),2.)*7.)*exp(-q.y*q.y*1.1);',
+    ' float body=exp(-d*d*6.);',
+    ' float arm=exp(-pow(q.x+.3*sin(q.y*2.4+t*1.3+uSeed.z),2.)*14.)*exp(-q.y*q.y*2.2);',
     ' float v=max(body,arm*.8)*(.55+.75*fbm(q*2.2+t*.6));',
     ' return v;}',
     'vec3 ramp(float v){',
     ' vec3 deep=vec3(.043,.122,.471),blue=vec3(.165,.42,1.),cyan=vec3(.263,.784,1.);',
-    ' vec3 col=mix(vec3(.012,.02,.047),deep,smoothstep(.02,.3,v));',
-    ' col=mix(col,blue,smoothstep(.22,.55,v));',
-    ' col=mix(col,cyan,smoothstep(.5+.25*(1.-uSeed.y),.95,v));',
-    ' col=mix(col,vec3(.9,.97,1.),smoothstep(.95,1.3,v));',
+    ' vec3 col=mix(vec3(.012,.02,.047),deep,smoothstep(.06,.45,v));',
+    ' col=mix(col,blue,smoothstep(.35,.75,v));',
+    ' col=mix(col,cyan,smoothstep(.7+.2*(1.-uSeed.y),1.1,v));',
+    ' col=mix(col,vec3(.9,.97,1.),smoothstep(1.35,2.,v));',
     ' return col;}',
     'void main(){',
     ' vec2 uv=gl_FragCoord.xy/uRes;',
@@ -49,11 +49,11 @@
     ' vec2 sp=vec2((uv.x+off)*a,(uv.y-.5)*.82+.5);',
     ' float v=light(sp)*(.9+.2*r);',
     ' v*=.82+.18*sin(f*3.1416);', // slight darkening at rib seams
-    ' vec3 col=ramp(v*uInt*1.15);',
+    ' v*=uInt;vec3 col=ramp(v*v*1.5+v*.3);', // contrast curve: dark falloff, hot core
     ' float edge=smoothstep(.88,.985,f)*(1.-smoothstep(.985,1.,f));',
     ' col+=edge*(.035+.22*v)*vec3(.55,.8,1.);',
     ' col*=.97+.05*noise(vec2(x*7.,uv.y*.5));', // fine vertical streaks inside ribs
-    ' vec2 vg=uv-.5;col*=1.-dot(vg,vg)*.9;',
+    ' vec2 vg=uv-.5;col*=1.-dot(vg,vg)*1.3;',
     ' col=mix(col,col+vec3(.006,.012,.035),1.-uv.y);', // field lifts toward #050a1e at the bottom
     ' col+=(h21(gl_FragCoord.xy+fract(uTime)*91.)-.5)*.035;',
     ' gl_FragColor=vec4(col,1.);}'
