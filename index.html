@@ -1,286 +1,965 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>TopDarkFlames · dev full-stack</title>
-  <meta name="description" content="Portfólio de TopDarkFlames (Braian Ribeiro), dev full-stack em formação no Brasil. Cada fio de luz é um repositório do GitHub.">
-  <meta name="theme-color" content="#02040b">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:wdth,wght@75..150,300..900&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/tokens.css">
-  <link rel="stylesheet" href="css/hero.css">
-  <link rel="stylesheet" href="css/work.css">
-  <link rel="stylesheet" href="css/rest.css">
-  <style>#trails{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}body>section,main,body>footer{position:relative;z-index:1}</style>
-  <script>document.documentElement.classList.add('js')</script>
-  <script defer src="js/github.js"></script>
-  <script defer src="js/trails.js"></script>
-  <script defer src="js/main.js"></script>
-  <script defer src="js/hero.js"></script>
-  <script defer src="js/work.js"></script>
-  <script defer src="js/rest.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TopDarkFlames | Full-Stack Developer</title>
+<meta name="description" content="Portfólio de TopDarkFlames, dev full-stack em formação. Java, SQL, Rust e web.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06080b; --bg2:#0c0f10; --panel:rgba(22,26,27,.55); --panel-solid:#121617;
+  --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
+  --text:#eef2f7; --muted:#8a919d; --dim:#5b616c;
+  --accent:#5aa8ff; --accent2:#2f7fe6; --accent-ink:#04101f;
+  --sans:"Inter Tight",system-ui,sans-serif; --serif:"Instrument Serif",Georgia,serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em}
+.mono{font-family:var(--mono)}
+body{position:relative}
+#trails{position:absolute;left:0;top:0;width:100%;z-index:0;pointer-events:none;overflow:hidden}
+#trails canvas{position:absolute;left:0}
+.spark{position:absolute;left:0;top:0;width:120px;height:2px;offset-rotate:auto;offset-anchor:100% 50%;animation:run linear infinite;will-change:offset-distance,opacity}
+.spark i{display:block;width:100%;height:100%;border-radius:2px;background:linear-gradient(90deg,transparent,var(--c) 70%,#fff);box-shadow:0 0 12px var(--c)}
+@keyframes run{0%{offset-distance:0%;opacity:0}12%{opacity:1}88%{opacity:1}100%{offset-distance:100%;opacity:0}}
+#fibres{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#bloom{position:fixed;left:0;top:0;width:min(90vw,820px);aspect-ratio:1;z-index:0;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(200,225,255,.55) 0,rgba(90,168,255,.22) 12%,rgba(90,168,255,.06) 40%,rgba(90,168,255,0) 68%);mix-blend-mode:screen;will-change:transform,opacity}
+#motes{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#motes i{position:absolute;top:100%;border-radius:50%;background:radial-gradient(circle,rgba(160,205,255,.8),rgba(160,205,255,0) 70%);animation:rise linear infinite;will-change:transform}
+@keyframes rise{to{transform:translate3d(0,-115vh,0)}}
+#vg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at center,rgba(6,8,11,0) 45%,rgba(6,8,11,.7) 100%)}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 28px}
+section{position:relative;z-index:1}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(6,8,11,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.mark{width:26px;height:26px;border-radius:7px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:-.04em}
+.links{display:flex;gap:30px;font-size:13px;color:var(--muted)}
+.links a:hover{color:var(--text)}
+.nav-r{display:flex;gap:10px;align-items:center}
+.status{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line2);border-radius:99px;padding:6px 12px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:99px;padding:10px 18px;font-size:13px;font-weight:500;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;border:0}
+.btn-accent{background:var(--accent);color:var(--accent-ink);box-shadow:0 0 0 1px rgba(90,168,255,.4),0 8px 30px -8px rgba(90,168,255,.55)}
+.btn-accent:hover{transform:translateY(-1px);box-shadow:0 0 0 1px rgba(90,168,255,.6),0 10px 40px -6px rgba(90,168,255,.7)}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text);border:1px solid var(--line2)}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-dark{background:var(--accent-ink);color:var(--accent)}
+.btn-dark:hover{transform:translateY(-1px)}
+.play{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:8px}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:110px 0 70px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;width:100%}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line2);border-radius:6px;padding:5px 10px;background:rgba(0,0,0,.35)}
+.tag i{width:5px;height:5px;border-radius:50%;background:var(--accent);display:block}
+h1{font-size:clamp(46px,6.4vw,84px);line-height:.98;font-weight:500;letter-spacing:-.04em;margin:26px 0 22px}
+h1 em{font-size:1.06em}
+.lede{color:#a7aebb;max-width:430px;font-size:16px;text-shadow:0 1px 14px rgba(6,8,11,.95),0 0 4px rgba(6,8,11,.9)}
+.fine{text-shadow:0 0 6px rgba(6,8,11,.95)}
+.cta{display:flex;gap:12px;margin:30px 0 16px;flex-wrap:wrap}
+.fine{font-family:var(--mono);font-size:11px;color:var(--dim)}
+
+.glass{background:linear-gradient(180deg,rgba(22,28,38,.84),rgba(9,12,18,.9));border:1px solid var(--line2);border-radius:16px;box-shadow:0 30px 80px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06)}
+.flow{overflow:hidden}
+.flow-h{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted)}
+.flow-h b{color:var(--text);font-weight:500}
+.run{color:var(--accent);display:flex;align-items:center;gap:6px}
+.flow-body{position:relative;height:300px}
+.flow-body svg{position:absolute;inset:0;width:100%;height:100%}
+.tools{position:absolute;left:14px;top:16px;display:flex;flex-direction:column;gap:6px}
+.tools span{width:26px;height:26px;border:1px solid var(--line2);border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--muted);background:rgba(0,0,0,.3)}
+.node{position:absolute;padding:9px 13px;border-radius:9px;border:1px solid var(--line2);background:rgba(14,17,18,.92);font-size:12px;min-width:120px}
+.node small{display:block;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:2px}
+.node.on{border-color:rgba(90,168,255,.55);box-shadow:0 0 24px -6px rgba(90,168,255,.6)}
+.pill{position:absolute;font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:5px;border:1px solid var(--line2);color:var(--muted);background:var(--bg2)}
+.pill.ok{color:var(--accent);border-color:rgba(90,168,255,.35)}
+.runs{border-top:1px solid var(--line);padding:12px 18px 16px;font-family:var(--mono);font-size:11px}
+.runs .lbl{color:var(--dim);margin-bottom:8px}
+.runs div.r{display:grid;grid-template-columns:14px 70px 1fr auto;gap:8px;padding:5px 0;color:var(--muted);border-bottom:1px dashed rgba(255,255,255,.05)}
+.runs div.r:last-child{border:0}
+.runs .ok{color:var(--accent)}
+
+/* sections */
+.sec{padding:130px 0}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line2);border-radius:99px;padding:5px 11px;margin-bottom:22px}
+.kicker i{width:5px;height:5px;border-radius:50%;background:var(--accent);display:block}
+h2{font-size:clamp(34px,4.4vw,56px);font-weight:500;letter-spacing:-.035em;line-height:1.02}
+h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
+.head-row{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:70px}
+.head-row p{color:var(--muted);max-width:400px;justify-self:end}
+.feat{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:center;margin-bottom:90px}
+.feat.rev{grid-template-columns:1.2fr .8fr}
+.feat .num{font-family:var(--mono);font-size:11px;color:var(--dim);margin-bottom:14px}
+.feat p{color:var(--muted);margin-top:12px;max-width:340px}
+
+.timing{padding:18px 22px}
+.timing .top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:16px}
+.trow{display:grid;grid-template-columns:150px 1fr 56px;gap:14px;align-items:center;font-family:var(--mono);font-size:11px;padding:9px 0;color:var(--muted)}
+.trow .chk{color:var(--accent);margin-right:6px}
+.track{height:8px;position:relative}
+.bar{position:absolute;top:0;height:8px;border-radius:3px;background:var(--accent);box-shadow:0 0 14px rgba(90,168,255,.45);transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.bar.wait{background:repeating-linear-gradient(90deg,rgba(90,168,255,.25) 0 4px,transparent 4px 7px);box-shadow:none}
+.in .bar{transform:scaleX(1)}
+.trow .t{text-align:right;color:var(--dim)}
+.axis{display:flex;justify-content:space-between;margin:10px 0 0 164px;padding-right:70px;font-family:var(--mono);font-size:9px;color:var(--dim)}
+
+.chat{padding:0;overflow:hidden}
+.chat .ch{padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
+.msg{display:flex;gap:12px;padding:18px}
+.msg .mark{flex:none;width:32px;height:32px;border-radius:9px}
+.msg b{font-size:13px;font-weight:500}
+.msg time{font-family:var(--mono);font-size:10px;color:var(--dim);margin-left:8px}
+.msg p{margin-top:4px;font-size:13px;color:var(--muted);max-width:none}
+.msg .acts{display:flex;gap:8px;margin-top:12px}
+.msg .acts span{font-family:var(--mono);font-size:10px;padding:5px 10px;border-radius:6px;border:1px solid var(--line2)}
+.msg .acts span.y{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+/* projects */
+.repos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.repo{padding:22px;display:flex;flex-direction:column;gap:12px;min-height:210px;transition:transform .25s,border-color .25s}
+.repo:hover{transform:translateY(-3px);border-color:rgba(90,168,255,.4)}
+.repo .rt{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim)}
+.repo h4{font-size:18px;font-weight:500;letter-spacing:-.02em;word-break:break-word}
+.repo p{color:var(--muted);font-size:13px;flex:1}
+.repo .rf{display:flex;gap:14px;font-family:var(--mono);font-size:10px;color:var(--muted);align-items:center}
+.lang-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:5px}
+.skel{background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.09),rgba(255,255,255,.04));background-size:200% 100%;animation:sk 1.4s infinite;border-radius:4px;height:12px}
+@keyframes sk{to{background-position:-200% 0}}
+
+/* accent card that grows on scroll */
+.grow{height:230vh;position:relative;z-index:1}
+.grow-pin{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
+.grow-card{width:84px;height:84px;border-radius:20px;background:var(--accent);color:var(--accent-ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;overflow:hidden;position:relative;
+  background-image:radial-gradient(rgba(3,12,28,.16) 1px,transparent 1.2px);background-size:22px 22px;box-shadow:0 30px 120px -20px rgba(90,168,255,.45);will-change:width,height}
+.grow-text{position:absolute;left:50%;bottom:calc(50% - 30px);width:min(760px,calc(100vw - 80px));margin-left:calc(min(760px,calc(100vw - 80px)) / -2);text-align:center;opacity:0}
+.grow-text .mono{font-size:11px;display:block;margin-bottom:18px}
+.grow-text h2{font-size:clamp(30px,4.4vw,58px)}
+.grow-card .big{flex:none;width:56px;height:56px;border-radius:14px;background:var(--accent-ink);color:var(--accent);display:grid;place-items:center;font-family:var(--mono);font-size:19px;letter-spacing:-.06em}
+
+/* dashboard */
+.dash{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{padding:20px 22px}
+.card .cl{font-family:var(--mono);font-size:10px;color:var(--dim);display:flex;justify-content:space-between;margin-bottom:16px}
+.c8{grid-column:span 8}.c4{grid-column:span 4}.c5{grid-column:span 5}.c7{grid-column:span 7}
+.week{display:grid;grid-template-columns:24px repeat(7,1fr);gap:8px;height:170px;align-items:end}
+.week .yax{display:flex;flex-direction:column;justify-content:space-between;height:100%;font-family:var(--mono);font-size:9px;color:var(--dim)}
+.col{height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;position:relative}
+.col i{display:block;height:9px;border-radius:2px;background:rgba(255,255,255,.07)}
+.col i.f{background:var(--accent);box-shadow:0 0 10px rgba(90,168,255,.4)}
+.days{display:grid;grid-template-columns:24px repeat(7,1fr);gap:8px;margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--dim);text-align:center}
+.ringwrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+.ringwrap svg{width:150px;height:150px}
+.ringwrap p{font-size:12px;color:var(--muted);text-align:center}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:11px;padding:7px 11px;border-radius:8px;border:1px solid var(--line2);background:rgba(0,0,0,.25);color:var(--muted)}
+.chip b{color:var(--text);font-weight:500;margin-right:6px}
+.chip.hot{border-color:rgba(90,168,255,.45);color:var(--accent)}
+.chip.hot b{color:var(--accent)}
+.journey{display:flex;flex-direction:column}
+.jr{display:grid;grid-template-columns:32px 1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.jr:last-child{border:0}
+.jr .n{font-family:var(--mono);font-size:11px;color:var(--dim);padding-top:2px}
+.jr b{font-weight:500;font-size:15px}
+.jr p{font-size:12px;color:var(--muted);margin-top:3px}
+.badge{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:99px;border:1px solid var(--line2);color:var(--muted);white-space:nowrap}
+.badge.live{color:var(--accent);border-color:rgba(90,168,255,.4)}
+.wave{width:100%;height:110px}
+
+/* cta + footer */
+.end{padding:120px 0 40px}
+.endgrid{display:grid;grid-template-columns:1fr 1.3fr;gap:16px}
+.idcard{padding:26px;display:flex;flex-direction:column;justify-content:space-between;min-height:260px;position:relative;overflow:hidden}
+.idcard .chev{position:absolute;right:-10px;top:30px;font-family:var(--mono);font-size:180px;line-height:1;color:rgba(255,255,255,.04);letter-spacing:-.15em}
+.idcard p{color:var(--muted);font-size:14px;max-width:230px;margin-top:40px}
+.idcard .foot{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;color:var(--dim)}
+.soc{display:flex;gap:6px}
+.soc a{width:28px;height:28px;border-radius:7px;border:1px solid var(--line2);display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--muted)}
+.soc a:hover{color:var(--accent);border-color:rgba(90,168,255,.4)}
+.accentcard{background:var(--accent);color:var(--accent-ink);border-radius:16px;padding:30px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;box-shadow:0 30px 90px -30px rgba(90,168,255,.5)}
+.accentcard .mono{font-size:11px}
+.accentcard h3{font-size:clamp(28px,3.2vw,40px);letter-spacing:-.035em;line-height:1.05;margin-top:12px}
+.accentcard p{font-size:14px;opacity:.75;max-width:420px;margin-top:10px}
+.accentcard .acts{display:flex;gap:10px;flex-wrap:wrap}
+.accentcard .btn-o{border:1px solid rgba(3,12,28,.3);color:var(--accent-ink);background:transparent}
+.accentcard .btn-o:hover{background:rgba(3,12,28,.08)}
+.stats{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:28px 0;margin-top:40px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted)}
+.stats span::before{content:"● ";color:var(--accent)}
+footer{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px;padding:40px 0;font-size:13px}
+footer .fl{color:var(--muted);max-width:240px;margin-top:12px}
+footer h5{font-family:var(--mono);font-size:10px;font-weight:400;color:var(--dim);margin-bottom:12px}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:8px;color:var(--muted)}
+footer ul a:hover{color:var(--text)}
+.legal{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);padding:20px 0 0;border-top:1px solid var(--line)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media (min-width:901px){
+  .hero .wrap{perspective:1500px}
+  .hero .flow{background:linear-gradient(180deg,rgba(22,28,38,.5),rgba(9,12,18,.62));backdrop-filter:blur(16px) saturate(125%);-webkit-backdrop-filter:blur(16px) saturate(125%);
+    transform-origin:0% 50%;width:calc(100% + 40px)}
+  .hero .flow.rv{transform:rotateY(-14deg) rotateX(3deg) translate3d(0,24px,0)}
+  .hero .flow.rv.in{transform:rotateY(-14deg) rotateX(3deg) translate3d(0,0,0)}
+  .hero{overflow:hidden}
+}
+@media (max-width:900px){
+  .links,.status{display:none}
+  .hero .wrap,.head-row,.feat,.feat.rev,.endgrid{grid-template-columns:1fr}
+  .head-row p{justify-self:start}
+  .feat.rev .glass{order:2}
+  .repos{grid-template-columns:1fr}
+  .c8,.c4,.c5,.c7{grid-column:span 12}
+  footer{grid-template-columns:1fr 1fr}
+  .flow-body{height:280px}
+  .sec{padding:90px 0}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  .trow{grid-template-columns:110px 1fr 40px}
+  .axis{margin-left:124px;padding-right:50px}
+  .node{min-width:0;font-size:11px;padding:7px 9px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-<canvas id="trails" aria-hidden="true"></canvas>
-<header class="bar" id="bar">
-  <div class="bar__in">
-    <a class="bar__brand" href="#top" aria-label="TopDarkFlames, início"><span class="bar__mono" aria-hidden="true">TF</span><span class="bar__name" aria-hidden="true">TopDarkFlames</span></a>
-    <nav class="bar__nav" aria-label="Principal">
-      <a href="#projetos">Projetos</a>
-      <a href="#numeros">Números</a>
-      <a href="#jornada">Jornada</a>
-      <a href="#contato">Contato</a>
-    </nav>
-    <p class="bar__status" role="status"><span class="bar__dot" aria-hidden="true"></span><span class="bar__status-text">Conectando ao GitHub</span></p>
-    <a class="btn bar__gh" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a>
-  </div>
-</header>
-<section id="top" data-trail="s" class="hero">
-  <div class="wrap hero__grid">
-    <div class="hero__copy">
-      <h1 class="hero__title">Construo apps que eu mesmo <em>uso.</em></h1>
-      <p class="hero__lead" data-reveal style="--i:1">Sou o TopDarkFlames, dev full-stack em formação no Brasil. Publico tudo no GitHub, e cada fio de luz desta página é um dos meus repositórios.</p>
-      <div class="hero__actions" data-reveal style="--i:2">
-        <a class="btn" href="#projetos">Ver projetos</a>
-        <a class="btn btn--quiet" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noreferrer">LinkedIn</a>
-      </div>
-    </div>
+<div id="vg"></div>
 
-    <div class="hero__side" data-reveal style="--i:3">
-      <div class="feed" data-ui>
-        <div class="feed__head">
-          <p class="feed__title">Atividade no GitHub</p>
-          <span class="feed__at" id="feed-at"></span>
-        </div>
-        <ul class="feed__list" id="feed-list">
-          <li class="feed__empty">Carregando repositórios do GitHub…</li>
-        </ul>
-        <noscript><p class="feed__empty"><a href="https://github.com/TopDarkFlames?tab=repositories">Ver os repositórios no GitHub</a></p></noscript>
-      </div>
-      <p class="hero__hint" id="feed-hint">Passe o mouse num repositório para acender o fio dele.</p>
-    </div>
-  </div>
-</section>
-<main>
-<section id="projetos" class="work" data-trail="curtain" aria-labelledby="projetos-title">
+<nav id="nav">
   <div class="wrap">
-    <header class="work__head">
-      <h2 id="projetos-title" data-reveal>Projetos que eu <em>uso</em> todo dia.</h2>
-      <p data-reveal style="--i:1">Dois deles eu abro todo dia. O resto está aqui embaixo, puxado ao vivo do GitHub.</p>
-    </header>
-
-    <article class="feat feat--vexely" aria-labelledby="vexely-title">
-      <div class="feat__text" data-reveal style="--i:1">
-        <h3 id="vexely-title">Vexely</h3>
-        <p>Um quadro gratuito e de código aberto para agentes de código. Rode Claude Code, Codex, Gemini CLI e outros em terminais de verdade numa tela infinita, veja quem está trabalhando e quem está esperando você, e retome as sessões. Para Windows, Linux e macOS.</p>
-        <a class="feat__link" href="https://github.com/TopDarkFlames/Vexely">Ver no GitHub</a>
-      </div>
-
-      <div class="vx" data-ui data-repo="Vexely" data-reveal style="--i:2" role="img" aria-label="Tela do Vexely: quatro agentes de código em terminais sobre uma tela infinita; dois trabalhando, um esperando resposta e um pronto.">
-        <div class="vx__tools" aria-hidden="true">
-          <span class="vx__brand">Vexely</span>
-          <span>100%</span>
-          <span>4 agentes</span>
-          <span class="vx__wait">1 esperando você</span>
-        </div>
-        <div class="vx__canvas" aria-hidden="true">
-          <div class="vx__card vx__card--a">
-            <div class="vx__bar"><b>Claude Code</b><span class="vx__st vx__st--work">trabalhando</span></div>
-            <pre class="vx__term"><span class="p">› </span>npm run build
-editando src/board/canvas.ts
-<span class="ok">ok</span> 42 testes passaram
-<span class="dim">compilando 3 de 7 módulos…</span></pre>
-          </div>
-          <div class="vx__card vx__card--b">
-            <div class="vx__bar"><b>Codex</b><span class="vx__st vx__st--wait">esperando você</span></div>
-            <pre class="vx__term"><span class="p">› </span>refatorar sessions/store.ts
-<span class="dim">2 arquivos alterados, +38 −12</span>
-<span class="ask">Aguardando sua resposta:</span>
-aplicar a mudança? (s/n) <span class="cur"></span></pre>
-          </div>
-          <div class="vx__card vx__card--c">
-            <div class="vx__bar"><b>Gemini CLI</b><span class="vx__st vx__st--work">trabalhando</span></div>
-            <pre class="vx__term"><span class="p">› </span>gemini "revise o README"
-lendo README.md (212 linhas)
-<span class="dim">sugerindo 4 alterações…</span></pre>
-          </div>
-          <div class="vx__card vx__card--d">
-            <div class="vx__bar"><b>Claude Code</b><span class="vx__st vx__st--done">pronto</span></div>
-            <pre class="vx__term"><span class="p">› </span>git commit -m "retomar sessões"
-<span class="ok">ok</span> 1 commit criado
-<span class="dim">sessão salva há 2 min</span></pre>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article class="feat feat--hanabi" aria-labelledby="hanabi-title">
-      <div class="hb" data-ui data-repo="hanabi-wallpapers" data-reveal style="--i:1" role="img" aria-label="Tela do Hanabi Wallpapers: biblioteca com nove wallpapers em vídeo em grade, com barra lateral de navegação.">
-        <div class="hb__top" aria-hidden="true">
-          <b>Hanabi Wallpapers</b>
-          <span class="hb__search">Buscar na biblioteca</span>
-        </div>
-        <div class="hb__body" aria-hidden="true">
-          <nav class="hb__side">
-            <span class="is-on">Biblioteca</span>
-            <span>Favoritos</span>
-            <span>Steam Workshop</span>
-            <span>Configurações</span>
-          </nav>
-          <div class="hb__grid">
-            <figure class="hb__thumb"><canvas data-scene="rain" width="400" height="250"></canvas><i>vídeo</i><figcaption>Neon Rain</figcaption></figure>
-            <figure class="hb__thumb is-on"><canvas data-scene="aurora" width="400" height="250"></canvas><i>4K</i><figcaption>Aurora Loop</figcaption></figure>
-            <figure class="hb__thumb"><canvas data-scene="drive" width="400" height="250"></canvas><i>vídeo</i><figcaption>Night Drive</figcaption></figure>
-            <figure class="hb__thumb"><canvas data-scene="city" width="400" height="250"></canvas><i>4K</i><figcaption>City Glow</figcaption></figure>
-            <figure class="hb__thumb"><canvas data-scene="trails" width="400" height="250"></canvas><i>vídeo</i><figcaption>Light Trails</figcaption></figure>
-            <figure class="hb__thumb"><canvas data-scene="orbit" width="400" height="250"></canvas><i>4K</i><figcaption>Deep Orbit</figcaption></figure>
-            <figure class="hb__thumb"><canvas data-scene="tide" width="400" height="250"></canvas><i>vídeo</i><figcaption>Tide Lines</figcaption></figure>
-            <figure class="hb__thumb"><canvas data-scene="stars" width="400" height="250"></canvas><i>vídeo</i><figcaption>Starfield</figcaption></figure>
-            <figure class="hb__thumb"><canvas data-scene="grid" width="400" height="250"></canvas><i>4K</i><figcaption>Horizon Grid</figcaption></figure>
-          </div>
-        </div>
-      </div>
-
-      <div class="feat__text" data-reveal style="--i:2">
-        <h3 id="hanabi-title">Hanabi Wallpapers</h3>
-        <p>Um navegador de wallpapers no estilo Wallpaper Engine para o GNOME: aplique os wallpapers em vídeo da Steam Workshop com o Hanabi, com inclinação 3D, partículas e prévias ao vivo.</p>
-        <a class="feat__link" href="https://github.com/TopDarkFlames/hanabi-wallpapers">Ver no GitHub</a>
-      </div>
-    </article>
-
-    <div class="repos" data-reveal>
-      <h3>Todos os repositórios</h3>
-      <p class="repos__status" aria-live="polite"></p>
-      <ul class="repos__list" role="list"></ul>
-      <noscript><p class="repos__none">A lista vem do GitHub e precisa de JavaScript. Veja todos em <a href="https://github.com/TopDarkFlames">github.com/TopDarkFlames</a>.</p></noscript>
+    <a href="#top" class="logo"><span class="mark">TF</span>TopDarkFlames</a>
+    <div class="links">
+      <a href="#projetos">Projetos</a><a href="#stack">Stack</a><a href="#jornada">Jornada</a><a href="#contato">Contato</a>
+    </div>
+    <div class="nav-r">
+      <span class="status"><span class="dot"></span>all systems building</span>
+      <a class="btn btn-accent" href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
-</section>
-<section id="numeros" class="rest-sec numeros" data-trail="mist" aria-labelledby="numeros-title">
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
   <div class="wrap">
-    <div class="num-head">
-      <h2 id="numeros-title" data-reveal>Números que o GitHub <em>conta</em> por mim.</h2>
-      <p data-reveal style="--i:1">Contados agora, direto da API pública. Nada aqui é arredondado para impressionar.</p>
+    <div class="rv">
+      <span class="tag"><i></i>full-stack dev / brazil / open source</span>
+      <h1>Do commit<br>ao <em>deploy.</em></h1>
+      <p class="lede">Sou o TopDarkFlames, dev full-stack em formação. Construo projetos web e ferramentas próprias, estudo Java, SQL e Rust, e gosto de interfaces que não sacrificam clareza.</p>
+      <div class="cta">
+        <a class="btn btn-accent" href="#projetos">Ver projetos</a>
+        <a class="btn btn-ghost" href="https://github.com/TopDarkFlames" target="_blank" rel="noopener"><span class="play">▶</span>Abrir GitHub</a>
+      </div>
+      <p class="fine">java / sql / rust · web & backend · building in public</p>
     </div>
 
-    <dl class="figs" data-reveal style="--i:2">
-      <div class="fig">
-        <dt class="fig-cap">repositórios públicos</dt>
-        <dd class="fig-num" data-fig="repos">—</dd>
+    <div class="glass flow rv">
+      <div class="flow-h"><span><b>pipeline</b> &nbsp;·&nbsp; 5 steps / 1 branch</span><span class="run"><span class="dot"></span>running</span></div>
+      <div class="flow-body" id="flowBody">
+        <div class="tools"><span>+</span><span>⌥</span><span>↯</span></div>
+        <svg id="flowSvg" preserveAspectRatio="none"></svg>
+        <div class="node" data-n="a" style="left:8%;top:44%">git push<small>trigger</small></div>
+        <div class="node" data-n="b" style="left:36%;top:16%">tests pass<small>condition</small></div>
+        <div class="node" data-n="c" style="left:36%;top:68%">open issue<small>fallback</small></div>
+        <div class="node" data-n="d" style="left:68%;top:30%">deploy pages<small>gh-pages · live</small></div>
+        <span class="pill ok" style="left:27%;top:33%">true</span>
+        <span class="pill" style="left:27%;top:64%">else</span>
+        <span class="pill" style="left:72%;top:52%">⏱ 38s</span>
       </div>
-      <div class="fig">
-        <dt class="fig-cap">linguagens diferentes</dt>
-        <dd class="fig-num" data-fig="langs">—</dd>
+      <div class="runs">
+        <div class="lbl">last runs</div>
+        <div class="r"><span class="ok">●</span><span>14:52:07</span><span>portfolio · deploy</span><span class="ok">ok</span></div>
+        <div class="r"><span class="ok">●</span><span>11:20:44</span><span>hanabi-wallpapers · build</span><span class="ok">ok</span></div>
+        <div class="r"><span class="ok">●</span><span>09:03:18</span><span>rust · cargo test</span><span class="ok">ok</span></div>
       </div>
-      <div class="fig" data-fig-push>
-        <dt class="fig-cap" data-fig-cap="push">desde o último push</dt>
-        <dd class="fig-num"><a class="fig-link" data-fig-link><span data-fig="push">—</span><span class="fig-unit" data-fig-unit></span></a></dd>
-      </div>
-    </dl>
-    <noscript><p class="num-note">Os números são contados com JavaScript ativo. Os repositórios estão em <a href="https://github.com/TopDarkFlames">github.com/TopDarkFlames</a>.</p></noscript>
-
-    <div class="num-panels">
-      <div class="num-panel" data-ui data-reveal style="--i:3">
-        <div class="ui-head"><span class="ui-title">Linguagens por repositório</span><span class="ui-meta" data-langs-meta></span></div>
-        <ul class="langbars" data-langs role="list"><li class="ui-empty">Carregando dados do GitHub…</li></ul>
-      </div>
-      <div class="num-panel" data-ui data-reveal style="--i:4">
-        <div class="ui-head"><span class="ui-title">Pushes recentes por dia da semana</span><span class="ui-meta">último push de cada repositório</span></div>
-        <div class="week" data-week><p class="ui-empty">Carregando dados do GitHub…</p></div>
-        <p class="week-find" data-week-find></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="jornada" class="rest-sec jornada" data-trail="s" aria-labelledby="jornada-title">
-  <div class="wrap jor-grid">
-    <h2 id="jornada-title" data-reveal>Aprendo <em>construindo</em> em público.</h2>
-    <div class="jor-copy">
-      <p data-reveal style="--i:1">Estudo Ciência da Computação na EEP, em Piracicaba. Antes da faculdade concluí cursos de Cibersegurança e de Blockchain. Hoje estudo Java, SQL e Rust, e uso TypeScript, React e Node.js nos meus projetos.</p>
-    </div>
-
-    <div class="runs" data-ui data-reveal style="--i:2">
-      <svg width="0" height="0" aria-hidden="true" style="position:absolute">
-        <symbol id="ic-done" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 10.4l2.6 2.6L14.2 7.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-        <symbol id="ic-half" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3a7 7 0 0 1 0 14z" fill="currentColor"/></symbol>
-        <symbol id="ic-use" viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="10" r="4" fill="currentColor"/></symbol>
-      </svg>
-
-      <h3 class="run-group">Formação</h3>
-      <ul class="run-list" role="list">
-        <li class="run run--done"><svg class="run-ic" aria-hidden="true"><use href="#ic-done"/></svg><span class="run-name">Cibersegurança</span><span class="run-bar" aria-hidden="true"><i style="--w:100%"></i></span><span class="run-st">concluído</span></li>
-        <li class="run run--done"><svg class="run-ic" aria-hidden="true"><use href="#ic-done"/></svg><span class="run-name">Blockchain</span><span class="run-bar" aria-hidden="true"><i style="--w:100%"></i></span><span class="run-st">concluído</span></li>
-        <li class="run run--now"><svg class="run-ic" aria-hidden="true"><use href="#ic-half"/></svg><span class="run-name">Ciência da Computação</span><span class="run-bar" aria-hidden="true"><i style="--w:50%"></i></span><span class="run-st">em curso</span></li>
-      </ul>
-
-      <h3 class="run-group">Estudando agora</h3>
-      <ul class="run-list" role="list">
-        <li class="run run--now run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-half"/></svg><span class="run-name">Java</span><span class="run-st">estudando</span></li>
-        <li class="run run--now run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-half"/></svg><span class="run-name">SQL</span><span class="run-st">estudando</span></li>
-        <li class="run run--now run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-half"/></svg><span class="run-name">Rust</span><span class="run-st">estudando</span></li>
-      </ul>
-
-      <h3 class="run-group">Uso nos projetos</h3>
-      <ul class="run-list run-list--tools" role="list">
-        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">TypeScript</span><span class="run-st">em uso</span></li>
-        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">React</span><span class="run-st">em uso</span></li>
-        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">Node.js</span><span class="run-st">em uso</span></li>
-        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">HTML e CSS</span><span class="run-st">em uso</span></li>
-        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">Python</span><span class="run-st">em uso</span></li>
-        <li class="run run--use run--nobar"><svg class="run-ic" aria-hidden="true"><use href="#ic-use"/></svg><span class="run-name">Git</span><span class="run-st">em uso</span></li>
-      </ul>
     </div>
   </div>
 </section>
 
-<section id="contato" class="rest-sec contato" data-trail="wave" aria-labelledby="contato-title">
+<!-- HOW I WORK -->
+<section class="sec" id="how">
   <div class="wrap">
-    <div class="close-card" data-reveal>
-      <div class="close-copy">
-        <h2 id="contato-title">Vamos construir <em>algo?</em></h2>
-        <p>Estou aberto a projetos, estudos e colaborações envolvendo web, automações e interfaces bem cuidadas.</p>
+    <div class="head-row rv">
+      <div><span class="kicker"><i></i>como eu trabalho</span><h2>Todo projeto é <em>lógica.</em></h2></div>
+      <p>Interface, dados e deploy são partes do mesmo fluxo. Eu cuido do caminho inteiro, da query ao pixel, para que a coisa funcione do jeito que parece funcionar.</p>
+    </div>
+
+    <div class="feat">
+      <div class="rv">
+        <div class="num">01</div>
+        <h3>Uma base, várias camadas</h3>
+        <p>Backend em Java, dados em SQL, sistemas em Rust e uma camada web em TypeScript e React por cima. Cada parte medida, nenhuma tratada como mágica.</p>
       </div>
-      <div class="close-links">
-        <a class="close-link" href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="close-link" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noreferrer">LinkedIn<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <p class="close-place">Piracicaba, Brasil</p>
+      <div class="glass timing rv" id="timing">
+        <div class="top"><span>build #0412</span><span>finished in 128 ms</span></div>
+        <div class="trow"><span><span class="chk">✓</span>compile java</span><div class="track"><span class="bar" style="left:0;width:62%"></span></div><span class="t">78 ms</span></div>
+        <div class="trow"><span><span class="chk">✓</span>query sql</span><div class="track"><span class="bar" style="left:62%;width:7%"></span></div><span class="t">9 ms</span></div>
+        <div class="trow"><span><span class="chk">✓</span>cargo build</span><div class="track"><span class="bar" style="left:69%;width:22%"></span></div><span class="t">28 ms</span></div>
+        <div class="trow"><span><span style="color:var(--dim);margin-right:6px">◌</span>ship web</span><div class="track"><span class="bar wait" style="left:91%;width:9%"></span></div><span class="t">queued</span></div>
+        <div class="axis"><span>0</span><span>32</span><span>64</span><span>96</span><span>128 ms</span></div>
+      </div>
+    </div>
+
+    <div class="feat rev">
+      <div class="glass chat rv">
+        <div class="ch"><span># deploys</span><span>hoje</span></div>
+        <div class="msg">
+          <span class="mark">TF</span>
+          <div>
+            <b>TopDarkFlames</b><time>14:52</time>
+            <p>Build verde em <span class="mono" style="color:var(--text)">topdarkflames.github.io</span>. Publicar a versão nova do portfólio?</p>
+            <div class="acts"><span class="y">publicar</span><span>revisar antes</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="num">02</div>
+        <h3>Feito em público, revisado antes</h3>
+        <p>Código aberto no GitHub, commits pequenos e nada vai para produção sem passar por revisão. Programas próprios, ferramentas para amigos e estudos, tudo versionado.</p>
       </div>
     </div>
   </div>
 </section>
-</main>
-<footer class="site-foot">
+
+<!-- PROJECTS -->
+<section class="sec" id="projetos" style="padding-top:40px">
   <div class="wrap">
-    <div class="foot-cols">
-      <nav class="foot-col" aria-labelledby="foot-nav">
-        <h2 id="foot-nav" class="foot-h">Navegação</h2>
-        <ul role="list">
-          <li><a href="#top">Início</a></li>
-          <li><a href="#projetos">Projetos</a></li>
-          <li><a href="#numeros">Números</a></li>
-          <li><a href="#jornada">Jornada</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
-      </nav>
-      <div class="foot-col">
-        <h2 class="foot-h">Redes</h2>
-        <ul role="list">
-          <li><a href="https://github.com/TopDarkFlames" target="_blank" rel="noreferrer">GitHub</a></li>
-          <li><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noreferrer">LinkedIn</a></li>
-        </ul>
+    <div class="head-row rv">
+      <div><span class="kicker"><i></i>featured repositories</span><h2>Projetos em <em>destaque.</em></h2></div>
+      <p>Repositórios públicos puxados direto do GitHub. Quando um projeto é publicado ou atualizado, esta vitrine acompanha sozinha.</p>
+    </div>
+    <div class="repos" id="repos">
+      <div class="glass repo"><div class="skel" style="width:40%"></div><div class="skel" style="width:70%;height:18px"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:60%"></div></div>
+      <div class="glass repo"><div class="skel" style="width:40%"></div><div class="skel" style="width:70%;height:18px"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:60%"></div></div>
+      <div class="glass repo"><div class="skel" style="width:40%"></div><div class="skel" style="width:70%;height:18px"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:60%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCENT CARD (grows on scroll) -->
+<section class="grow" id="grow">
+  <div class="grow-pin">
+    <div class="grow-card" id="growCard">
+      <div class="grow-text" id="growText">
+        <span class="mono">// signature</span>
+        <h2>O melhor código é o que <em>ninguém percebe</em> rodando.</h2>
       </div>
-      <div class="foot-col foot-col--site">
-        <h2 class="foot-h">Este site</h2>
-        <p>HTML, CSS e Canvas, sem framework. Cada fio de luz é um repositório.</p>
-        <a href="https://github.com/TopDarkFlames/topdarkflames.github.io" target="_blank" rel="noreferrer">Código no GitHub</a>
+      <span class="big">TF</span>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="sec" id="stack">
+  <div class="wrap">
+    <div class="head-row rv">
+      <div><h2>Uma <em>semana,</em> vista do terminal.</h2></div>
+      <p>O que está aberto, o que está estudando e o que já foi para o ar. Números puxados do GitHub quando disponíveis.</p>
+    </div>
+    <div class="dash">
+      <div class="glass card c8 rv">
+        <div class="cl"><span>atividade pública, por dia</span><span id="actTotal">— eventos</span></div>
+        <div class="week" id="week"></div>
+        <div class="days"><span></span><span>dom</span><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span></div>
+      </div>
+      <div class="glass card c4 rv">
+        <div class="cl"><span>linguagens nos repos</span><span>%</span></div>
+        <div class="ringwrap">
+          <svg viewBox="0 0 120 120" id="ring">
+            <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/>
+            <circle id="ringArc" cx="60" cy="60" r="48" fill="none" stroke="#5aa8ff" stroke-width="9" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 60 60)" style="filter:drop-shadow(0 0 6px rgba(90,168,255,.6));transition:stroke-dashoffset 1.4s cubic-bezier(.2,.8,.2,1)"/>
+            <text id="ringPct" x="60" y="66" text-anchor="middle" fill="#eef2f7" font-family="Inter Tight" font-size="22" font-weight="500">—</text>
+          </svg>
+          <p id="ringLbl">dos repositórios na linguagem principal</p>
+        </div>
+      </div>
+      <div class="glass card c7 rv">
+        <div class="cl"><span>loadout</span><span>build atual</span></div>
+        <div class="chips">
+          <span class="chip hot"><b>Java</b>backend</span>
+          <span class="chip hot"><b>SQL</b>databases</span>
+          <span class="chip hot"><b>Rust</b>systems</span>
+          <span class="chip"><b>HTML+CSS</b>web base</span>
+          <span class="chip"><b>JavaScript</b>frontend</span>
+          <span class="chip"><b>TypeScript</b>typed web</span>
+          <span class="chip"><b>React</b>interfaces</span>
+          <span class="chip"><b>Node.js</b>APIs</span>
+          <span class="chip"><b>Python</b>scripts</span>
+          <span class="chip"><b>Git</b>tools</span>
+        </div>
+        <svg class="wave" viewBox="0 0 600 110" preserveAspectRatio="none" id="wave"></svg>
+      </div>
+      <div class="glass card c5 rv" id="jornada">
+        <div class="cl"><span>jornada</span><span>sem hype</span></div>
+        <div class="journey">
+          <div class="jr"><span class="n">01</span><div><b>Ciência da Computação</b><p>EEP Piracicaba · fundamentos de programação, lógica e sistemas.</p></div><span class="badge live">em progresso</span></div>
+          <div class="jr"><span class="n">02</span><div><b>CyberSecurity</b><p>Segurança, boas práticas e o funcionamento interno das aplicações.</p></div><span class="badge">concluído</span></div>
+          <div class="jr"><span class="n">03</span><div><b>Blockchain</b><p>Tecnologias descentralizadas, com curiosidade técnica acima do hype.</p></div><span class="badge">concluído</span></div>
+        </div>
       </div>
     </div>
-    <p class="foot-mark" aria-label="TopDarkFlames"><span aria-hidden="true">TopDark</span><span aria-hidden="true">Flames</span></p>
-    <p class="foot-legal">© 2026 TopDarkFlames. Feito no Brasil.</p>
   </div>
-</footer>
+</section>
+
+<!-- CTA + FOOTER -->
+<section class="end" id="contato">
+  <div class="wrap">
+    <div class="endgrid rv">
+      <div class="glass idcard">
+        <span class="chev">&gt;&gt;</span>
+        <div class="logo"><span class="mark">TF</span>TopDarkFlames</div>
+        <p>Full-stack developer construindo a parte que roda entre a ideia e o deploy.</p>
+        <div class="foot"><span>stay in touch</span>
+          <div class="soc"><a href="https://github.com/TopDarkFlames" target="_blank" rel="noopener" aria-label="GitHub">gh</a><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a></div>
+        </div>
+      </div>
+      <div class="accentcard">
+        <div>
+          <span class="mono">// contato</span>
+          <h3>Vamos acender um <em>projeto?</em></h3>
+          <p>Aberto para projetos, estudos e colaboração envolvendo web, automações e interfaces bem cuidadas.</p>
+        </div>
+        <div class="acts">
+          <a class="btn btn-dark" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener">Falar no LinkedIn →</a>
+          <a class="btn btn-o" href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">Ver GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <span>open source por padrão</span><span id="statRepos">— repositórios públicos</span><span>java · sql · rust</span>
+    </div>
+
+    <footer>
+      <div><div class="logo"><span class="mark">TF</span>TopDarkFlames</div><p class="fl">Dev full-stack em formação, construindo em público desde o Brasil.</p></div>
+      <div><h5>site</h5><ul><li><a href="#projetos">Projetos</a></li><li><a href="#stack">Stack</a></li><li><a href="#jornada">Jornada</a></li></ul></div>
+      <div><h5>código</h5><ul><li><a href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/TopDarkFlames?tab=repositories" target="_blank" rel="noopener">Repositórios</a></li></ul></div>
+      <div><h5>contato</h5><ul><li><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+    </footer>
+    <div class="legal"><span>© <span id="yr">2026</span> TopDarkFlames</span><span>built in brazil · light without the noise</span></div>
+  </div>
+</section>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* nav */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 20);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* reveal */
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.15});
+  document.querySelectorAll('.rv,#timing').forEach(el => io.observe(el));
+
+  /* ---------- light trails: painted ONCE into page tiles; all motion is CSS (GPU), nothing redrawn per frame ---------- */
+  const $ = s => document.querySelector(s);
+  const docY = el => el.getBoundingClientRect().top + scrollY;
+  const BLUE = ['80,160,255','110,185,255','175,215,255','60,125,245'], ALT = ['120,230,255','150,140,255'];
+  const layer = document.createElement('div'); layer.id = 'trails'; document.body.prepend(layer);
+  let spine = [], apex = {x:0, y:0}, strands = [], hh = 0, built = '';
+
+  function buildSpine(){
+    hh = $('.hero').offsetHeight;
+    const s2 = docY($('#how')), pj = docY($('#projetos')),
+          gr = $('#grow'), gy = docY(gr), gh = gr.offsetHeight, st = docY($('#stack')), ct = docY($('#contato'));
+    // [x as fraction of width, y in page px, fan width px, crisp-line brightness, aurora brightness]
+    const P = [
+      [1.30, hh*-.02, 300, .7, .5], [.82, hh*.20, 210, .95, .6], [.50, hh*.50, 80, 1, .8],
+      [.36, hh*.72, 6, 1, 1],                                   // the bright apex of the hairpin
+      [.54, hh*.92, 90, 1, .8], [.95, hh*1.04, 230, .8, .6], [1.18, hh*1.32, 220, .3, .7],
+      [.80, s2+(pj-s2)*.28, 230, .12, .8], [.28, s2+(pj-s2)*.58, 210, .12, .8], [.04, s2+(pj-s2)*.88, 230, .11, .75],
+      [.40, pj+(gy-pj)*.65, 210, .11, .75], [.75, gy+gh*.5, 170, .14, .7],
+      [.45, st+70, 210, .13, .8], [-.05, st+(ct-st)*.42, 250, .11, .75],
+      [.30, st+(ct-st)*.86, 210, .12, .8], [.68, ct+30, 180, .16, .85], [1.3, ct+170, 280, .13, .7]
+    ];
+    P.forEach(p => p[0] *= innerWidth);
+    apex = {x: P[3][0], y: P[3][1]};
+    spine = []; let len = 0;
+    for (let i = 0; i < P.length - 1; i++){
+      const p0 = P[Math.max(i-1,0)], p1 = P[i], p2 = P[i+1], p3 = P[Math.min(i+2,P.length-1)];
+      const n = Math.max(2, Math.ceil(Math.hypot(p2[0]-p1[0], p2[1]-p1[1]) / 10));
+      for (let j = 0; j < n; j++){
+        const t = j/n, t2 = t*t, t3 = t2*t, sm = t2*(3-2*t), lerp = k => p1[k]+(p2[k]-p1[k])*sm;
+        const cr = k => .5*(2*p1[k] + (p2[k]-p0[k])*t + (2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*t2 + (3*p1[k]-p0[k]-3*p2[k]+p3[k])*t3);
+        const x = cr(0), y = cr(1), prev = spine[spine.length-1];
+        if (prev) len += Math.hypot(x-prev.x, y-prev.y);
+        spine.push({x, y, u: len, w: lerp(2), a: lerp(3), g: lerp(4)});
+      }
+    }
+    for (let i = 0; i < spine.length; i++){
+      const p = spine[Math.max(i-1,0)], q = spine[Math.min(i+1,spine.length-1)];
+      const dx = q.x-p.x, dy = q.y-p.y, l = Math.hypot(dx,dy) || 1;
+      spine[i].nx = -dy/l; spine[i].ny = dx/l;
+    }
+  }
+
+  function makeStrands(){
+    const n = GL ? (innerWidth < 700 ? 120 : 240) : (innerWidth < 700 ? 34 : 64);
+    strands = Array.from({length:n}, (_, i) => {
+      const hot = Math.random() < (GL ? .1 : .16);
+      return { o: (i/(n-1) - .5) * (.7 + .6*Math.random()), w: hot ? 1.6 : .45 + Math.random()*.75,
+        a: GL ? (hot ? .7 : .14 + Math.random()*.3) : (hot ? .9 : .16 + Math.random()*.32), ph: Math.random()*6.28, hot,
+        c: Math.random() < .15 ? ALT[i % 2] : BLUE[i % 4] };
+    });
+  }
+
+  const off = (s, p) => s.o*p.w*(1 + .14*Math.sin(s.ph + p.u*.004)) + 6*Math.sin(p.u*.011 + s.ph);
+  const pt = (s, p) => { const o = off(s, p); return [p.x + p.nx*o, p.y + p.ny*o]; };
+  function trace(c, s, k, e){
+    c.beginPath();
+    for (let j = k; j <= e; j++){ const [x, y] = pt(s, spine[j]); j === k ? c.moveTo(x, y) : c.lineTo(x, y); }
+  }
+  function rangesIn(lo, hi){
+    const r = []; let start = -1;
+    for (let i = 0; i < spine.length; i++){
+      const vis = spine[i].y > lo && spine[i].y < hi;
+      if (vis && start < 0) start = Math.max(0, i-1);
+      if (!vis && start >= 0){ r.push([start, i]); start = -1; }
+    }
+    if (start >= 0) r.push([start, spine.length-1]);
+    return r;
+  }
+
+
+  /* ---------- the beam, live on the GPU (WebGL2) ----------
+     tuned against the reference video: light pulses run 120-210 px/s from the top arm, through the apex, out the
+     bottom arm; fibres are pinned at the apex and sway a few px at the ends (~2.2 s); brightness breathes ~3%;
+     depth of field = each fibre is a ribbon whose blur width grows where the bundle fans out toward the lens */
+  const glc = document.createElement('canvas'); glc.id = 'fibres';
+  const GL = glc.getContext('webgl2', {antialias: true, premultipliedAlpha: true});
+  let glN = 0, spineY = new Float32Array(0), nGlow = 0, nFib = 0, nDust = 0;
+  let rProg, pProg, rU = {}, pU = {}, vaoG, vaoF, vaoD, bufR, bufS, bufG, bufF, bufD;
+  if (GL){
+    layer.after(glc);
+    const sh = (type, code) => { const s = GL.createShader(type); GL.shaderSource(s, code); GL.compileShader(s);
+      if (!GL.getShaderParameter(s, GL.COMPILE_STATUS)) throw new Error(GL.getShaderInfoLog(s)); return s; };
+    const link = (vs, fs) => { const p = GL.createProgram(); GL.attachShader(p, sh(GL.VERTEX_SHADER, vs)); GL.attachShader(p, sh(GL.FRAGMENT_SHADER, fs));
+      GL.linkProgram(p); if (!GL.getProgramParameter(p, GL.LINK_STATUS)) throw new Error(GL.getProgramInfoLog(p)); return p; };
+    const COMMON = `
+      uniform vec2 uRes; uniform float uScroll, uTime, uDpr;
+      float hash(float n){ return fract(sin(n)*43758.5453); }
+      vec4 toClip(vec2 p){ p.y -= uScroll; vec2 c = p/uRes*2.0 - 1.0; return vec4(c.x, -c.y, 0.0, 1.0); }
+      float fibreOffset(float o0, float w, float u, float ph, float t){
+        float pin = clamp(w/220.0, 0.0, 1.0);
+        float sw = 2.85*(0.8 + 0.4*hash(ph*5.3));
+        return o0*w*(1.0 + 0.05*sin(ph + t*0.4)) + pin*5.0*sin(t*sw + ph*3.0)*sin(u*0.004 + ph);
+      }`;
+
+    // ribbons: kind 0 = wide soft glow (bloom), kind 1 = one fibre with depth of field
+    rProg = link(`#version 300 es
+      in vec4 aS; in vec4 aM; in float aA; in vec4 aI; in vec3 aC;
+      uniform float uKind;
+      out vec3 vCol; out float vA; out float vSide;` + COMMON + `
+      void main(){
+        float w = aM.x, g = aM.y, u = aM.z, side = aM.w, t = uTime;
+        float breathe = 1.0 + 0.04*sin(t*2.85);
+        float o, hw, a;
+        if (uKind < 0.5){
+          float pin = clamp(w/220.0, 0.0, 1.0);
+          o  = aI.x*w*(1.0 + 0.06*sin(aI.y + t*0.35)) + pin*8.0*sin(t*2.2 + aI.y*2.0)*sin(u*0.003 + aI.y);
+          hw = (aI.w*(0.9 + 0.1*sin(t*0.8 + aI.y*3.0)) + w*0.12)*clamp(w/140.0, 0.1, 1.0);
+          float k = (u - t*60.0)/420.0 + aI.y;
+          a  = aI.z*g*(0.8 + 0.2*sin(k*6.2832))*breathe;
+        } else {
+          o = fibreOffset(aI.x, w, u, aI.y, t);
+          float coc = 12.0*smoothstep(70.0, 260.0, w)*(0.3 + 1.2*hash(aI.y*2.9));
+          hw = 0.7 + coc;
+          float sp  = 120.0 + 90.0*hash(aI.y*7.1);
+          float len = 240.0 + 420.0*hash(aI.y*3.3);
+          float k = fract((u - t*sp)/len + hash(aI.y*1.3));
+          float pulse = pow(max(0.0, sin(k*6.2832)), 8.0);
+          a = aI.z*aA*(0.55 + 1.8*pulse)*breathe*(0.7/hw);   // a blurred fibre spreads the same light wider
+        }
+        gl_Position = toClip(aS.xy + aS.zw*(o + side*hw));
+        vA = a; vSide = side; vCol = aC;
+      }`, `#version 300 es
+      precision highp float;
+      in vec3 vCol; in float vA; in float vSide; uniform float uKind; out vec4 o;
+      void main(){ float e = 1.0 - abs(vSide); float a = vA*(uKind < 0.5 ? e*e : e); o = vec4(vCol*a, a); }`);
+
+    // dust: specks orbiting the bundle and drifting with it, each twinkling on its own
+    pProg = link(`#version 300 es
+      in vec4 aS; in vec3 aM; in vec4 aI; in vec3 aC;
+      out vec3 vCol; out float vA;` + COMMON + `
+      void main(){
+        float w = aM.x, u = aM.z, t = uTime;
+        float flow = 40.0 + 40.0*hash(aI.y*7.1);
+        float s = t*flow/10.0, id = float(gl_VertexID) - floor(s);
+        float h = hash(id*1.71 + aI.y*91.3);
+        vec2 tng = vec2(aS.w, -aS.z);
+        float o = fibreOffset(aI.x, w, u, aI.y, t) + sin(t*0.6 + h*40.0)*(6.0 + w*0.22);
+        gl_Position = toClip(aS.xy + aS.zw*o + tng*fract(s)*10.0);
+        float tw = 0.45 + 0.55*sin(t*(2.0 + 4.0*h) + h*60.0);
+        vA = step(0.94, h)*max(tw, 0.0)*(0.25 + 0.75*aM.y)*(1.0 + 0.04*sin(t*2.85));
+        gl_PointSize = (1.0 + 2.4*fract(h*13.0))*uDpr;
+        vCol = aC;
+      }`, `#version 300 es
+      precision highp float;
+      in vec3 vCol; in float vA; out vec4 o;
+      void main(){ float a = vA*smoothstep(0.5, 0.0, length(gl_PointCoord - 0.5)); o = vec4(vCol*a, a); }`);
+
+    for (const k of ['uRes','uScroll','uTime','uDpr','uKind']) rU[k] = GL.getUniformLocation(rProg, k);
+    for (const k of ['uRes','uScroll','uTime','uDpr']) pU[k] = GL.getUniformLocation(pProg, k);
+    bufR = GL.createBuffer(); bufS = GL.createBuffer(); bufG = GL.createBuffer(); bufF = GL.createBuffer(); bufD = GL.createBuffer();
+    const inst = (prog, buf) => {
+      const at = k => GL.getAttribLocation(prog, k);
+      GL.bindBuffer(GL.ARRAY_BUFFER, buf);
+      GL.enableVertexAttribArray(at('aI')); GL.vertexAttribPointer(at('aI'), 4, GL.FLOAT, false, 28, 0); GL.vertexAttribDivisor(at('aI'), 1);
+      GL.enableVertexAttribArray(at('aC')); GL.vertexAttribPointer(at('aC'), 3, GL.FLOAT, false, 28, 16); GL.vertexAttribDivisor(at('aC'), 1);
+    };
+    const ribbonVao = buf => {
+      const v = GL.createVertexArray(), at = k => GL.getAttribLocation(rProg, k); GL.bindVertexArray(v);
+      GL.bindBuffer(GL.ARRAY_BUFFER, bufR);
+      GL.enableVertexAttribArray(at('aS')); GL.vertexAttribPointer(at('aS'), 4, GL.FLOAT, false, 36, 0);
+      GL.enableVertexAttribArray(at('aM')); GL.vertexAttribPointer(at('aM'), 4, GL.FLOAT, false, 36, 16);
+      GL.enableVertexAttribArray(at('aA')); GL.vertexAttribPointer(at('aA'), 1, GL.FLOAT, false, 36, 32);
+      inst(rProg, buf); GL.bindVertexArray(null); return v;
+    };
+    vaoG = ribbonVao(bufG); vaoF = ribbonVao(bufF);
+    vaoD = GL.createVertexArray(); GL.bindVertexArray(vaoD);
+    { const at = k => GL.getAttribLocation(pProg, k);
+      GL.bindBuffer(GL.ARRAY_BUFFER, bufS);
+      GL.enableVertexAttribArray(at('aS')); GL.vertexAttribPointer(at('aS'), 4, GL.FLOAT, false, 28, 0);
+      GL.enableVertexAttribArray(at('aM')); GL.vertexAttribPointer(at('aM'), 3, GL.FLOAT, false, 28, 16);
+      inst(pProg, bufD); }
+    GL.bindVertexArray(null);
+    GL.enable(GL.BLEND); GL.blendFunc(GL.ONE, GL.ONE);   // additive: overlapping light adds up, like the reference
+  }
+
+  /* one continuous ribbon down the whole page. control points live in page coordinates (they scroll with the
+     content, so the beam is never cut or swapped); the scroll bends it: points away from the hero sway with the
+     scroll position and lag a little behind fast scrolling, like something with weight.
+     each point = [x as a fraction of width, y in page px, fan width px, fibre brightness, glow brightness] */
+  let path = [], smoothY = null, lastNow = 0, vel = 0;
+  function buildAnchors(){
+    hh = $('.hero').offsetHeight;
+    const s2 = docY($('#how')), pj = docY($('#projetos')), g = $('#grow'), gy = docY(g), gh = g.offsetHeight,
+          st = docY($('#stack')), ct = docY($('#contato')), end = document.documentElement.scrollHeight;
+    const L = (a, b, f) => a + (b - a)*f;
+    path = [
+      [1.30, hh*-.02, 300, .7, .5], [.82, hh*.20, 210, .95, .6], [.50, hh*.50, 80, 1, .8], [.36, hh*.72, 6, 1, 1],
+      [.54, hh*.92, 90, 1, .8], [.95, hh*1.04, 200, .8, .6],
+      [1.08, L(s2, pj, .14), 190, .5, .6], [.72, L(s2, pj, .32), 120, .5, .7], [.48, L(s2, pj, .46), 45, .6, .85],
+      [.20, L(s2, pj, .64), 120, .45, .7], [-.06, L(s2, pj, .86), 190, .4, .6],
+      [.24, L(pj, gy, .38), 140, .42, .7], [.60, L(pj, gy, .58), 50, .6, .85], [1.06, L(pj, gy, .82), 190, .4, .6],
+      [.88, L(gy, gy + gh, .32), 150, .5, .7], [.52, L(gy, gy + gh, .5), 55, .6, .85], [.10, L(gy, gy + gh, .68), 150, .5, .7],
+      [-.08, L(st, ct, .14), 190, .4, .6], [.40, L(st, ct, .40), 120, .42, .7], [.74, L(st, ct, .62), 50, .6, .85], [1.06, L(st, ct, .84), 190, .4, .6],
+      [.80, ct + 40, 170, .6, .7], [.46, L(ct, end, .45), 70, .78, .85], [.28, L(ct, end, .62), 8, .85, 1],
+      [.46, L(ct, end, .78), 70, .78, .85], [1.30, end + 120, 260, .42, .6]
+    ];
+  }
+  const SEG = 48;
+  let SR = new Float32Array(0), SS = new Float32Array(0), PX = new Float32Array(0), PY = new Float32Array(0);
+  const bloom = document.createElement('div'); bloom.id = 'bloom';
+  function frameSpine(sy){
+    const vw = innerWidth, vh = innerHeight, NP = (path.length - 1)*SEG + 1;
+    if (PX.length !== NP){ SR = new Float32Array(NP*18); SS = new Float32Array(NP*7); PX = new Float32Array(NP); PY = new Float32Array(NP); }
+    const drag = Math.max(-.09*vh, Math.min(.09*vh, vel*.06));
+    const P = path.map((p, k) => {
+      const f = Math.min(1, Math.max(0, (p[1] - hh*.95)/(hh*.4)));   // the hero hairpin stays put; the rest responds to scroll
+      return [p[0]*vw + f*vw*.05*Math.sin(sy*.0011 + k*1.9),
+              p[1] - sy + f*(vh*.045*Math.sin(sy*.0009 + k*1.3) - drag), p[2], p[3], p[4]];
+    });
+    let n = 0, len = 0, minW = 1e9, bx = 0, by = 0, i0 = -1, i1 = 0;
+    for (let i = 0; i < P.length - 1; i++){
+      const p0 = P[Math.max(i-1,0)], p1 = P[i], p2 = P[i+1], p3 = P[Math.min(i+2,P.length-1)];
+      for (let j = 0; j < SEG + (i === P.length - 2 ? 1 : 0); j++){
+        const t = j/SEG, t2 = t*t, t3 = t2*t, sm = t2*(3-2*t), lerp = k => p1[k]+(p2[k]-p1[k])*sm;
+        const cr = k => .5*(2*p1[k] + (p2[k]-p0[k])*t + (2*p0[k]-5*p1[k]+4*p2[k]-p3[k])*t2 + (3*p1[k]-p0[k]-3*p2[k]+p3[k])*t3);
+        const x = cr(0), y = cr(1);
+        if (n) len += Math.hypot(x - PX[n-1], y - PY[n-1]);
+        PX[n] = x; PY[n] = y;
+        const w = lerp(2), al = lerp(3), g = lerp(4);
+        SR[n*18+4] = SR[n*18+13] = w; SR[n*18+5] = SR[n*18+14] = g; SR[n*18+6] = SR[n*18+15] = len; SR[n*18+8] = SR[n*18+17] = al;
+        SS[n*7+4] = w; SS[n*7+5] = al; SS[n*7+6] = len;
+        if (y > -500 && y < vh + 500){ if (i0 < 0) i0 = n; i1 = n; if (w < minW && y > -100 && y < vh + 100){ minW = w; bx = x; by = y; } }
+        n++;
+      }
+    }
+    for (let i = 0; i < n; i++){
+      const a = Math.max(i-1, 0), b = Math.min(i+1, n-1), dx = PX[b]-PX[a], dy = PY[b]-PY[a], l = Math.hypot(dx, dy) || 1;
+      const nx = -dy/l, ny = dx/l;
+      SR[i*18] = SR[i*18+9] = PX[i]; SR[i*18+1] = SR[i*18+10] = PY[i]; SR[i*18+2] = SR[i*18+11] = nx; SR[i*18+3] = SR[i*18+12] = ny;
+      SR[i*18+7] = -1; SR[i*18+16] = 1;
+      SS[i*7] = PX[i]; SS[i*7+1] = PY[i]; SS[i*7+2] = nx; SS[i*7+3] = ny;
+    }
+    bloom.style.transform = `translate3d(${bx.toFixed(1)}px,${by.toFixed(1)}px,0) translate(-50%,-50%)`;
+    bloom.style.opacity = minW < 1e9 ? Math.max(0, 1 - minW/120).toFixed(3) : 0;
+    GL.bindBuffer(GL.ARRAY_BUFFER, bufR); GL.bufferData(GL.ARRAY_BUFFER, SR, GL.DYNAMIC_DRAW);
+    GL.bindBuffer(GL.ARRAY_BUFFER, bufS); GL.bufferData(GL.ARRAY_BUFFER, SS, GL.DYNAMIC_DRAW);
+    return i0 < 0 ? [0, 0] : [Math.max(0, i0 - 1), Math.min(n - 1, i1 + 1)];
+  }
+
+  function glUpload(){
+    const rgb = s => s.split(',').map(v => v/255);
+    const fib = new Float32Array(strands.length*7);
+    strands.forEach((s, i) => fib.set([s.o, s.ph, s.a, 0, ...rgb(s.c)], i*7));
+    const dust = strands.filter((_, i) => i % 2 === 0), D = new Float32Array(dust.length*7);
+    dust.forEach((s, i) => D.set([s.o, s.ph, s.a, 0, ...rgb(s.c)], i*7));
+    const RC = ['70,140,255','90,175,255','60,110,235','120,220,255','140,130,255'];
+    const G = new Float32Array(14*7);
+    for (let i = 0; i < 14; i++) G.set([(i/13 - .5)*(.8 + .4*Math.random()), Math.random()*6.28, .13 + Math.random()*.12, 60 + Math.random()*140, ...rgb(RC[i % RC.length])], i*7);
+    for (const [buf, data] of [[bufF, fib], [bufD, D], [bufG, G]]){ GL.bindBuffer(GL.ARRAY_BUFFER, buf); GL.bufferData(GL.ARRAY_BUFFER, data, GL.STATIC_DRAW); }
+    glN = 1; nFib = strands.length; nDust = dust.length; nGlow = 14;
+    if (!bloom.isConnected) glc.after(bloom);
+  }
+
+  function glSize(){
+    const d = Math.min(devicePixelRatio || 1, 2);
+    glc.width = innerWidth*d; glc.height = innerHeight*d;
+    for (const [p, U] of [[rProg, rU], [pProg, pU]]){ GL.useProgram(p); GL.uniform2f(U.uRes, innerWidth, innerHeight); GL.uniform1f(U.uDpr, d); }
+  }
+
+  function glFrame(now){
+    GL.viewport(0, 0, glc.width, glc.height); GL.clearColor(0,0,0,0); GL.clear(GL.COLOR_BUFFER_BIT);
+    if (glN && path.length){
+      const dt = Math.min(.1, (now - (lastNow || now))/1000); lastNow = now;
+      const prev = smoothY == null ? scrollY : smoothY;
+      smoothY = reduce ? scrollY : prev + (scrollY - prev)*(1 - Math.exp(-dt*7));
+      if (dt > 0) vel += ((smoothY - prev)/dt - vel)*(1 - Math.exp(-dt*5));
+      const [i0, i1] = frameSpine(smoothY), cnt = i1 - i0 + 1, t = reduce ? 0 : now/1000;
+      if (cnt > 1){
+        GL.useProgram(rProg); GL.uniform1f(rU.uScroll, 0); GL.uniform1f(rU.uTime, t);
+        GL.uniform1f(rU.uKind, 0); GL.bindVertexArray(vaoG); GL.drawArraysInstanced(GL.TRIANGLE_STRIP, i0*2, cnt*2, nGlow);
+        GL.uniform1f(rU.uKind, 1); GL.bindVertexArray(vaoF); GL.drawArraysInstanced(GL.TRIANGLE_STRIP, i0*2, cnt*2, nFib);
+        GL.useProgram(pProg); GL.uniform1f(pU.uScroll, 0); GL.uniform1f(pU.uTime, t);
+        GL.bindVertexArray(vaoD); GL.drawArraysInstanced(GL.POINTS, i0, cnt, nDust);
+      }
+    }
+    requestAnimationFrame(glFrame);
+  }
+  if (GL){ glSize(); addEventListener('resize', glSize); requestAnimationFrame(glFrame); }
+
+  function paint(){
+    layer.style.height = '0px';
+    const W = innerWidth, pageH = document.documentElement.scrollHeight, key = W + 'x' + pageH;
+    layer.style.height = pageH + 'px';
+    if (W < 2 || pageH < 2) return;   // preview panels can load the page at 0x0 first; paint once it has a size
+    if (key === built) return;
+    built = key;
+    layer.textContent = '';
+    if (GL){ if (!strands.length) makeStrands(); buildAnchors(); glUpload(); return; }
+    buildSpine(); makeStrands();
+    const TILE = 1200, AUS = 6, au = document.createElement('canvas'), actx = au.getContext('2d');
+    const brush = document.createElement('canvas'); brush.width = brush.height = 64;
+    { const bg = brush.getContext('2d'), gr = bg.createRadialGradient(32,32,0,32,32,32);
+      gr.addColorStop(0,'rgba(70,140,255,1)'); gr.addColorStop(.6,'rgba(70,140,255,.35)'); gr.addColorStop(1,'rgba(70,140,255,0)');
+      bg.fillStyle = gr; bg.fillRect(0,0,64,64); }
+    for (let y0 = 0; y0 < pageH; y0 += TILE){
+      const th = Math.min(TILE, pageH - y0), ranges = rangesIn(y0 - 500, y0 + th + 500);
+      if (!ranges.length) continue;
+      const dpr = y0 < hh*1.4 ? Math.min(devicePixelRatio || 1, 2) : 1;   // crisp hero, soft (cheaper) aurora below
+      const cv = document.createElement('canvas'), ctx = cv.getContext('2d');
+      cv.width = W*dpr; cv.height = th*dpr; cv.style.cssText = `top:${y0}px;width:${W}px;height:${th}px`;
+
+      if (!GL){
+      // soft aurora: drawn small, upscaled = blur that works in every browser
+      const PAD = 180;   // aurora is painted past the tile edges so neighbouring tiles blend without a seam
+      au.width = Math.max(1, Math.ceil(W/AUS)); au.height = Math.max(1, Math.ceil((th + PAD*2)/AUS));
+      actx.setTransform(1/AUS,0,0,1/AUS,0,-(y0-PAD)/AUS);
+      actx.globalCompositeOperation = 'lighter'; actx.lineCap = 'butt'; actx.lineJoin = 'round';
+      for (const [a, b] of ranges){
+        // soft brush stamped along the spine: overlapping dabs sum smoothly, no stair-steps
+        for (let j = a; j <= b; j += 2){
+          const p = spine[j], r = p.w*.6 + 45;
+          actx.globalAlpha = .05*p.g; actx.drawImage(brush, p.x - r, p.y - r, r*2, r*2);
+        }
+        actx.globalAlpha = 1;
+        for (let i = 0; i < strands.length; i += Math.ceil(strands.length/16)){
+          const s = strands[i], g = spine[(a+b)>>1].g;
+          actx.strokeStyle = `rgba(${s.c},${.2*g})`; actx.lineWidth = 14; trace(actx, s, a, b); actx.stroke();
+        }
+      }
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(au, 0, -PAD*dpr, au.width*AUS*dpr, au.height*AUS*dpr);
+      }
+
+      // fibres: only painted here as a static fallback when WebGL2 is missing
+      ctx.setTransform(dpr,0,0,dpr,0,-y0*dpr); ctx.lineCap = 'butt'; ctx.lineJoin = 'round';
+      if (!GL) for (const [a, b] of ranges) for (const s of strands){
+        ctx.strokeStyle = `rgb(${s.c})`;
+        for (let k = a; k < b; k += 16){
+          const e = Math.min(k+16, b), m = spine[(k+e)>>1];
+          if (m.a < .05) continue;
+          ctx.globalAlpha = s.a*m.a*.16; ctx.lineWidth = s.w*5; trace(ctx, s, k, e); ctx.stroke();
+          ctx.globalAlpha = s.a*m.a;     ctx.lineWidth = s.w;   ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 1;
+      if (apex.y > y0 - 700 && apex.y < y0 + th + 700){
+        const r = Math.max(W, innerHeight)*.36, rg = ctx.createRadialGradient(apex.x, apex.y, 0, apex.x, apex.y, r);
+        rg.addColorStop(0,'rgba(190,220,255,.5)'); rg.addColorStop(.14,'rgba(90,168,255,.2)'); rg.addColorStop(1,'rgba(90,168,255,0)');
+        ctx.fillStyle = rg; ctx.fillRect(apex.x-r, apex.y-r, r*2, r*2);
+      }
+      layer.appendChild(cv);
+    }
+
+    // no WebGL here: keep the beam alive with light streaks animated by CSS along the painted fibres
+    // sparks: short streaks that run along real fibre paths (CSS offset-path, animated by the browser)
+    const heroEnd = spine.findIndex(p => p.y > hh*1.35), total = innerWidth < 700 ? 22 : 40;
+    for (let n = 0; n < total; n++){
+      const inHero = n < total*.7, pool = strands.filter(s => inHero || s.hot || Math.random() < .3);
+      const s = pool[Math.floor(Math.random()*pool.length)];
+      let k0, k1;
+      if (inHero){ k0 = 0; k1 = heroEnd > 0 ? heroEnd : spine.length-1; }
+      else { k0 = heroEnd + Math.floor(Math.random()*Math.max(1, spine.length - heroEnd - 140)); k1 = Math.min(spine.length-1, k0 + 140); }
+      let d = '';
+      for (let j = k0; j <= k1; j += 3){ const [x, y] = pt(s, spine[j]); d += (d ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); }
+      const m = spine[(k0+k1)>>1], dur = inHero ? 2.4 + Math.random()*2.6 : 4 + Math.random()*3;
+      const el = document.createElement('div'); el.className = 'spark';
+      el.style.cssText = `offset-path:path('${d}');animation-duration:${dur}s;animation-delay:${-Math.random()*dur}s;--c:rgb(${s.c})`;
+      el.innerHTML = `<i style="opacity:${inHero ? .95 : Math.min(.55, .2 + m.g*.3)}"></i>`;
+      layer.appendChild(el);
+    }
+  }
+
+  // floating bokeh, CSS only
+  const motes = document.createElement('div'); motes.id = 'motes';
+  motes.innerHTML = Array.from({length: innerWidth < 700 ? 16 : 30}, () => {
+    const r = 8 + Math.random()*22, dur = 30 + Math.random()*50;
+    return `<i style="left:${(Math.random()*100).toFixed(1)}%;width:${r}px;height:${r}px;opacity:${(.15+Math.random()*.4).toFixed(2)};animation-duration:${dur}s;animation-delay:${(-Math.random()*dur).toFixed(1)}s"></i>`;
+  }).join('');
+  document.body.prepend(motes);
+
+  /* ---------- accent card that grows from the TF icon while you scroll ---------- */
+  const grow = $('#grow'), gcard = $('#growCard'), gtext = $('#growText'), gbig = gcard.querySelector('.big');
+  function updateGrow(sy, vh, vw){
+    const top = grow.offsetTop, span = grow.offsetHeight - vh;
+    const p = Math.min(1, Math.max(0, (sy - top + vh*.35) / (span + vh*.35)));
+    const e = p < .5 ? 4*p*p*p : 1 - Math.pow(-2*p + 2, 3)/2;   // easeInOutCubic
+    const gutter = vw < 560 ? 16 : 28, W = Math.min(1180, vw) - gutter*2;
+    gcard.style.width = (84 + (W - 84)*e) + 'px';
+    gcard.style.height = (84 + (vh*.74 - 84)*e) + 'px';
+    gcard.style.borderRadius = (20 + 6*e) + 'px';
+    gtext.style.opacity = Math.max(0, (e - .55) / .45);
+    gtext.style.transform = `translateY(${(1-e)*20}px)`;
+    gbig.style.transform = `translateY(${e*72}px)`;   // icon starts centred, slides under the headline
+  }
+
+  let gq = false;
+  const onGrow = () => { if (gq) return; gq = true; requestAnimationFrame(() => { gq = false; updateGrow(scrollY, innerHeight, innerWidth); }); };
+  addEventListener('scroll', onGrow, {passive:true}); addEventListener('resize', onGrow); onGrow();
+
+  // a failed paint must never take the rest of the page down with it
+  const safePaint = () => { try { paint(); } catch (e) { built = ''; console.warn('trails:', e); } };
+  let rt; const repaint = () => { clearTimeout(rt); rt = setTimeout(safePaint, 150); };
+  safePaint(); addEventListener('resize', repaint);
+  // safety net: reveal anything already on screen even if the observer fired while the page had no size
+  const revealVisible = () => document.querySelectorAll('.rv:not(.in),#timing:not(.in)').forEach(el => {
+    const r = el.getBoundingClientRect(); if (r.width && r.top < innerHeight && r.bottom > 0) el.classList.add('in'); });
+  addEventListener('resize', revealVisible); setTimeout(revealVisible, 1200);
+  new ResizeObserver(repaint).observe(document.body);   // projects load later and change page height
+  document.fonts && document.fonts.ready.then(repaint);
+
+  /* ---------- flow connectors ---------- */
+  const fb = document.getElementById('flowBody'), svg = document.getElementById('flowSvg');
+  function drawFlow(){
+    const R = {width: fb.clientWidth, height: fb.clientHeight};
+    svg.setAttribute('viewBox', `0 0 ${R.width} ${R.height}`);
+    const box = n => { const e = fb.querySelector(`[data-n="${n}"]`); return {l: e.offsetLeft, r: e.offsetLeft + e.offsetWidth, cy: e.offsetTop + e.offsetHeight/2}; };
+    const a = box('a'), b = box('b'), c = box('c'), d = box('d');
+    const path = (p, q, on) => {
+      const mx = (p.r + q.l) / 2;
+      return `<path d="M${p.r},${p.cy} C${mx},${p.cy} ${mx},${q.cy} ${q.l},${q.cy}" fill="none" stroke="${on?'#5aa8ff':'rgba(255,255,255,.18)'}" stroke-width="1.3" ${on?'stroke-dasharray="4 5" class="flowdash"':''}/>`;
+    };
+    svg.innerHTML = path(a,b,true) + path(a,c,false) + path(b,d,true) +
+      `<style>.flowdash{animation:dash 1.2s linear infinite}@keyframes dash{to{stroke-dashoffset:-18}}</style>`;
+  }
+  drawFlow(); addEventListener('resize', drawFlow);
+  // cycle the active node
+  const order = ['a','b','d'], nodes = order.map(n => fb.querySelector(`[data-n="${n}"]`));
+  let ni = 0; nodes[0].classList.add('on');
+  if (!reduce) setInterval(() => { nodes[ni].classList.remove('on'); ni = (ni + 1) % nodes.length; nodes[ni].classList.add('on'); }, 1400);
+
+  /* ---------- wave ---------- */
+  const wave = document.getElementById('wave');
+  wave.innerHTML = '<path fill="none" stroke="#5aa8ff" stroke-width="1.6" style="filter:drop-shadow(0 0 5px rgba(90,168,255,.6))"/><path fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.2"/>';
+  const [w1, w2] = wave.querySelectorAll('path');
+  function drawWave(t){
+    const mk = (amp, ph, f) => { let d = ''; for (let x = 0; x <= 600; x += 10){ const y = 55 + Math.sin(x/600*Math.PI*2*f + ph + t/1400) * amp; d += (x ? 'L' : 'M') + x + ',' + y.toFixed(1); } return d; };
+    w1.setAttribute('d', mk(30,0,1.5)); w2.setAttribute('d', mk(24,2.2,1.5));
+    if (!reduce) requestAnimationFrame(drawWave);
+  }
+  requestAnimationFrame(drawWave);
+
+  /* ---------- week chart ---------- */
+  function drawWeek(counts){
+    const max = Math.max(4, ...counts), cells = 14;
+    const wk = document.getElementById('week');
+    let html = `<div class="yax"><span>${max}</span><span>${Math.round(max/2)}</span><span>0</span></div>`;
+    const top = counts.indexOf(Math.max(...counts));
+    counts.forEach((c, i) => {
+      const filled = Math.round(c / max * cells);
+      let col = '';
+      for (let k = cells - 1; k >= 0; k--) col += `<i class="${k < filled && i === top ? 'f' : ''}" style="${k < filled && i !== top ? 'background:rgba(255,255,255,.22)' : ''}"></i>`;
+      html += `<div class="col">${col}</div>`;
+    });
+    wk.innerHTML = html;
+  }
+  drawWeek([0,0,0,0,0,0,0]);
+
+  /* ---------- GitHub data ---------- */
+  const USER = 'TopDarkFlames';
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const ago = d => { const s = (Date.now() - new Date(d)) / 1000, dd = Math.floor(s/86400);
+    return dd < 1 ? 'hoje' : dd === 1 ? 'ontem' : dd < 30 ? `${dd} dias atrás` : dd < 365 ? `${Math.floor(dd/30)} meses atrás` : `${Math.floor(dd/365)} anos atrás`; };
+
+  fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`)
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(repos => {
+      const own = repos.filter(r => !r.fork && r.name.toLowerCase() !== USER.toLowerCase());
+      document.getElementById('statRepos').textContent = `${own.length} repositórios públicos`;
+      const pick = own.slice(0, 6);
+      document.getElementById('repos').innerHTML = pick.map((r, i) => `
+        <a class="glass repo rv in" href="${esc(r.html_url)}" target="_blank" rel="noopener">
+          <div class="rt"><span>${String(i+1).padStart(2,'0')} / repo</span><span>${esc(ago(r.pushed_at))}</span></div>
+          <h4>${esc(r.name)}</h4>
+          <p>${esc(r.description || 'Sem descrição ainda.')}</p>
+          <div class="rf"><span><span class="lang-dot"></span>${esc(r.language || 'misc')}</span><span>★ ${r.stargazers_count}</span>${r.homepage ? '<span style="color:var(--accent)">live ↗</span>' : ''}</div>
+        </a>`).join('') || '<p style="color:var(--muted)">Nenhum repositório público ainda.</p>';
+      // language ring
+      const langs = {}; own.forEach(r => { if (r.language) langs[r.language] = (langs[r.language] || 0) + 1; });
+      const tot = Object.values(langs).reduce((a,b) => a+b, 0);
+      const top = Object.entries(langs).sort((a,b) => b[1]-a[1]);
+      if (tot){
+        const pct = Math.round(top[0][1] / tot * 100);
+        document.getElementById('ringPct').textContent = pct + '%';
+        document.getElementById('ringArc').style.strokeDashoffset = 301.6 * (1 - pct/100);
+        document.getElementById('ringLbl').innerHTML = `dos repositórios em <b style="color:var(--accent);font-weight:500">${esc(top[0][0])}</b>`;
+      }
+    })
+    .catch(() => {
+      document.getElementById('repos').innerHTML = `
+        <a class="glass repo" href="https://github.com/${USER}" target="_blank" rel="noopener" style="grid-column:1/-1;min-height:0">
+          <div class="rt"><span>github</span><span>offline</span></div>
+          <h4>Ver todos os repositórios</h4><p>Não deu para carregar a lista agora. Abra o perfil no GitHub.</p></a>`;
+    });
+
+  fetch(`https://api.github.com/users/${USER}/events/public?per_page=100`)
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(ev => {
+      const counts = [0,0,0,0,0,0,0], cutoff = Date.now() - 7*86400e3;
+      ev.forEach(e => { const d = new Date(e.created_at); if (d >= cutoff) counts[d.getDay()]++; });
+      drawWeek(counts);
+      document.getElementById('actTotal').textContent = counts.reduce((a,b)=>a+b,0) + ' eventos · 7 dias';
+    }).catch(() => {});
+})();
+</script>
 </body>
 </html>
