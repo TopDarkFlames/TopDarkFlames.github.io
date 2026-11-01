@@ -37,6 +37,11 @@ The site is a single static `index.html` (vanilla HTML, CSS and JavaScript, no b
 - Repositories sorted by recent activity
 - Weekly activity chart and main-language ring from the GitHub API
 - Link to the GitHub profile if the API is unavailable
+- Entrance animation: a strand of light writes the name, then it flies into the nav (once per visit, skipped with reduced motion)
+- Portuguese / English toggle, remembered per visitor
+- Command palette (Ctrl/⌘ K or /) to jump to sections, projects and actions
+- Hidden terminal easter egg (type `flames` anywhere): `help`, `projetos`, `neofetch`, `ignite`…
+- Share preview (Open Graph / Twitter card) with `og-image.jpg`
 - GitHub Pages deploy with no build step
 
 ## Stack
@@ -66,6 +71,7 @@ When I update or publish a public repository, the portfolio can reflect the late
 ```text
 .
 |-- index.html   whole site: markup, styles, WebGL beam and GitHub data
+|-- og-image.jpg  share preview image (1200x630)
 `-- README.md
 ```
 
