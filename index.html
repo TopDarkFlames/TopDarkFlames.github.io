@@ -37,7 +37,7 @@
 :root{
   --bg:#06080b; --bg2:#0c0f10; --panel:rgba(22,26,27,.55); --panel-solid:#121617;
   --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.14);
-  --text:#eef2f7; --muted:#8a919d; --dim:#5b616c;
+  --text:#eef2f7; --muted:#c2cad5; --dim:#a8b0bd;
   --accent:#5aa8ff; --accent2:#2f7fe6; --accent-ink:#04101f;
   --sans:"Inter Tight",system-ui,sans-serif; --serif:"Instrument Serif",Georgia,serif; --mono:"JetBrains Mono",ui-monospace,monospace;
 }
@@ -66,9 +66,9 @@ section{position:relative;z-index:1}
 nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:0;transition:padding .35s}
 nav .wrap{border:1px solid transparent;border-radius:18px;transition:background .35s,border-color .35s,box-shadow .35s,max-width .35s}
 nav.scrolled{padding-top:12px}
-nav.scrolled .wrap{max-width:1120px;background:linear-gradient(160deg,rgba(40,52,72,.45),rgba(10,14,22,.6));backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
+nav.scrolled .wrap{max-width:1120px;background:linear-gradient(160deg,rgba(52,68,96,.55),rgba(12,17,27,.74));backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
   border-color:rgba(255,255,255,.09);box-shadow:0 16px 40px -16px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.1)}
-.links a{position:relative;padding:6px 2px}
+.links a{position:relative;display:inline-block;padding:6px 2px}
 .links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .links a:hover::after{transform:scaleX(1)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
@@ -87,7 +87,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .btn-ghost:hover{background:rgba(255,255,255,.08)}
 .btn-dark{background:var(--accent-ink);color:var(--accent)}
 .btn-dark:hover{transform:translateY(-1px)}
-.play{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:8px}
+.play{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:9px}
 
 /* hero */
 .hero{min-height:100vh;display:flex;align-items:center;padding:110px 0 70px}
@@ -101,14 +101,14 @@ h1 em{font-size:1.06em}
 .cta{display:flex;gap:12px;margin:30px 0 16px;flex-wrap:wrap}
 .fine{font-family:var(--mono);font-size:11px;color:var(--dim)}
 
-.glass{position:relative;isolation:isolate;border-radius:16px;border:1px solid rgba(255,255,255,.07);
-  background:linear-gradient(160deg,rgba(40,52,72,.42),rgba(12,16,24,.55) 55%,rgba(10,14,22,.62));
-  backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
-  box-shadow:0 30px 80px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.1),inset 0 -1px 0 rgba(255,255,255,.02)}
+.glass{position:relative;isolation:isolate;border-radius:16px;border:1px solid rgba(255,255,255,.1);
+  background:linear-gradient(160deg,rgba(50,66,96,.68),rgba(16,22,34,.8) 55%,rgba(12,17,27,.86));
+  backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -1px 0 rgba(255,255,255,.03)}
 /* light edge: brighter top-left, blue bottom-right, and a hot spot that follows the cursor */
 .glass::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;z-index:1;
   background:radial-gradient(260px circle at var(--mx,50%) var(--my,-30%),rgba(150,200,255,calc(.75*var(--spot,0))),transparent 60%),
-             linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.04) 28%,rgba(90,168,255,0) 60%,rgba(90,168,255,.3));
+             linear-gradient(140deg,rgba(255,255,255,.38),rgba(255,255,255,.07) 30%,rgba(90,168,255,.04) 60%,rgba(90,168,255,.42));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
 /* soft spotlight inside the panel */
 .glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:var(--spot,0);transition:opacity .35s;
@@ -118,7 +118,7 @@ h1 em{font-size:1.06em}
 }
 @media (max-width:700px){ .glass{backdrop-filter:blur(10px) saturate(140%);-webkit-backdrop-filter:blur(10px) saturate(140%)} }
 .flow{overflow:hidden}
-.flow-h{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted)}
+.flow-h{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted);background:rgba(8,11,17,.55);border-radius:16px 16px 0 0}
 .flow-h b{color:var(--text);font-weight:500}
 .run{color:var(--accent);display:flex;align-items:center;gap:6px}
 .flow-body{position:relative;height:300px}
@@ -130,7 +130,7 @@ h1 em{font-size:1.06em}
 .node.dragging{cursor:grabbing;border-color:rgba(90,168,255,.7);box-shadow:0 0 0 1px rgba(90,168,255,.35),0 18px 40px -12px rgba(0,0,0,.9),0 0 28px -6px rgba(90,168,255,.6);z-index:2}
 .node small{display:block;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:2px}
 .node.on{border-color:rgba(90,168,255,.55);box-shadow:0 0 24px -6px rgba(90,168,255,.6)}
-.pill{position:absolute;font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:5px;border:1px solid var(--line2);color:var(--muted);background:var(--bg2)}
+.pill{position:absolute;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:5px;border:1px solid var(--line2);color:var(--muted);background:var(--bg2)}
 .pill.ok{color:var(--accent);border-color:rgba(90,168,255,.35)}
 .runs{border-top:1px solid var(--line);padding:12px 18px 16px;font-family:var(--mono);font-size:11px}
 .runs .lbl{color:var(--dim);margin-bottom:8px}
@@ -154,13 +154,13 @@ h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
 .timing{padding:18px 22px}
 .timing .top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:16px}
 .trow{display:grid;grid-template-columns:150px 1fr 56px;gap:14px;align-items:center;font-family:var(--mono);font-size:11px;padding:9px 0;color:var(--muted)}
-.trow .chk{color:var(--accent);margin-right:6px}
+.trow .chk{color:#9ccbff;margin-right:6px}
 .track{height:8px;position:relative}
 .bar{position:absolute;top:0;height:8px;border-radius:3px;background:var(--accent);box-shadow:0 0 14px rgba(90,168,255,.45);transform-origin:left;transform:scaleX(0);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
 .bar.wait{background:repeating-linear-gradient(90deg,rgba(90,168,255,.25) 0 4px,transparent 4px 7px);box-shadow:none}
 .in .bar{transform:scaleX(1)}
 .trow .t{text-align:right;color:var(--dim)}
-.axis{display:flex;justify-content:space-between;margin:10px 0 0 164px;padding-right:70px;font-family:var(--mono);font-size:9px;color:var(--dim)}
+.axis{display:flex;justify-content:space-between;margin:10px 0 0 164px;padding-right:70px;font-family:var(--mono);font-size:10px;color:var(--dim)}
 
 .chat{padding:0;overflow:hidden}
 .chat .ch{padding:12px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;justify-content:space-between}
@@ -177,8 +177,8 @@ h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
 .repos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .repo{padding:22px;display:flex;flex-direction:column;gap:12px;min-height:210px;transition:transform .25s,border-color .25s}
 .repo:hover{transform:translateY(-3px);border-color:rgba(90,168,255,.4)}
-.repo .rt{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim)}
-.repo h4{font-size:18px;font-weight:500;letter-spacing:-.02em;word-break:break-word}
+.repo .rt{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.repo h3{font-size:18px;font-weight:500;letter-spacing:-.02em;word-break:break-word}
 .repo p{color:var(--muted);font-size:13px;flex:1}
 .repo .rf{display:flex;gap:14px;font-family:var(--mono);font-size:10px;color:var(--muted);align-items:center}
 .lang-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:5px}
@@ -198,14 +198,14 @@ h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
 /* dashboard */
 .dash{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
 .card{padding:20px 22px}
-.card .cl{font-family:var(--mono);font-size:10px;color:var(--dim);display:flex;justify-content:space-between;margin-bottom:16px}
+.card .cl{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:16px}
 .c8{grid-column:span 8}.c4{grid-column:span 4}.c5{grid-column:span 5}.c7{grid-column:span 7}
 .week{display:grid;grid-template-columns:24px repeat(7,1fr);gap:8px;height:170px;align-items:end}
-.week .yax{display:flex;flex-direction:column;justify-content:space-between;height:100%;font-family:var(--mono);font-size:9px;color:var(--dim)}
+.week .yax{display:flex;flex-direction:column;justify-content:space-between;height:100%;font-family:var(--mono);font-size:10px;color:var(--dim)}
 .col{height:100%;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;position:relative}
 .col i{display:block;height:9px;border-radius:2px;background:rgba(255,255,255,.07)}
 .col i.f{background:var(--accent);box-shadow:0 0 10px rgba(90,168,255,.4)}
-.days{display:grid;grid-template-columns:24px repeat(7,1fr);gap:8px;margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--dim);text-align:center}
+.days{display:grid;grid-template-columns:24px repeat(7,1fr);gap:8px;margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--dim);text-align:center}
 .ringwrap{display:flex;flex-direction:column;align-items:center;gap:10px}
 .ringwrap svg{width:150px;height:150px}
 .ringwrap p{font-size:12px;color:var(--muted);text-align:center}
@@ -223,7 +223,7 @@ h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
 .jr b{font-weight:500;font-size:15px}
 .jr p{font-size:12px;color:var(--muted);margin-top:3px}
 .badge{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:99px;border:1px solid var(--line2);color:var(--muted);white-space:nowrap}
-.badge.live{color:var(--accent);border-color:rgba(90,168,255,.4)}
+.badge.live{color:#9ccbff;border-color:rgba(90,168,255,.4)}
 .wave{width:100%;height:110px}
 
 /* cta + footer */
@@ -247,8 +247,9 @@ h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
 .stats span::before{content:"● ";color:var(--accent)}
 footer{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px;padding:40px 0;font-size:13px}
 footer .fl{color:var(--muted);max-width:240px;margin-top:12px}
-footer h5{font-family:var(--mono);font-size:10px;font-weight:400;color:var(--dim);margin-bottom:12px}
+footer .ft{font-family:var(--mono);font-size:10px;font-weight:400;color:var(--dim);margin-bottom:12px}
 footer ul{list-style:none;display:flex;flex-direction:column;gap:8px;color:var(--muted)}
+footer ul a{display:inline-block;padding:4px 0}
 footer ul a:hover{color:var(--text)}
 .legal{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);padding:20px 0 0;border-top:1px solid var(--line)}
 
@@ -331,13 +332,20 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
   100%{opacity:1;color:#d6e9ff;text-shadow:0 0 26px rgba(90,168,255,.55)}}
 @keyframes introFail{to{opacity:0;visibility:hidden}}
 
+.skip{position:fixed;left:16px;top:-60px;z-index:120;padding:10px 14px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:500;transition:top .2s}
+.skip:focus{top:12px}
+/* legibility over the beam: a dark halo around free-standing text */
+.hero h1,.hero .lede,.hero .fine,.hero .tag,.head-row h2,.head-row p,.feat h3,.feat p,.feat .num,.kicker,
+.links a,.logo,.stats,footer,.legal{text-shadow:0 0 2px rgba(6,8,11,.9),0 0 14px rgba(6,8,11,.85),0 0 28px rgba(6,8,11,.6)}
+.btn-ghost{background:rgba(12,17,27,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.tag,.kicker{background:rgba(8,11,17,.7)}
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 
 @media (min-width:901px){
   .hero .wrap{perspective:1500px}
-  .hero .flow{background:linear-gradient(180deg,rgba(22,28,38,.5),rgba(9,12,18,.62));backdrop-filter:blur(16px) saturate(125%);-webkit-backdrop-filter:blur(16px) saturate(125%);
+  .hero .flow{background:linear-gradient(160deg,rgba(50,66,96,.68),rgba(16,22,34,.8) 55%,rgba(12,17,27,.86));backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
     transform-origin:0% 50%;width:calc(100% + 40px)}
   .hero .flow.rv{transform:rotateY(calc(-14deg + var(--px,0)*5deg)) rotateX(calc(3deg - var(--py,0)*4deg)) translate3d(0,24px,0)}
   .hero .flow.rv.in{transform:rotateY(calc(-14deg + var(--px,0)*5deg)) rotateX(calc(3deg - var(--py,0)*4deg)) translate3d(0,0,0);transition:opacity .9s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
@@ -372,7 +380,8 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
   </div>
   <div class="intro-hint" id="introHint">clique ou aperte qualquer tecla para pular</div>
 </div>
-<div id="vg"></div>
+<div id="vg" aria-hidden="true"></div>
+<a class="skip" href="#main" data-en="Skip to content">Pular para o conteúdo</a>
 
 <nav id="nav">
   <div class="wrap">
@@ -391,6 +400,7 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
   </div>
 </nav>
 
+<main id="main">
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="wrap">
@@ -558,7 +568,7 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
   <div class="wrap">
     <div class="endgrid rv">
       <div class="glass idcard">
-        <span class="chev">&gt;&gt;</span>
+        <span class="chev" aria-hidden="true">&gt;&gt;</span>
         <div class="logo"><span class="mark">TF</span>TopDarkFlames</div>
         <p data-en="Full-stack developer building the part that runs between the idea and the deploy.">Full-stack developer construindo a parte que roda entre a ideia e o deploy.</p>
         <div class="foot"><span>stay in touch</span>
@@ -584,13 +594,14 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
 
     <footer>
       <div><div class="logo"><span class="mark">TF</span>TopDarkFlames</div><p class="fl" data-en="Full-stack developer in training, building in public from Brazil.">Dev full-stack em formação, construindo em público desde o Brasil.</p></div>
-      <div><h5>site</h5><ul><li><a href="#projetos" data-en="Projects">Projetos</a></li><li><a href="#stack">Stack</a></li><li><a href="#jornada" data-en="Journey">Jornada</a></li></ul></div>
-      <div><h5 data-en="code">código</h5><ul><li><a href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/TopDarkFlames?tab=repositories" target="_blank" rel="noopener" data-en="Repositories">Repositórios</a></li></ul></div>
-      <div><h5 data-en="contact">contato</h5><ul><li><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+      <div><p class="ft">site</p><ul><li><a href="#projetos" data-en="Projects">Projetos</a></li><li><a href="#stack">Stack</a></li><li><a href="#jornada" data-en="Journey">Jornada</a></li></ul></div>
+      <div><p class="ft" data-en="code">código</p><ul><li><a href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/TopDarkFlames?tab=repositories" target="_blank" rel="noopener" data-en="Repositories">Repositórios</a></li></ul></div>
+      <div><p class="ft" data-en="contact">contato</p><ul><li><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
     </footer>
     <div class="legal"><span>© <span id="yr">2026</span> TopDarkFlames</span><span>built in brazil · light without the noise</span></div>
   </div>
 </section>
+</main>
 
 <div class="ovl" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Paleta de comandos">
   <div class="cmdk-box glass">
@@ -722,7 +733,7 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
   const $ = s => document.querySelector(s);
   const docY = el => el.getBoundingClientRect().top + scrollY;
   const BLUE = ['80,160,255','110,185,255','175,215,255','60,125,245'], ALT = ['120,230,255','150,140,255'];
-  const layer = document.createElement('div'); layer.id = 'trails'; document.body.prepend(layer);
+  const layer = document.createElement('div'); layer.id = 'trails'; layer.setAttribute('aria-hidden', 'true'); document.body.prepend(layer);
   let spine = [], apex = {x:0, y:0}, strands = [], hh = 0, built = '';
 
   function buildSpine(){
@@ -792,7 +803,7 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
      tuned against the reference video: light pulses run 120-210 px/s from the top arm, through the apex, out the
      bottom arm; fibres are pinned at the apex and sway a few px at the ends (~2.2 s); brightness breathes ~3%;
      depth of field = each fibre is a ribbon whose blur width grows where the bundle fans out toward the lens */
-  const glc = document.createElement('canvas'); glc.id = 'fibres';
+  const glc = document.createElement('canvas'); glc.id = 'fibres'; glc.setAttribute('aria-hidden', 'true');
   const GL = glc.getContext('webgl2', {antialias: true, premultipliedAlpha: true});
   let glN = 0, spineY = new Float32Array(0), nGlow = 0, nFib = 0, nDust = 0;
   let rProg, pProg, rU = {}, pU = {}, vaoG, vaoF, vaoD, bufR, bufS, bufG, bufF, bufD;
@@ -913,18 +924,18 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
     path = [
       [1.30, hh*-.02, 300, .7, .5], [.82, hh*.20, 210, .95, .6], [.50, hh*.50, 80, 1, .8], [.36, hh*.72, 6, 1, 1],
       [.54, hh*.92, 90, 1, .8], [.95, hh*1.04, 200, .8, .6],
-      [1.08, L(s2, pj, .14), 190, .5, .6], [.72, L(s2, pj, .32), 120, .5, .7], [.48, L(s2, pj, .46), 45, .6, .85],
-      [.20, L(s2, pj, .64), 120, .45, .7], [-.06, L(s2, pj, .86), 190, .4, .6],
+      [1.08, L(s2, pj, .12), 190, .5, .6], [.80, L(s2, pj, .40), 120, .5, .7], [.55, L(s2, pj, .60), 45, .6, .85],
+      [.24, L(s2, pj, .72), 120, .45, .7], [-.06, L(s2, pj, .88), 190, .4, .6],
       [.24, L(pj, gy, .38), 140, .42, .7], [.60, L(pj, gy, .58), 50, .6, .85], [1.06, L(pj, gy, .82), 190, .4, .6],
       [.88, L(gy, gy + gh, .32), 150, .5, .7], [.52, L(gy, gy + gh, .5), 55, .6, .85], [.10, L(gy, gy + gh, .68), 150, .5, .7],
       [-.08, L(st, ct, .14), 190, .4, .6], [.40, L(st, ct, .40), 120, .42, .7], [.74, L(st, ct, .62), 50, .6, .85], [1.06, L(st, ct, .84), 190, .4, .6],
-      [.80, ct + 40, 170, .6, .7], [.46, L(ct, end, .45), 70, .78, .85], [.28, L(ct, end, .62), 8, .85, 1],
-      [.46, L(ct, end, .78), 70, .78, .85], [1.30, end + 120, 260, .42, .6]
+      [.80, ct + 10, 170, .6, .7], [.46, L(ct, end, .20), 70, .75, .8], [.28, L(ct, end, .32), 8, .85, .95],
+      [.50, L(ct, end, .41), 70, .75, .8], [1.30, L(ct, end, .45), 220, .42, .6]
     ];
   }
   const SEG = 48;
   let SR = new Float32Array(0), SS = new Float32Array(0), PX = new Float32Array(0), PY = new Float32Array(0);
-  const bloom = document.createElement('div'); bloom.id = 'bloom';
+  const bloom = document.createElement('div'); bloom.id = 'bloom'; bloom.setAttribute('aria-hidden', 'true');
   function frameSpine(sy){
     const vw = innerWidth, vh = innerHeight, NP = (path.length - 1)*SEG + 1;
     if (PX.length !== NP){ SR = new Float32Array(NP*18); SS = new Float32Array(NP*7); PX = new Float32Array(NP); PY = new Float32Array(NP); }
@@ -1091,7 +1102,7 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
   }
 
   // floating bokeh, CSS only
-  const motes = document.createElement('div'); motes.id = 'motes';
+  const motes = document.createElement('div'); motes.id = 'motes'; motes.setAttribute('aria-hidden', 'true');
   motes.innerHTML = Array.from({length: innerWidth < 700 ? 16 : 30}, () => {
     const r = 8 + Math.random()*22, dur = 30 + Math.random()*50;
     return `<i style="left:${(Math.random()*100).toFixed(1)}%;width:${r}px;height:${r}px;opacity:${(.15+Math.random()*.4).toFixed(2)};animation-duration:${dur}s;animation-delay:${(-Math.random()*dur).toFixed(1)}s"></i>`;
@@ -1189,7 +1200,7 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
     const box = document.getElementById('repos');
     if (repoFailed){
       box.innerHTML = `<a class="glass repo" href="https://github.com/${USER}" target="_blank" rel="noopener" style="grid-column:1/-1;min-height:0">
-          <div class="rt"><span>github</span><span>offline</span></div><h4>${esc(t('allRepos'))}</h4><p>${esc(t('offline'))}</p></a>`;
+          <div class="rt"><span>github</span><span>offline</span></div><h3>${esc(t('allRepos'))}</h3><p>${esc(t('offline'))}</p></a>`;
       return;
     }
     if (!repoData) return;
@@ -1197,7 +1208,7 @@ html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important
     box.innerHTML = repoData.slice(0, 6).map((r, i) => `
         <a class="glass repo rv in" href="${esc(r.html_url)}" target="_blank" rel="noopener">
           <div class="rt"><span>${String(i+1).padStart(2,'0')} / repo</span><span>${esc(ago(r.pushed_at))}</span></div>
-          <h4>${esc(r.name)}</h4>
+          <h3>${esc(r.name)}</h3>
           <p>${esc(r.description || t('noDesc'))}</p>
           <div class="rf"><span><span class="lang-dot"></span>${esc(r.language || 'misc')}</span><span>★ ${r.stargazers_count}</span>${r.homepage ? '<span style="color:var(--accent)">live ↗</span>' : ''}</div>
         </a>`).join('') || `<p style="color:var(--muted)">${esc(t('noRepos'))}</p>`;
