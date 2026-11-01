@@ -5,6 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TopDarkFlames | Full-Stack Developer</title>
 <meta name="description" content="Portfólio de TopDarkFlames, dev full-stack em formação. Java, SQL, Rust e web.">
+<meta name="theme-color" content="#06080b">
+<link rel="canonical" href="https://topdarkflames.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%235aa8ff'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='26' font-weight='600' text-anchor='middle' fill='%2304101f'%3ETF%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TopDarkFlames">
+<meta property="og:url" content="https://topdarkflames.github.io/">
+<meta property="og:title" content="TopDarkFlames | Full-Stack Developer">
+<meta property="og:description" content="Dev full-stack em formação: Java, SQL, Rust e web, construindo em público.">
+<meta property="og:image" content="https://topdarkflames.github.io/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="TopDarkFlames: feixe de fibra óptica azul sobre fundo escuro">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TopDarkFlames | Full-Stack Developer">
+<meta name="twitter:description" content="Dev full-stack em formação: Java, SQL, Rust e web, construindo em público.">
+<meta name="twitter:image" content="https://topdarkflames.github.io/og-image.jpg">
+<script>
+  // the entrance plays once per visit and never with reduced motion; if anything fails, the page shows itself anyway
+  (function(){ var h = document.documentElement;
+    try { if (sessionStorage.getItem('tdf-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) h.classList.add('no-intro'); } catch (e) {}
+    setTimeout(function(){ h.classList.remove('intro-on'); }, 6000);
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -38,8 +63,14 @@ body{position:relative}
 section{position:relative;z-index:1}
 
 /* nav */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
-nav.scrolled{background:rgba(6,8,11,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:0;transition:padding .35s}
+nav .wrap{border:1px solid transparent;border-radius:18px;transition:background .35s,border-color .35s,box-shadow .35s,max-width .35s}
+nav.scrolled{padding-top:12px}
+nav.scrolled .wrap{max-width:1120px;background:linear-gradient(160deg,rgba(40,52,72,.45),rgba(10,14,22,.6));backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
+  border-color:rgba(255,255,255,.09);box-shadow:0 16px 40px -16px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.1)}
+.links a{position:relative;padding:6px 2px}
+.links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.links a:hover::after{transform:scaleX(1)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
 .mark{width:26px;height:26px;border-radius:7px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:-.04em}
@@ -70,7 +101,22 @@ h1 em{font-size:1.06em}
 .cta{display:flex;gap:12px;margin:30px 0 16px;flex-wrap:wrap}
 .fine{font-family:var(--mono);font-size:11px;color:var(--dim)}
 
-.glass{background:linear-gradient(180deg,rgba(22,28,38,.84),rgba(9,12,18,.9));border:1px solid var(--line2);border-radius:16px;box-shadow:0 30px 80px -30px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.06)}
+.glass{position:relative;isolation:isolate;border-radius:16px;border:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(160deg,rgba(40,52,72,.42),rgba(12,16,24,.55) 55%,rgba(10,14,22,.62));
+  backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.1),inset 0 -1px 0 rgba(255,255,255,.02)}
+/* light edge: brighter top-left, blue bottom-right, and a hot spot that follows the cursor */
+.glass::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;z-index:1;
+  background:radial-gradient(260px circle at var(--mx,50%) var(--my,-30%),rgba(150,200,255,calc(.75*var(--spot,0))),transparent 60%),
+             linear-gradient(140deg,rgba(255,255,255,.26),rgba(255,255,255,.04) 28%,rgba(90,168,255,0) 60%,rgba(90,168,255,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+/* soft spotlight inside the panel */
+.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:-1;opacity:var(--spot,0);transition:opacity .35s;
+  background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgba(110,175,255,.14),transparent 45%)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .glass{background:linear-gradient(180deg,rgba(22,28,38,.88),rgba(9,12,18,.93))}
+}
+@media (max-width:700px){ .glass{backdrop-filter:blur(10px) saturate(140%);-webkit-backdrop-filter:blur(10px) saturate(140%)} }
 .flow{overflow:hidden}
 .flow-h{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:11px;color:var(--muted)}
 .flow-h b{color:var(--text);font-weight:500}
@@ -79,7 +125,9 @@ h1 em{font-size:1.06em}
 .flow-body svg{position:absolute;inset:0;width:100%;height:100%}
 .tools{position:absolute;left:14px;top:16px;display:flex;flex-direction:column;gap:6px}
 .tools span{width:26px;height:26px;border:1px solid var(--line2);border-radius:7px;display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--muted);background:rgba(0,0,0,.3)}
-.node{position:absolute;padding:9px 13px;border-radius:9px;border:1px solid var(--line2);background:rgba(14,17,18,.92);font-size:12px;min-width:120px}
+.node{position:absolute;padding:9px 13px;border-radius:9px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(160deg,rgba(40,52,72,.7),rgba(12,16,24,.82));box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 10px 24px -12px rgba(0,0,0,.8);font-size:12px;min-width:120px;cursor:grab;touch-action:none;user-select:none;transition:box-shadow .25s,border-color .25s}
+.node:hover{border-color:rgba(90,168,255,.45)}
+.node.dragging{cursor:grabbing;border-color:rgba(90,168,255,.7);box-shadow:0 0 0 1px rgba(90,168,255,.35),0 18px 40px -12px rgba(0,0,0,.9),0 0 28px -6px rgba(90,168,255,.6);z-index:2}
 .node small{display:block;font-family:var(--mono);font-size:10px;color:var(--dim);margin-top:2px}
 .node.on{border-color:rgba(90,168,255,.55);box-shadow:0 0 24px -6px rgba(90,168,255,.6)}
 .pill{position:absolute;font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:5px;border:1px solid var(--line2);color:var(--muted);background:var(--bg2)}
@@ -163,7 +211,8 @@ h3{font-size:22px;font-weight:500;letter-spacing:-.02em}
 .ringwrap p{font-size:12px;color:var(--muted);text-align:center}
 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:var(--mono);font-size:11px;padding:7px 11px;border-radius:8px;border:1px solid var(--line2);background:rgba(0,0,0,.25);color:var(--muted)}
+.chip{font-family:var(--mono);font-size:11px;padding:7px 11px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.015));color:var(--muted);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:transform .2s,border-color .2s,color .2s}
+.chip:hover{transform:translateY(-2px);border-color:rgba(90,168,255,.5);color:var(--text)}
 .chip b{color:var(--text);font-weight:500;margin-right:6px}
 .chip.hot{border-color:rgba(90,168,255,.45);color:var(--accent)}
 .chip.hot b{color:var(--accent)}
@@ -203,6 +252,85 @@ footer ul{list-style:none;display:flex;flex-direction:column;gap:8px;color:var(-
 footer ul a:hover{color:var(--text)}
 .legal{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--dim);padding:20px 0 0;border-top:1px solid var(--line)}
 
+/* ---------- nav tools: language + command palette ---------- */
+.nav-tools{display:flex;gap:6px;align-items:center}
+.lang{display:inline-flex;padding:3px;border-radius:99px;border:1px solid var(--line2);background:rgba(255,255,255,.03);font-family:var(--mono);font-size:11px;cursor:pointer;color:var(--muted);transition:border-color .2s}
+.lang:hover{border-color:rgba(90,168,255,.5)}
+.lang span{padding:4px 8px;border-radius:99px;transition:background .25s,color .25s}
+.lang span.on{background:var(--accent);color:var(--accent-ink)}
+.kbtn{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line2);border-radius:99px;padding:6px 11px;background:rgba(255,255,255,.03);cursor:pointer;transition:color .2s,border-color .2s}
+.kbtn:hover{color:var(--text);border-color:rgba(90,168,255,.5)}
+.status{cursor:default;user-select:none}
+@media (max-width:900px){ .kbtn{display:none} }
+@media (max-width:560px){ .nav-r .btn-accent{display:none} }
+
+/* ---------- overlays (palette + terminal) ---------- */
+.ovl{position:fixed;inset:0;z-index:90;display:grid;place-items:start center;padding:12vh 16px 16px;background:rgba(4,6,10,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .2s}
+.ovl.open{opacity:1}
+.ovl[hidden]{display:none}
+.cmdk-box,.term-win{transform:translateY(-10px) scale(.98);transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+.ovl.open .cmdk-box,.ovl.open .term-win{transform:none}
+.cmdk-box{width:min(640px,100%);overflow:hidden}
+.cmdk-in{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);color:var(--dim)}
+.cmdk-in input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--text);font:inherit;font-size:16px}
+.cmdk-in input::placeholder{color:var(--dim)}
+kbd{font-family:var(--mono);font-size:10px;color:var(--dim);border:1px solid var(--line2);border-radius:5px;padding:2px 6px}
+#cmdkList{list-style:none;max-height:min(52vh,420px);overflow:auto;padding:6px;overscroll-behavior:contain}
+.cmdk-g{font-family:var(--mono);font-size:10px;color:var(--dim);padding:10px 10px 4px}
+.cmdk-i{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:10px;cursor:pointer;font-size:14px;color:var(--muted);transition:background .15s,color .15s}
+.cmdk-i .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;border:1px solid var(--line2);font-family:var(--mono);font-size:10px;color:var(--accent);flex:none;background:rgba(255,255,255,.03)}
+.cmdk-i small{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:45%}
+.cmdk-i.on{background:rgba(90,168,255,.13);color:var(--text)}
+.cmdk-i.on .ic{border-color:rgba(90,168,255,.5)}
+.cmdk-empty{padding:22px 14px;color:var(--dim);font-size:13px}
+.cmdk-foot{display:flex;gap:16px;padding:10px 16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:10px;color:var(--dim)}
+.term-win{width:min(780px,100%);height:min(480px,72vh);display:flex;flex-direction:column;overflow:hidden;font-family:var(--mono);font-size:13px}
+.term-bar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);color:var(--dim);font-size:11px}
+.term-bar .dots{display:flex;gap:6px}
+.term-bar .dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.14)}
+.term-bar .dots i:first-child{background:#ff5f57}.term-bar .dots i:nth-child(2){background:#febc2e}.term-bar .dots i:nth-child(3){background:#28c840}
+.term-x{margin-left:auto;background:none;border:0;color:var(--dim);font-size:18px;line-height:1;cursor:pointer;padding:0 4px}
+.term-x:hover{color:var(--text)}
+.term-body{flex:1;overflow:auto;padding:14px 16px 6px;line-height:1.65;color:#c9d6e8;white-space:pre-wrap;word-break:break-word;overscroll-behavior:contain}
+.term-body .c{color:var(--accent)} .term-body .d{color:var(--dim)} .term-body .w{color:var(--text)}
+.term-body a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.term-line{display:flex;gap:10px;padding:8px 16px 14px}
+.ps1{color:var(--accent);white-space:nowrap}
+.term-line input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--text);font:inherit;caret-color:var(--accent)}
+.toast{position:fixed;left:50%;bottom:28px;z-index:95;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:10px 16px;border-radius:99px;font-size:13px;transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- entrance: a strand of light writes the name, "Flames" ignites, the name flies into the nav ---------- */
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;animation:introFail .5s ease 5s forwards}
+html.no-intro #intro{display:none}
+html.intro-on .hero .rv{opacity:0!important;transform:translateY(28px)!important}
+.intro-bg{position:absolute;inset:0;background:var(--bg);transition:opacity .75s ease}
+.intro-stage{position:relative;display:flex;flex-direction:column;align-items:center;gap:26px;padding:0 16px}
+.intro-wrap{position:relative}
+.intro-name{font-size:clamp(44px,11vw,172px);font-weight:500;letter-spacing:-.05em;line-height:1;white-space:nowrap;padding:.08em .04em .12em;
+  clip-path:inset(-10% 100% -10% 0);transform-origin:0 0;will-change:transform}
+.intro-name em{font-size:1.06em;letter-spacing:-.01em}
+.intro-line{position:absolute;left:0;right:0;top:54%;height:2px;transform:scaleX(0);transform-origin:left;
+  background:linear-gradient(90deg,rgba(90,168,255,0),rgba(90,168,255,.75) 75%,#e8f3ff);box-shadow:0 0 16px rgba(90,168,255,.85)}
+.intro-head{position:absolute;left:-7px;top:calc(54% - 6px);width:14px;height:14px;border-radius:50%;background:#f2f8ff;
+  box-shadow:0 0 14px 4px rgba(150,200,255,.95),0 0 60px 18px rgba(90,168,255,.5)}
+.intro-sub{font-family:var(--mono);font-size:12px;color:var(--muted);opacity:0;transform:translateY(12px);text-align:center}
+.intro-hint{position:absolute;left:0;right:0;bottom:28px;text-align:center;font-family:var(--mono);font-size:10px;color:var(--dim);opacity:0;transition:opacity .6s 1s}
+#intro.s1 .intro-hint{opacity:1}
+#intro.s1 .intro-name{clip-path:inset(-10% -4% -10% 0);transition:clip-path 1.05s cubic-bezier(.75,0,.25,1)}
+#intro.s1 .intro-line{transform:scaleX(1);transition:transform 1.05s cubic-bezier(.75,0,.25,1)}
+#intro.s1 .intro-head{transform:translateX(var(--w,0));transition:transform 1.05s cubic-bezier(.75,0,.25,1)}
+#intro.s2 .intro-line,#intro.s2 .intro-head{opacity:0;transition:opacity .5s}
+#intro.s2 .intro-name em{animation:ignite .95s ease-out forwards}
+#intro.s2 .intro-sub{opacity:1;transform:none;transition:opacity .6s .2s,transform .6s .2s}
+#intro.s3{pointer-events:none}
+#intro.s3 .intro-bg{opacity:0}
+#intro.s3 .intro-sub,#intro.s3 .intro-hint{opacity:0;transition:opacity .25s}
+#intro.s3 .intro-name{opacity:0;transition:transform .85s cubic-bezier(.7,0,.2,1),opacity .3s ease .6s}
+@keyframes ignite{0%{opacity:.25}12%{opacity:1}22%{opacity:.45}34%{opacity:1;text-shadow:0 0 18px rgba(90,168,255,.9)}48%{opacity:.75}
+  100%{opacity:1;color:#d6e9ff;text-shadow:0 0 26px rgba(90,168,255,.55)}}
+@keyframes introFail{to{opacity:0;visibility:hidden}}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -211,8 +339,8 @@ footer ul a:hover{color:var(--text)}
   .hero .wrap{perspective:1500px}
   .hero .flow{background:linear-gradient(180deg,rgba(22,28,38,.5),rgba(9,12,18,.62));backdrop-filter:blur(16px) saturate(125%);-webkit-backdrop-filter:blur(16px) saturate(125%);
     transform-origin:0% 50%;width:calc(100% + 40px)}
-  .hero .flow.rv{transform:rotateY(-14deg) rotateX(3deg) translate3d(0,24px,0)}
-  .hero .flow.rv.in{transform:rotateY(-14deg) rotateX(3deg) translate3d(0,0,0)}
+  .hero .flow.rv{transform:rotateY(calc(-14deg + var(--px,0)*5deg)) rotateX(calc(3deg - var(--py,0)*4deg)) translate3d(0,24px,0)}
+  .hero .flow.rv.in{transform:rotateY(calc(-14deg + var(--px,0)*5deg)) rotateX(calc(3deg - var(--py,0)*4deg)) translate3d(0,0,0);transition:opacity .9s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
   .hero{overflow:hidden}
 }
 @media (max-width:900px){
@@ -232,20 +360,32 @@ footer ul a:hover{color:var(--text)}
   .axis{margin-left:124px;padding-right:50px}
   .node{min-width:0;font-size:11px;padding:7px 9px}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#intro{display:none}*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 </style>
 </head>
 <body>
+<div id="intro" aria-hidden="true">
+  <div class="intro-bg"></div>
+  <div class="intro-stage">
+    <div class="intro-wrap"><div class="intro-name">TopDark<em>Flames</em></div><div class="intro-line"></div><div class="intro-head"></div></div>
+    <div class="intro-sub">full-stack dev · java · sql · rust · building in public</div>
+  </div>
+  <div class="intro-hint" id="introHint">clique ou aperte qualquer tecla para pular</div>
+</div>
 <div id="vg"></div>
 
 <nav id="nav">
   <div class="wrap">
     <a href="#top" class="logo"><span class="mark">TF</span>TopDarkFlames</a>
     <div class="links">
-      <a href="#projetos">Projetos</a><a href="#stack">Stack</a><a href="#jornada">Jornada</a><a href="#contato">Contato</a>
+      <a href="#projetos" data-en="Projects">Projetos</a><a href="#stack">Stack</a><a href="#jornada" data-en="Journey">Jornada</a><a href="#contato" data-en="Contact">Contato</a>
     </div>
     <div class="nav-r">
-      <span class="status"><span class="dot"></span>all systems building</span>
+      <span class="status" id="statusPill"><span class="dot"></span>all systems building</span>
+      <div class="nav-tools">
+        <button class="kbtn" id="kbtn" type="button" aria-label="Paleta de comandos">Ctrl K</button>
+        <button class="lang" id="langBtn" type="button" aria-label="Mudar idioma / Change language"><span data-l="pt">PT</span><span data-l="en">EN</span></button>
+      </div>
       <a class="btn btn-accent" href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
@@ -256,11 +396,11 @@ footer ul a:hover{color:var(--text)}
   <div class="wrap">
     <div class="rv">
       <span class="tag"><i></i>full-stack dev / brazil / open source</span>
-      <h1>Do commit<br>ao <em>deploy.</em></h1>
-      <p class="lede">Sou o TopDarkFlames, dev full-stack em formação. Construo projetos web e ferramentas próprias, estudo Java, SQL e Rust, e gosto de interfaces que não sacrificam clareza.</p>
+      <h1 data-en="From commit&lt;br&gt;to &lt;em&gt;deploy.&lt;/em&gt;">Do commit<br>ao <em>deploy.</em></h1>
+      <p class="lede" data-en="I&#x27;m TopDarkFlames, a full-stack developer in training. I build web projects and my own tools, study Java, SQL and Rust, and like interfaces that don&#x27;t sacrifice clarity.">Sou o TopDarkFlames, dev full-stack em formação. Construo projetos web e ferramentas próprias, estudo Java, SQL e Rust, e gosto de interfaces que não sacrificam clareza.</p>
       <div class="cta">
-        <a class="btn btn-accent" href="#projetos">Ver projetos</a>
-        <a class="btn btn-ghost" href="https://github.com/TopDarkFlames" target="_blank" rel="noopener"><span class="play">▶</span>Abrir GitHub</a>
+        <a class="btn btn-accent" href="#projetos" data-en="See projects">Ver projetos</a>
+        <a class="btn btn-ghost" href="https://github.com/TopDarkFlames" target="_blank" rel="noopener" data-en="&lt;span class=&quot;play&quot;&gt;▶&lt;/span&gt;Open GitHub"><span class="play">▶</span>Abrir GitHub</a>
       </div>
       <p class="fine">java / sql / rust · web & backend · building in public</p>
     </div>
@@ -292,15 +432,15 @@ footer ul a:hover{color:var(--text)}
 <section class="sec" id="how">
   <div class="wrap">
     <div class="head-row rv">
-      <div><span class="kicker"><i></i>como eu trabalho</span><h2>Todo projeto é <em>lógica.</em></h2></div>
-      <p>Interface, dados e deploy são partes do mesmo fluxo. Eu cuido do caminho inteiro, da query ao pixel, para que a coisa funcione do jeito que parece funcionar.</p>
+      <div><span class="kicker" data-en="&lt;i&gt;&lt;/i&gt;how I work"><i></i>como eu trabalho</span><h2 data-en="Every project is &lt;em&gt;logic.&lt;/em&gt;">Todo projeto é <em>lógica.</em></h2></div>
+      <p data-en="Interface, data and deploy are parts of the same flow. I take care of the whole path, from query to pixel, so things work the way they look like they work.">Interface, dados e deploy são partes do mesmo fluxo. Eu cuido do caminho inteiro, da query ao pixel, para que a coisa funcione do jeito que parece funcionar.</p>
     </div>
 
     <div class="feat">
       <div class="rv">
         <div class="num">01</div>
-        <h3>Uma base, várias camadas</h3>
-        <p>Backend em Java, dados em SQL, sistemas em Rust e uma camada web em TypeScript e React por cima. Cada parte medida, nenhuma tratada como mágica.</p>
+        <h3 data-en="One base, many layers">Uma base, várias camadas</h3>
+        <p data-en="Backend in Java, data in SQL, systems in Rust and a web layer in TypeScript and React on top. Every part measured, none treated as magic.">Backend em Java, dados em SQL, sistemas em Rust e uma camada web em TypeScript e React por cima. Cada parte medida, nenhuma tratada como mágica.</p>
       </div>
       <div class="glass timing rv" id="timing">
         <div class="top"><span>build #0412</span><span>finished in 128 ms</span></div>
@@ -314,20 +454,20 @@ footer ul a:hover{color:var(--text)}
 
     <div class="feat rev">
       <div class="glass chat rv">
-        <div class="ch"><span># deploys</span><span>hoje</span></div>
+        <div class="ch"><span># deploys</span><span data-en="today">hoje</span></div>
         <div class="msg">
           <span class="mark">TF</span>
           <div>
             <b>TopDarkFlames</b><time>14:52</time>
-            <p>Build verde em <span class="mono" style="color:var(--text)">topdarkflames.github.io</span>. Publicar a versão nova do portfólio?</p>
-            <div class="acts"><span class="y">publicar</span><span>revisar antes</span></div>
+            <p data-en="Green build on &lt;span class=&quot;mono&quot; style=&quot;color:var(--text)&quot;&gt;topdarkflames.github.io&lt;/span&gt;. Ship the new version of the portfolio?">Build verde em <span class="mono" style="color:var(--text)">topdarkflames.github.io</span>. Publicar a versão nova do portfólio?</p>
+            <div class="acts"><span class="y" data-en="ship">publicar</span><span data-en="review first">revisar antes</span></div>
           </div>
         </div>
       </div>
       <div class="rv">
         <div class="num">02</div>
-        <h3>Feito em público, revisado antes</h3>
-        <p>Código aberto no GitHub, commits pequenos e nada vai para produção sem passar por revisão. Programas próprios, ferramentas para amigos e estudos, tudo versionado.</p>
+        <h3 data-en="Built in public, reviewed first">Feito em público, revisado antes</h3>
+        <p data-en="Open source on GitHub, small commits, and nothing goes to production without a review. My own programs, tools for friends and study projects, all versioned.">Código aberto no GitHub, commits pequenos e nada vai para produção sem passar por revisão. Programas próprios, ferramentas para amigos e estudos, tudo versionado.</p>
       </div>
     </div>
   </div>
@@ -337,8 +477,8 @@ footer ul a:hover{color:var(--text)}
 <section class="sec" id="projetos" style="padding-top:40px">
   <div class="wrap">
     <div class="head-row rv">
-      <div><span class="kicker"><i></i>featured repositories</span><h2>Projetos em <em>destaque.</em></h2></div>
-      <p>Repositórios públicos puxados direto do GitHub. Quando um projeto é publicado ou atualizado, esta vitrine acompanha sozinha.</p>
+      <div><span class="kicker"><i></i>featured repositories</span><h2 data-en="Featured &lt;em&gt;projects.&lt;/em&gt;">Projetos em <em>destaque.</em></h2></div>
+      <p data-en="Public repositories pulled straight from GitHub. When a project is published or updated, this showcase follows on its own.">Repositórios públicos puxados direto do GitHub. Quando um projeto é publicado ou atualizado, esta vitrine acompanha sozinha.</p>
     </div>
     <div class="repos" id="repos">
       <div class="glass repo"><div class="skel" style="width:40%"></div><div class="skel" style="width:70%;height:18px"></div><div class="skel" style="width:90%"></div><div class="skel" style="width:60%"></div></div>
@@ -354,7 +494,7 @@ footer ul a:hover{color:var(--text)}
     <div class="grow-card" id="growCard">
       <div class="grow-text" id="growText">
         <span class="mono">// signature</span>
-        <h2>O melhor código é o que <em>ninguém percebe</em> rodando.</h2>
+        <h2 data-en="The best code is the one &lt;em&gt;nobody notices&lt;/em&gt; running.">O melhor código é o que <em>ninguém percebe</em> rodando.</h2>
       </div>
       <span class="big">TF</span>
     </div>
@@ -365,17 +505,17 @@ footer ul a:hover{color:var(--text)}
 <section class="sec" id="stack">
   <div class="wrap">
     <div class="head-row rv">
-      <div><h2>Uma <em>semana,</em> vista do terminal.</h2></div>
-      <p>O que está aberto, o que está estudando e o que já foi para o ar. Números puxados do GitHub quando disponíveis.</p>
+      <div><h2 data-en="A &lt;em&gt;week,&lt;/em&gt; seen from the terminal.">Uma <em>semana,</em> vista do terminal.</h2></div>
+      <p data-en="What&#x27;s open, what&#x27;s being studied and what has already shipped. Numbers pulled from GitHub when available.">O que está aberto, o que está estudando e o que já foi para o ar. Números puxados do GitHub quando disponíveis.</p>
     </div>
     <div class="dash">
       <div class="glass card c8 rv">
-        <div class="cl"><span>atividade pública, por dia</span><span id="actTotal">— eventos</span></div>
+        <div class="cl"><span data-en="public activity, per day">atividade pública, por dia</span><span id="actTotal">— eventos</span></div>
         <div class="week" id="week"></div>
-        <div class="days"><span></span><span>dom</span><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span></div>
+        <div class="days" data-en="&lt;span&gt;&lt;/span&gt;&lt;span&gt;sun&lt;/span&gt;&lt;span&gt;mon&lt;/span&gt;&lt;span&gt;tue&lt;/span&gt;&lt;span&gt;wed&lt;/span&gt;&lt;span&gt;thu&lt;/span&gt;&lt;span&gt;fri&lt;/span&gt;&lt;span&gt;sat&lt;/span&gt;"><span></span><span>dom</span><span>seg</span><span>ter</span><span>qua</span><span>qui</span><span>sex</span><span>sáb</span></div>
       </div>
       <div class="glass card c4 rv">
-        <div class="cl"><span>linguagens nos repos</span><span>%</span></div>
+        <div class="cl"><span data-en="languages in repos">linguagens nos repos</span><span>%</span></div>
         <div class="ringwrap">
           <svg viewBox="0 0 120 120" id="ring">
             <circle cx="60" cy="60" r="48" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="9"/>
@@ -386,7 +526,7 @@ footer ul a:hover{color:var(--text)}
         </div>
       </div>
       <div class="glass card c7 rv">
-        <div class="cl"><span>loadout</span><span>build atual</span></div>
+        <div class="cl"><span>loadout</span><span data-en="current build">build atual</span></div>
         <div class="chips">
           <span class="chip hot"><b>Java</b>backend</span>
           <span class="chip hot"><b>SQL</b>databases</span>
@@ -402,11 +542,11 @@ footer ul a:hover{color:var(--text)}
         <svg class="wave" viewBox="0 0 600 110" preserveAspectRatio="none" id="wave"></svg>
       </div>
       <div class="glass card c5 rv" id="jornada">
-        <div class="cl"><span>jornada</span><span>sem hype</span></div>
+        <div class="cl" data-en="&lt;span&gt;journey&lt;/span&gt;&lt;span&gt;no hype&lt;/span&gt;"><span>jornada</span><span>sem hype</span></div>
         <div class="journey">
-          <div class="jr"><span class="n">01</span><div><b>Ciência da Computação</b><p>EEP Piracicaba · fundamentos de programação, lógica e sistemas.</p></div><span class="badge live">em progresso</span></div>
-          <div class="jr"><span class="n">02</span><div><b>CyberSecurity</b><p>Segurança, boas práticas e o funcionamento interno das aplicações.</p></div><span class="badge">concluído</span></div>
-          <div class="jr"><span class="n">03</span><div><b>Blockchain</b><p>Tecnologias descentralizadas, com curiosidade técnica acima do hype.</p></div><span class="badge">concluído</span></div>
+          <div class="jr"><span class="n">01</span><div><b data-en="Computer Science">Ciência da Computação</b><p data-en="EEP Piracicaba · programming fundamentals, logic and systems.">EEP Piracicaba · fundamentos de programação, lógica e sistemas.</p></div><span class="badge live" data-en="in progress">em progresso</span></div>
+          <div class="jr"><span class="n">02</span><div><b>CyberSecurity</b><p data-en="Security, good practices and how applications work on the inside.">Segurança, boas práticas e o funcionamento interno das aplicações.</p></div><span class="badge" data-en="completed">concluído</span></div>
+          <div class="jr"><span class="n">03</span><div><b>Blockchain</b><p data-en="Decentralized technologies, with technical curiosity above the hype.">Tecnologias descentralizadas, com curiosidade técnica acima do hype.</p></div><span class="badge" data-en="completed">concluído</span></div>
         </div>
       </div>
     </div>
@@ -420,41 +560,153 @@ footer ul a:hover{color:var(--text)}
       <div class="glass idcard">
         <span class="chev">&gt;&gt;</span>
         <div class="logo"><span class="mark">TF</span>TopDarkFlames</div>
-        <p>Full-stack developer construindo a parte que roda entre a ideia e o deploy.</p>
+        <p data-en="Full-stack developer building the part that runs between the idea and the deploy.">Full-stack developer construindo a parte que roda entre a ideia e o deploy.</p>
         <div class="foot"><span>stay in touch</span>
           <div class="soc"><a href="https://github.com/TopDarkFlames" target="_blank" rel="noopener" aria-label="GitHub">gh</a><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener" aria-label="LinkedIn">in</a></div>
         </div>
       </div>
       <div class="accentcard">
         <div>
-          <span class="mono">// contato</span>
-          <h3>Vamos acender um <em>projeto?</em></h3>
-          <p>Aberto para projetos, estudos e colaboração envolvendo web, automações e interfaces bem cuidadas.</p>
+          <span class="mono" data-en="// contact">// contato</span>
+          <h3 data-en="Shall we spark a &lt;em&gt;project?&lt;/em&gt;">Vamos acender um <em>projeto?</em></h3>
+          <p data-en="Open to projects, studies and collaboration around web, automation and well-crafted interfaces.">Aberto para projetos, estudos e colaboração envolvendo web, automações e interfaces bem cuidadas.</p>
         </div>
         <div class="acts">
-          <a class="btn btn-dark" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener">Falar no LinkedIn →</a>
-          <a class="btn btn-o" href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">Ver GitHub</a>
+          <a class="btn btn-dark" href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener" data-en="Talk on LinkedIn →">Falar no LinkedIn →</a>
+          <a class="btn btn-o" href="https://github.com/TopDarkFlames" target="_blank" rel="noopener" data-en="See GitHub">Ver GitHub</a>
         </div>
       </div>
     </div>
 
     <div class="stats">
-      <span>open source por padrão</span><span id="statRepos">— repositórios públicos</span><span>java · sql · rust</span>
+      <span data-en="open source by default">open source por padrão</span><span id="statRepos">— repositórios públicos</span><span>java · sql · rust</span>
     </div>
 
     <footer>
-      <div><div class="logo"><span class="mark">TF</span>TopDarkFlames</div><p class="fl">Dev full-stack em formação, construindo em público desde o Brasil.</p></div>
-      <div><h5>site</h5><ul><li><a href="#projetos">Projetos</a></li><li><a href="#stack">Stack</a></li><li><a href="#jornada">Jornada</a></li></ul></div>
-      <div><h5>código</h5><ul><li><a href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/TopDarkFlames?tab=repositories" target="_blank" rel="noopener">Repositórios</a></li></ul></div>
-      <div><h5>contato</h5><ul><li><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+      <div><div class="logo"><span class="mark">TF</span>TopDarkFlames</div><p class="fl" data-en="Full-stack developer in training, building in public from Brazil.">Dev full-stack em formação, construindo em público desde o Brasil.</p></div>
+      <div><h5>site</h5><ul><li><a href="#projetos" data-en="Projects">Projetos</a></li><li><a href="#stack">Stack</a></li><li><a href="#jornada" data-en="Journey">Jornada</a></li></ul></div>
+      <div><h5 data-en="code">código</h5><ul><li><a href="https://github.com/TopDarkFlames" target="_blank" rel="noopener">GitHub</a></li><li><a href="https://github.com/TopDarkFlames?tab=repositories" target="_blank" rel="noopener" data-en="Repositories">Repositórios</a></li></ul></div>
+      <div><h5 data-en="contact">contato</h5><ul><li><a href="https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
     </footer>
     <div class="legal"><span>© <span id="yr">2026</span> TopDarkFlames</span><span>built in brazil · light without the noise</span></div>
   </div>
 </section>
 
+<div class="ovl" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Paleta de comandos">
+  <div class="cmdk-box glass">
+    <div class="cmdk-in"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="cmdkInput" type="text" autocomplete="off" spellcheck="false" aria-controls="cmdkList" aria-autocomplete="list"><kbd>esc</kbd></div>
+    <ul id="cmdkList" role="listbox"></ul>
+    <div class="cmdk-foot"><span id="cmdkF1">↑↓ navegar</span><span id="cmdkF2">↵ abrir</span><span id="cmdkF3">esc fechar</span></div>
+  </div>
+</div>
+<div class="ovl" id="term" hidden role="dialog" aria-modal="true" aria-label="Terminal">
+  <div class="term-win glass">
+    <div class="term-bar"><span class="dots"><i></i><i></i><i></i></span><span>visitor@topdarkflames: ~</span><button class="term-x" id="termX" type="button" aria-label="Fechar">×</button></div>
+    <div class="term-body" id="termOut" aria-live="polite"></div>
+    <form class="term-line" id="termForm"><label class="ps1" for="termIn">visitor@tdf:~$</label><input id="termIn" type="text" autocomplete="off" spellcheck="false" autocapitalize="off"></form>
+  </div>
+</div>
+<div class="toast glass" id="toast" role="status"></div>
+
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- language: Portuguese lives in the HTML, English in data-en; dynamic strings below ---------- */
+  const I18N = {
+    pt: {
+      title: 'TopDarkFlames | Full-Stack Developer',
+      desc: 'Portfólio de TopDarkFlames, dev full-stack em formação. Java, SQL, Rust e web.',
+      hint: 'clique ou aperte qualquer tecla para pular',
+      today: 'hoje', yesterday: 'ontem', days: n => `${n} dias atrás`, months: n => `${n} meses atrás`, years: n => `${n} anos atrás`,
+      noDesc: 'Sem descrição ainda.', noRepos: 'Nenhum repositório público ainda.', repos: n => `${n} repositórios públicos`, reposNone: '— repositórios públicos',
+      ringIn: 'dos repositórios em', ringNone: 'dos repositórios na linguagem principal',
+      events: n => `${n} eventos · 7 dias`, eventsNone: '— eventos',
+      allRepos: 'Ver todos os repositórios', offline: 'Não deu para carregar a lista agora. Abra o perfil no GitHub.',
+      cmdkPh: 'Buscar seções, projetos, ações…', cmdkLabel: 'Paleta de comandos', f1: '↑↓ navegar', f2: '↵ abrir', f3: 'esc fechar',
+      gNav: 'Navegar', gProj: 'Projetos', gLinks: 'Links', gAct: 'Ações', empty: 'Nada encontrado.',
+      sTop: 'Início', sHow: 'Como eu trabalho', sProj: 'Projetos', sStack: 'Stack e atividade', sJour: 'Jornada', sCont: 'Contato',
+      aLang: 'Switch to English', aTerm: 'Abrir terminal', aCopy: 'Copiar link do site', copied: 'Link copiado', aTop: 'Voltar ao topo',
+      close: 'Fechar', langLabel: 'Mudar idioma / Change language'
+    },
+    en: {
+      title: 'TopDarkFlames | Full-Stack Developer',
+      desc: 'Portfolio of TopDarkFlames, a full-stack developer in training. Java, SQL, Rust and web.',
+      hint: 'click or press any key to skip',
+      today: 'today', yesterday: 'yesterday', days: n => `${n} days ago`, months: n => `${n} months ago`, years: n => `${n} years ago`,
+      noDesc: 'No description yet.', noRepos: 'No public repositories yet.', repos: n => `${n} public repositories`, reposNone: '— public repositories',
+      ringIn: 'of repositories in', ringNone: 'of repositories in the main language',
+      events: n => `${n} events · 7 days`, eventsNone: '— events',
+      allRepos: 'See all repositories', offline: "Couldn't load the list right now. Open the profile on GitHub.",
+      cmdkPh: 'Search sections, projects, actions…', cmdkLabel: 'Command palette', f1: '↑↓ navigate', f2: '↵ open', f3: 'esc close',
+      gNav: 'Navigate', gProj: 'Projects', gLinks: 'Links', gAct: 'Actions', empty: 'Nothing found.',
+      sTop: 'Home', sHow: 'How I work', sProj: 'Projects', sStack: 'Stack and activity', sJour: 'Journey', sCont: 'Contact',
+      aLang: 'Mudar para português', aTerm: 'Open terminal', aCopy: 'Copy site link', copied: 'Link copied', aTop: 'Back to top',
+      close: 'Close', langLabel: 'Mudar idioma / Change language'
+    }
+  };
+  let lang = (() => {
+    try { const s = localStorage.getItem('tdf-lang'); if (s === 'pt' || s === 'en') return s; } catch (e) {}
+    return /^pt/i.test(navigator.language || '') ? 'pt' : 'en';
+  })();
+  const t = k => I18N[lang][k];
+  const langHooks = [];                       // sections that render text from JS re-render on a switch
+  function applyLang(){
+    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+    document.querySelectorAll('[data-en]').forEach(el => {
+      if (el.dataset.pt == null) el.dataset.pt = el.innerHTML;
+      el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.pt;
+    });
+    document.title = t('title');
+    const md = document.querySelector('meta[name="description"]'); if (md) md.content = t('desc');
+    document.querySelectorAll('#langBtn span').forEach(s => s.classList.toggle('on', s.dataset.l === lang));
+    const hint = document.getElementById('introHint'); if (hint) hint.textContent = t('hint');
+    langHooks.forEach(f => f());
+  }
+  function setLang(l){
+    lang = l; try { localStorage.setItem('tdf-lang', l); } catch (e) {}
+    applyLang();
+  }
+  document.getElementById('langBtn').addEventListener('click', () => setLang(lang === 'pt' ? 'en' : 'pt'));
+  applyLang();
+
+  /* ---------- entrance: a strand of light writes the name, "Flames" ignites, the name flies into the nav logo ---------- */
+  (() => {
+    const intro = document.getElementById('intro'), root = document.documentElement;
+    if (!intro || root.classList.contains('no-intro')) { if (intro) intro.remove(); return; }
+    root.classList.add('intro-on');
+    const wrap = intro.querySelector('.intro-wrap'), name = intro.querySelector('.intro-name');
+    let done = false; const timers = [];
+    function exit(){
+      if (done) return; done = true; timers.forEach(clearTimeout);
+      // fly the name onto the nav wordmark (measured from the text itself, not its box)
+      const logo = document.querySelector('nav .logo'), from = name.getBoundingClientRect();
+      let to = null;
+      if (logo){ const tn = [...logo.childNodes].find(n => n.nodeType === 3 && n.textContent.trim());
+        if (tn){ const r = document.createRange(); r.selectNodeContents(tn); to = r.getBoundingClientRect(); } }
+      intro.classList.add('s1', 's2', 's3');
+      if (to && from.width){
+        const s = to.width / from.width;
+        name.style.transform = `translate(${(to.left - from.left).toFixed(1)}px, ${(to.top - from.top - from.height*s*.08).toFixed(1)}px) scale(${s.toFixed(4)})`;
+      }
+      root.classList.remove('intro-on');
+      try { sessionStorage.setItem('tdf-intro', '1'); } catch (e) {}
+      setTimeout(() => intro.remove(), 1000);
+      ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(ev => removeEventListener(ev, exit));
+    }
+    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(ev => addEventListener(ev, exit, {passive: true}));
+    const go = () => {
+      if (done) return;
+      wrap.style.setProperty('--w', wrap.offsetWidth + 'px');
+      intro.classList.add('s1');
+      timers.push(setTimeout(() => intro.classList.add('s2'), 1080));
+      timers.push(setTimeout(exit, 2500));
+    };
+    // start once the display faces are in (never wait more than 0.7 s for them)
+    Promise.race([document.fonts ? document.fonts.ready : Promise.resolve(), new Promise(r => setTimeout(r, 700))])
+      .then(() => requestAnimationFrame(go));
+  })();
   document.getElementById('yr').textContent = new Date().getFullYear();
 
   /* nav */
@@ -551,7 +803,10 @@ footer ul a:hover{color:var(--text)}
     const link = (vs, fs) => { const p = GL.createProgram(); GL.attachShader(p, sh(GL.VERTEX_SHADER, vs)); GL.attachShader(p, sh(GL.FRAGMENT_SHADER, fs));
       GL.linkProgram(p); if (!GL.getProgramParameter(p, GL.LINK_STATUS)) throw new Error(GL.getProgramInfoLog(p)); return p; };
     const COMMON = `
-      uniform vec2 uRes; uniform float uScroll, uTime, uDpr;
+      uniform vec2 uRes; uniform float uScroll, uTime, uDpr, uBoost; uniform vec3 uMouse;
+      // cursor: fibres part around it and glow a little (uMouse.z = strength, eased in JS)
+      float near(vec2 p){ vec2 d = p - uMouse.xy; return uMouse.z*exp(-dot(d, d)/33800.0); }
+      vec2 repel(vec2 p){ vec2 d = p - uMouse.xy; return p + d/(length(d) + 1.0)*near(p)*34.0; }
       float hash(float n){ return fract(sin(n)*43758.5453); }
       vec4 toClip(vec2 p){ p.y -= uScroll; vec2 c = p/uRes*2.0 - 1.0; return vec4(c.x, -c.y, 0.0, 1.0); }
       float fibreOffset(float o0, float w, float u, float ph, float t){
@@ -585,8 +840,9 @@ footer ul a:hover{color:var(--text)}
           float pulse = pow(max(0.0, sin(k*6.2832)), 8.0);
           a = aI.z*aA*(0.55 + 1.8*pulse)*breathe*(0.7/hw);   // a blurred fibre spreads the same light wider
         }
-        gl_Position = toClip(aS.xy + aS.zw*(o + side*hw));
-        vA = a; vSide = side; vCol = aC;
+        vec2 bp = aS.xy + aS.zw*(o + side*hw);
+        gl_Position = toClip(repel(bp));
+        vA = a*(1.0 + (uKind < 0.5 ? 0.35 : 1.1)*near(bp))*(1.0 + uBoost); vSide = side; vCol = aC;
       }`, `#version 300 es
       precision highp float;
       in vec3 vCol; in float vA; in float vSide; uniform float uKind; out vec4 o;
@@ -603,9 +859,10 @@ footer ul a:hover{color:var(--text)}
         float h = hash(id*1.71 + aI.y*91.3);
         vec2 tng = vec2(aS.w, -aS.z);
         float o = fibreOffset(aI.x, w, u, aI.y, t) + sin(t*0.6 + h*40.0)*(6.0 + w*0.22);
-        gl_Position = toClip(aS.xy + aS.zw*o + tng*fract(s)*10.0);
+        vec2 dp = aS.xy + aS.zw*o + tng*fract(s)*10.0;
+        gl_Position = toClip(repel(dp));
         float tw = 0.45 + 0.55*sin(t*(2.0 + 4.0*h) + h*60.0);
-        vA = step(0.94, h)*max(tw, 0.0)*(0.25 + 0.75*aM.y)*(1.0 + 0.04*sin(t*2.85));
+        vA = step(0.94, h)*max(tw, 0.0)*(0.25 + 0.75*aM.y)*(1.0 + 0.04*sin(t*2.85))*(1.0 + 1.5*near(dp))*(1.0 + 2.0*uBoost);
         gl_PointSize = (1.0 + 2.4*fract(h*13.0))*uDpr;
         vCol = aC;
       }`, `#version 300 es
@@ -613,8 +870,8 @@ footer ul a:hover{color:var(--text)}
       in vec3 vCol; in float vA; out vec4 o;
       void main(){ float a = vA*smoothstep(0.5, 0.0, length(gl_PointCoord - 0.5)); o = vec4(vCol*a, a); }`);
 
-    for (const k of ['uRes','uScroll','uTime','uDpr','uKind']) rU[k] = GL.getUniformLocation(rProg, k);
-    for (const k of ['uRes','uScroll','uTime','uDpr']) pU[k] = GL.getUniformLocation(pProg, k);
+    for (const k of ['uRes','uScroll','uTime','uDpr','uKind','uMouse','uBoost']) rU[k] = GL.getUniformLocation(rProg, k);
+    for (const k of ['uRes','uScroll','uTime','uDpr','uMouse','uBoost']) pU[k] = GL.getUniformLocation(pProg, k);
     bufR = GL.createBuffer(); bufS = GL.createBuffer(); bufG = GL.createBuffer(); bufF = GL.createBuffer(); bufD = GL.createBuffer();
     const inst = (prog, buf) => {
       const at = k => GL.getAttribLocation(prog, k);
@@ -646,6 +903,8 @@ footer ul a:hover{color:var(--text)}
      scroll position and lag a little behind fast scrolling, like something with weight.
      each point = [x as a fraction of width, y in page px, fan width px, fibre brightness, glow brightness] */
   let path = [], smoothY = null, lastNow = 0, vel = 0;
+  const mouse = {x: -9999, y: -9999, s: 0, tx: -9999, ty: -9999, ts: 0};
+  let boost = 0;   // set by the terminal's `ignite`, decays by itself
   function buildAnchors(){
     hh = $('.hero').offsetHeight;
     const s2 = docY($('#how')), pj = docY($('#projetos')), g = $('#grow'), gy = docY(g), gh = g.offsetHeight,
@@ -729,15 +988,17 @@ footer ul a:hover{color:var(--text)}
     GL.viewport(0, 0, glc.width, glc.height); GL.clearColor(0,0,0,0); GL.clear(GL.COLOR_BUFFER_BIT);
     if (glN && path.length){
       const dt = Math.min(.1, (now - (lastNow || now))/1000); lastNow = now;
+      const km = 1 - Math.exp(-dt*9);
+      mouse.x += (mouse.tx - mouse.x)*km; mouse.y += (mouse.ty - mouse.y)*km; mouse.s += (mouse.ts - mouse.s)*(1 - Math.exp(-dt*4)); boost *= Math.exp(-dt*1.1);
       const prev = smoothY == null ? scrollY : smoothY;
       smoothY = reduce ? scrollY : prev + (scrollY - prev)*(1 - Math.exp(-dt*7));
       if (dt > 0) vel += ((smoothY - prev)/dt - vel)*(1 - Math.exp(-dt*5));
       const [i0, i1] = frameSpine(smoothY), cnt = i1 - i0 + 1, t = reduce ? 0 : now/1000;
       if (cnt > 1){
-        GL.useProgram(rProg); GL.uniform1f(rU.uScroll, 0); GL.uniform1f(rU.uTime, t);
+        GL.useProgram(rProg); GL.uniform1f(rU.uScroll, 0); GL.uniform1f(rU.uTime, t); GL.uniform3f(rU.uMouse, mouse.x, mouse.y, mouse.s); GL.uniform1f(rU.uBoost, boost);
         GL.uniform1f(rU.uKind, 0); GL.bindVertexArray(vaoG); GL.drawArraysInstanced(GL.TRIANGLE_STRIP, i0*2, cnt*2, nGlow);
         GL.uniform1f(rU.uKind, 1); GL.bindVertexArray(vaoF); GL.drawArraysInstanced(GL.TRIANGLE_STRIP, i0*2, cnt*2, nFib);
-        GL.useProgram(pProg); GL.uniform1f(pU.uScroll, 0); GL.uniform1f(pU.uTime, t);
+        GL.useProgram(pProg); GL.uniform1f(pU.uScroll, 0); GL.uniform1f(pU.uTime, t); GL.uniform3f(pU.uMouse, mouse.x, mouse.y, mouse.s); GL.uniform1f(pU.uBoost, boost);
         GL.bindVertexArray(vaoD); GL.drawArraysInstanced(GL.POINTS, i0, cnt, nDust);
       }
     }
@@ -878,6 +1139,9 @@ footer ul a:hover{color:var(--text)}
       const mx = (p.r + q.l) / 2;
       return `<path d="M${p.r},${p.cy} C${mx},${p.cy} ${mx},${q.cy} ${q.l},${q.cy}" fill="none" stroke="${on?'#5aa8ff':'rgba(255,255,255,.18)'}" stroke-width="1.3" ${on?'stroke-dasharray="4 5" class="flowdash"':''}/>`;
     };
+    const [pT, pE, pD] = fb.querySelectorAll('.pill'), at = (el, x, y) => { if (el){ el.style.left = (x - el.offsetWidth/2) + 'px'; el.style.top = (y - el.offsetHeight/2) + 'px'; } };
+    at(pT, (a.r + b.l)/2, (a.cy + b.cy)/2); at(pE, (a.r + c.l)/2, (a.cy + c.cy)/2);
+    const dn = fb.querySelector('[data-n="d"]'); at(pD, dn.offsetLeft + dn.offsetWidth/2, dn.offsetTop + dn.offsetHeight + 16);
     svg.innerHTML = path(a,b,true) + path(a,c,false) + path(b,d,true) +
       `<style>.flowdash{animation:dash 1.2s linear infinite}@keyframes dash{to{stroke-dashoffset:-18}}</style>`;
   }
@@ -914,51 +1178,291 @@ footer ul a:hover{color:var(--text)}
   }
   drawWeek([0,0,0,0,0,0,0]);
 
-  /* ---------- GitHub data ---------- */
-  const USER = 'TopDarkFlames';
+  /* ---------- GitHub data (kept as state so a language switch re-renders it) ---------- */
+  const USER = 'TopDarkFlames', SITE = 'https://topdarkflames.github.io/', LINKEDIN = 'https://www.linkedin.com/in/braian-henrique-do-rosario-ribeiro-5a3a76317/';
   const esc = s => String(s ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  const ago = d => { const s = (Date.now() - new Date(d)) / 1000, dd = Math.floor(s/86400);
-    return dd < 1 ? 'hoje' : dd === 1 ? 'ontem' : dd < 30 ? `${dd} dias atrás` : dd < 365 ? `${Math.floor(dd/30)} meses atrás` : `${Math.floor(dd/365)} anos atrás`; };
+  const ago = d => { const dd = Math.floor((Date.now() - new Date(d))/86400e3);
+    return dd < 1 ? t('today') : dd === 1 ? t('yesterday') : dd < 30 ? t('days')(dd) : dd < 365 ? t('months')(Math.floor(dd/30)) : t('years')(Math.floor(dd/365)); };
+  let repoData = null, repoFailed = false, topLang = null, eventCounts = null;
+
+  function renderRepos(){
+    const box = document.getElementById('repos');
+    if (repoFailed){
+      box.innerHTML = `<a class="glass repo" href="https://github.com/${USER}" target="_blank" rel="noopener" style="grid-column:1/-1;min-height:0">
+          <div class="rt"><span>github</span><span>offline</span></div><h4>${esc(t('allRepos'))}</h4><p>${esc(t('offline'))}</p></a>`;
+      return;
+    }
+    if (!repoData) return;
+    document.getElementById('statRepos').textContent = t('repos')(repoData.length);
+    box.innerHTML = repoData.slice(0, 6).map((r, i) => `
+        <a class="glass repo rv in" href="${esc(r.html_url)}" target="_blank" rel="noopener">
+          <div class="rt"><span>${String(i+1).padStart(2,'0')} / repo</span><span>${esc(ago(r.pushed_at))}</span></div>
+          <h4>${esc(r.name)}</h4>
+          <p>${esc(r.description || t('noDesc'))}</p>
+          <div class="rf"><span><span class="lang-dot"></span>${esc(r.language || 'misc')}</span><span>★ ${r.stargazers_count}</span>${r.homepage ? '<span style="color:var(--accent)">live ↗</span>' : ''}</div>
+        </a>`).join('') || `<p style="color:var(--muted)">${esc(t('noRepos'))}</p>`;
+  }
+  function renderRing(){
+    document.getElementById('ringLbl').innerHTML = topLang
+      ? `${esc(t('ringIn'))} <b style="color:var(--accent);font-weight:500">${esc(topLang)}</b>` : esc(t('ringNone'));
+  }
+  function renderAct(){
+    document.getElementById('actTotal').textContent = eventCounts ? t('events')(eventCounts.reduce((a, b) => a + b, 0)) : t('eventsNone');
+    if (!repoData) document.getElementById('statRepos').textContent = t('reposNone');
+  }
+  langHooks.push(renderRepos, renderRing, renderAct);
+  renderRing(); renderAct();
 
   fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`)
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(repos => {
-      const own = repos.filter(r => !r.fork && r.name.toLowerCase() !== USER.toLowerCase());
-      document.getElementById('statRepos').textContent = `${own.length} repositórios públicos`;
-      const pick = own.slice(0, 6);
-      document.getElementById('repos').innerHTML = pick.map((r, i) => `
-        <a class="glass repo rv in" href="${esc(r.html_url)}" target="_blank" rel="noopener">
-          <div class="rt"><span>${String(i+1).padStart(2,'0')} / repo</span><span>${esc(ago(r.pushed_at))}</span></div>
-          <h4>${esc(r.name)}</h4>
-          <p>${esc(r.description || 'Sem descrição ainda.')}</p>
-          <div class="rf"><span><span class="lang-dot"></span>${esc(r.language || 'misc')}</span><span>★ ${r.stargazers_count}</span>${r.homepage ? '<span style="color:var(--accent)">live ↗</span>' : ''}</div>
-        </a>`).join('') || '<p style="color:var(--muted)">Nenhum repositório público ainda.</p>';
-      // language ring
-      const langs = {}; own.forEach(r => { if (r.language) langs[r.language] = (langs[r.language] || 0) + 1; });
-      const tot = Object.values(langs).reduce((a,b) => a+b, 0);
-      const top = Object.entries(langs).sort((a,b) => b[1]-a[1]);
+      repoData = repos.filter(r => !r.fork && r.name.toLowerCase() !== USER.toLowerCase());
+      const langs = {}; repoData.forEach(r => { if (r.language) langs[r.language] = (langs[r.language] || 0) + 1; });
+      const tot = Object.values(langs).reduce((a, b) => a + b, 0), top = Object.entries(langs).sort((a, b) => b[1] - a[1]);
       if (tot){
-        const pct = Math.round(top[0][1] / tot * 100);
+        const pct = Math.round(top[0][1]/tot*100); topLang = top[0][0];
         document.getElementById('ringPct').textContent = pct + '%';
-        document.getElementById('ringArc').style.strokeDashoffset = 301.6 * (1 - pct/100);
-        document.getElementById('ringLbl').innerHTML = `dos repositórios em <b style="color:var(--accent);font-weight:500">${esc(top[0][0])}</b>`;
+        document.getElementById('ringArc').style.strokeDashoffset = 301.6*(1 - pct/100);
       }
+      renderRepos(); renderRing();
     })
-    .catch(() => {
-      document.getElementById('repos').innerHTML = `
-        <a class="glass repo" href="https://github.com/${USER}" target="_blank" rel="noopener" style="grid-column:1/-1;min-height:0">
-          <div class="rt"><span>github</span><span>offline</span></div>
-          <h4>Ver todos os repositórios</h4><p>Não deu para carregar a lista agora. Abra o perfil no GitHub.</p></a>`;
-    });
+    .catch(() => { repoFailed = true; renderRepos(); });
 
   fetch(`https://api.github.com/users/${USER}/events/public?per_page=100`)
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(ev => {
       const counts = [0,0,0,0,0,0,0], cutoff = Date.now() - 7*86400e3;
       ev.forEach(e => { const d = new Date(e.created_at); if (d >= cutoff) counts[d.getDay()]++; });
-      drawWeek(counts);
-      document.getElementById('actTotal').textContent = counts.reduce((a,b)=>a+b,0) + ' eventos · 7 dias';
+      eventCounts = counts; drawWeek(counts); renderAct();
     }).catch(() => {});
+
+  /* ---------- small shared helpers for the overlays ---------- */
+  const toastEl = document.getElementById('toast'); let toastT;
+  const toast = msg => { toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 1800); };
+  const goTo = sel => { const el = document.querySelector(sel); if (el) el.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'}); };
+  const openUrl = u => window.open(u, '_blank', 'noopener');
+  const copySite = () => (navigator.clipboard ? navigator.clipboard.writeText(SITE) : Promise.reject()).then(() => toast(t('copied')), () => toast(SITE));
+  function overlay(el, focusEl){
+    let prev = null;
+    const o = {
+      isOpen: () => !el.hidden,
+      open(){ if (!el.hidden) return; prev = document.activeElement; el.hidden = false; requestAnimationFrame(() => el.classList.add('open')); focusEl.focus(); },
+      close(){ if (el.hidden) return; el.classList.remove('open'); setTimeout(() => { el.hidden = true; }, 200); if (prev && prev.focus) prev.focus(); }
+    };
+    el.addEventListener('pointerdown', e => { if (e.target === el) o.close(); });
+    return o;
+  }
+  const norm = s => String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+
+  /* ---------- command palette: Ctrl/⌘ K or "/" ---------- */
+  const cmdkEl = document.getElementById('cmdk'), cIn = document.getElementById('cmdkInput'), cList = document.getElementById('cmdkList');
+  const cmdk = overlay(cmdkEl, cIn);
+  let cItems = [], cShown = [], cAt = 0;
+  function buildItems(){
+    const nav = (label, sel, kw) => ({g: t('gNav'), ic: '#', label, kw, run: () => goTo(sel)});
+    cItems = [
+      nav(t('sTop'), '#top', 'home inicio topo hero'), nav(t('sHow'), '#how', 'how work trabalho'),
+      nav(t('sProj'), '#projetos', 'projects projetos repos'), nav(t('sStack'), '#stack', 'stack atividade activity semana week'),
+      nav(t('sJour'), '#jornada', 'journey jornada estudos'), nav(t('sCont'), '#contato', 'contact contato linkedin'),
+      ...(repoData || []).slice(0, 12).map(r => ({g: t('gProj'), ic: '</>', label: r.name, hint: r.language || '', kw: r.description || '', run: () => openUrl(r.html_url)})),
+      {g: t('gLinks'), ic: 'gh', label: 'GitHub', hint: 'github.com/' + USER, run: () => openUrl('https://github.com/' + USER)},
+      {g: t('gLinks'), ic: 'in', label: 'LinkedIn', hint: 'linkedin.com', run: () => openUrl(LINKEDIN)},
+      {g: t('gAct'), ic: 'Aa', label: t('aLang'), kw: 'idioma language ingles english portugues', run: () => setLang(lang === 'pt' ? 'en' : 'pt')},
+      {g: t('gAct'), ic: '>_', label: t('aTerm'), kw: 'terminal console shell easter', run: () => openTerm()},
+      {g: t('gAct'), ic: '⧉', label: t('aCopy'), kw: 'copy copiar link share compartilhar', run: copySite},
+      {g: t('gAct'), ic: '↑', label: t('aTop'), kw: 'top topo', run: () => goTo('#top')}
+    ];
+  }
+  function renderList(){
+    const q = norm(cIn.value).split(/\s+/).filter(Boolean);
+    cShown = cItems.filter(it => { const h = norm(it.label + ' ' + (it.kw || '') + ' ' + (it.hint || '') + ' ' + it.g); return q.every(w => h.includes(w)); });
+    cAt = Math.min(cAt, Math.max(0, cShown.length - 1));
+    if (!cShown.length){ cList.innerHTML = `<li class="cmdk-empty">${esc(t('empty'))}</li>`; return; }
+    let g = '', h = '';
+    cShown.forEach((it, i) => {
+      if (it.g !== g){ g = it.g; h += `<li class="cmdk-g" role="presentation">${esc(g)}</li>`; }
+      h += `<li class="cmdk-i${i === cAt ? ' on' : ''}" role="option" aria-selected="${i === cAt}" data-i="${i}"><span class="ic">${esc(it.ic)}</span><span>${esc(it.label)}</span>${it.hint ? `<small>${esc(it.hint)}</small>` : ''}</li>`;
+    });
+    cList.innerHTML = h;
+    const on = cList.querySelector('.on'); if (on) on.scrollIntoView({block: 'nearest'});
+  }
+  function runAt(i){ const it = cShown[i]; if (!it) return; cmdk.close(); setTimeout(it.run, 60); }
+  function openCmdk(){
+    cIn.placeholder = t('cmdkPh'); cmdkEl.setAttribute('aria-label', t('cmdkLabel'));
+    ['f1','f2','f3'].forEach((k, i) => { document.getElementById('cmdkF' + (i + 1)).textContent = t(k); });
+    buildItems(); cIn.value = ''; cAt = 0; renderList(); cmdk.open();
+  }
+  cIn.addEventListener('input', () => { cAt = 0; renderList(); });
+  cIn.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown'){ e.preventDefault(); cAt = (cAt + 1) % Math.max(1, cShown.length); renderList(); }
+    else if (e.key === 'ArrowUp'){ e.preventDefault(); cAt = (cAt - 1 + cShown.length) % Math.max(1, cShown.length); renderList(); }
+    else if (e.key === 'Enter'){ e.preventDefault(); runAt(cAt); }
+    else if (e.key === 'Escape'){ e.preventDefault(); cmdk.close(); }
+    else if (e.key === 'Tab'){ e.preventDefault(); }
+  });
+  cList.addEventListener('pointermove', e => { const li = e.target.closest('.cmdk-i'); if (li && +li.dataset.i !== cAt){ cAt = +li.dataset.i; renderList(); } });
+  cList.addEventListener('click', e => { const li = e.target.closest('.cmdk-i'); if (li) runAt(+li.dataset.i); });
+  const kbtn = document.getElementById('kbtn');
+  if (/Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent)) kbtn.textContent = '⌘K';
+  kbtn.addEventListener('click', openCmdk);
+
+  /* ---------- hidden terminal: press ` (or click the status pill, or ask the palette) ---------- */
+  const termEl = document.getElementById('term'), tOut = document.getElementById('termOut'), tIn = document.getElementById('termIn');
+  const term = overlay(termEl, tIn);
+  const tHist = []; let tHi = 0, tGreeted = false;
+  const line = (h, cls) => { const d = document.createElement('div'); if (cls) d.className = cls; d.innerHTML = h; tOut.appendChild(d); tOut.scrollTop = tOut.scrollHeight; };
+  const PT = () => lang === 'pt';
+  const a = (u, label) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(label)}</a>`;
+  const FILES = { 'sobre.txt': 'whoami', 'about.txt': 'whoami', 'stack.txt': 'stack', 'jornada.md': 'jornada', 'journey.md': 'jornada', 'contato.txt': 'contato', 'contact.txt': 'contato' };
+  const CMDS = {
+    help: () => line(PT()
+      ? `<span class="w">comandos</span>\n  <span class="c">whoami</span>      quem sou eu\n  <span class="c">projetos</span>    repositórios públicos\n  <span class="c">stack</span>       o que eu uso\n  <span class="c">jornada</span>     estudos\n  <span class="c">contato</span>     onde me achar\n  <span class="c">open</span> &lt;x&gt;    abre um projeto, github ou linkedin\n  <span class="c">cd</span> &lt;seção&gt;  vai até uma seção do site\n  <span class="c">lang</span> pt|en  troca o idioma\n  <span class="c">ls</span> · <span class="c">cat</span> · <span class="c">neofetch</span> · <span class="c">date</span> · <span class="c">echo</span> · <span class="c">history</span> · <span class="c">clear</span> · <span class="c">exit</span>\n  <span class="d">e um comando escondido que acende o feixe…</span>`
+      : `<span class="w">commands</span>\n  <span class="c">whoami</span>      who I am\n  <span class="c">projects</span>    public repositories\n  <span class="c">stack</span>       what I use\n  <span class="c">journey</span>     studies\n  <span class="c">contact</span>     where to find me\n  <span class="c">open</span> &lt;x&gt;    opens a project, github or linkedin\n  <span class="c">cd</span> &lt;section&gt; goes to a section of the site\n  <span class="c">lang</span> pt|en  switches the language\n  <span class="c">ls</span> · <span class="c">cat</span> · <span class="c">neofetch</span> · <span class="c">date</span> · <span class="c">echo</span> · <span class="c">history</span> · <span class="c">clear</span> · <span class="c">exit</span>\n  <span class="d">and a hidden command that lights up the beam…</span>`),
+    whoami: () => line(PT()
+      ? `<span class="w">TopDarkFlames</span> · dev full-stack em formação, Brasil.\nConstruo projetos web e ferramentas próprias, estudo Java, SQL e Rust\ne gosto de interfaces que não sacrificam clareza.`
+      : `<span class="w">TopDarkFlames</span> · full-stack developer in training, Brazil.\nI build web projects and my own tools, study Java, SQL and Rust,\nand like interfaces that don't sacrifice clarity.`),
+    projetos: () => {
+      if (!repoData) return line(PT() ? 'carregando do GitHub… tente de novo em instantes.' : 'loading from GitHub… try again in a moment.', 'd');
+      line(repoData.slice(0, 12).map(r => `${a(r.html_url, r.name.padEnd(24))} <span class="d">${esc(r.language || 'misc')}</span>  ${esc(r.description || t('noDesc'))}`).join('\n'));
+    },
+    stack: () => line(`<span class="c">java</span> backend · <span class="c">sql</span> databases · <span class="c">rust</span> systems\nhtml+css · javascript · typescript · react · node.js · python · git`),
+    jornada: () => line(PT()
+      ? `<span class="c">01</span> Ciência da Computação  <span class="d">em progresso · EEP Piracicaba</span>\n<span class="c">02</span> CyberSecurity          <span class="d">concluído</span>\n<span class="c">03</span> Blockchain             <span class="d">concluído</span>`
+      : `<span class="c">01</span> Computer Science  <span class="d">in progress · EEP Piracicaba</span>\n<span class="c">02</span> CyberSecurity     <span class="d">completed</span>\n<span class="c">03</span> Blockchain        <span class="d">completed</span>`),
+    contato: () => line(`github    ${a('https://github.com/' + USER, 'github.com/' + USER)}\nlinkedin  ${a(LINKEDIN, 'linkedin.com/in/braian-henrique…')}\nsite      ${a(SITE, 'topdarkflames.github.io')}`),
+    open: args => {
+      const q = norm(args.join(' '));
+      if (!q) return line(PT() ? 'uso: open &lt;projeto | github | linkedin&gt;' : 'usage: open &lt;project | github | linkedin&gt;', 'd');
+      if (q === 'github') return openUrl('https://github.com/' + USER);
+      if (q === 'linkedin') return openUrl(LINKEDIN);
+      const r = (repoData || []).find(r => norm(r.name).includes(q));
+      if (r){ line((PT() ? 'abrindo ' : 'opening ') + esc(r.name) + '…', 'd'); openUrl(r.html_url); }
+      else line((PT() ? 'não achei: ' : 'not found: ') + esc(args.join(' ')), 'd');
+    },
+    cd: args => {
+      const map = {'': '#top', '~': '#top', '/': '#top', inicio: '#top', home: '#top', how: '#how', trabalho: '#how', projetos: '#projetos', projects: '#projetos', stack: '#stack', jornada: '#jornada', journey: '#jornada', contato: '#contato', contact: '#contato'};
+      const k = norm(args[0] || ''); if (!(k in map)) return line((PT() ? 'seção desconhecida: ' : 'unknown section: ') + esc(args[0]), 'd');
+      term.close(); setTimeout(() => goTo(map[k]), 220);
+    },
+    ls: () => line(`<span class="c">projetos/</span>  ${PT() ? 'sobre.txt  stack.txt  jornada.md  contato.txt' : 'about.txt  stack.txt  journey.md  contact.txt'}`),
+    cat: args => { const f = FILES[norm(args[0] || '')]; if (f) CMDS[f]([]); else if (/^projetos\/?$/.test(args[0] || '')) CMDS.projetos([]); else line('cat: ' + esc(args[0] || '') + (PT() ? ': arquivo não encontrado' : ': no such file'), 'd'); },
+    lang: args => { const l = norm(args[0] || ''); if (l !== 'pt' && l !== 'en') return line('lang pt | lang en', 'd'); setLang(l); line(l === 'pt' ? 'idioma: português' : 'language: English', 'd'); },
+    neofetch: () => {
+      const art = ['████████  ███████', '   ██     ██', '   ██     █████', '   ██     ██', '   ██     ██', '', ''];
+      const info = ['<span class="w">visitor</span>@<span class="w">topdarkflames</span>', '─────────────────────',
+        '<span class="c">role </span>   full-stack dev', '<span class="c">stack</span>   java · sql · rust · web', '<span class="c">home </span>   brazil',
+        `<span class="c">repos</span>   ${repoData ? repoData.length : '…'} public`, '<span class="c">theme</span>   dark · blue fibre'];
+      line(art.map((s, i) => `<span class="c">${s.padEnd(20)}</span>${info[i]}`).join('\n'));
+    },
+    date: () => line(new Date().toLocaleString(PT() ? 'pt-BR' : 'en-US')),
+    echo: args => line(esc(args.join(' '))),
+    history: () => line(tHist.map((h, i) => `<span class="d">${String(i + 1).padStart(3)}</span>  ${esc(h)}`).join('\n') || '…', ''),
+    clear: () => { tOut.innerHTML = ''; },
+    exit: () => term.close(),
+    sudo: () => line(PT() ? 'visitor não está no arquivo sudoers. este incidente será reportado… para ninguém.' : 'visitor is not in the sudoers file. this incident will be reported… to nobody.', 'd'),
+    ignite: () => { boost = 1.8; const bl = document.getElementById('bloom'); if (bl){ bl.animate([{filter: 'brightness(1)'}, {filter: 'brightness(2.4)'}, {filter: 'brightness(1)'}], {duration: 1600, easing: 'ease-out'}); }
+      line(PT() ? '🔥 o feixe acendeu.' : '🔥 the beam is lit.', 'c'); }
+  };
+  Object.assign(CMDS, {ajuda: CMDS.help, '?': CMDS.help, sobre: CMDS.whoami, about: CMDS.whoami, projects: CMDS.projetos, ls_projetos: CMDS.projetos,
+    journey: CMDS.jornada, contact: CMDS.contato, limpar: CMDS.clear, sair: CMDS.exit, quit: CMDS.exit, idioma: CMDS.lang, flames: CMDS.ignite, acender: CMDS.ignite});
+  const NAMES = Object.keys(CMDS).filter(k => !k.includes('_') && k !== '?');
+  function openTerm(){
+    if (!tGreeted){ tGreeted = true;
+      line(PT() ? `TopDarkFlames shell · digite <span class="c">help</span> para ver os comandos.` : `TopDarkFlames shell · type <span class="c">help</span> to see the commands.`, 'd'); }
+    document.getElementById('termX').setAttribute('aria-label', t('close'));
+    term.open();
+  }
+  document.getElementById('termForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const raw = tIn.value; tIn.value = '';
+    const echo = document.createElement('div'); echo.innerHTML = '<span class="ps1">visitor@tdf:~$</span> '; echo.appendChild(document.createTextNode(raw)); tOut.appendChild(echo);
+    if (raw.trim()){ tHist.push(raw); tHi = tHist.length; }
+    const [c, ...args] = raw.trim().split(/\s+/); const k = norm(c || '');
+    if (!k){ tOut.scrollTop = tOut.scrollHeight; return; }
+    (CMDS[k] || (() => line((PT() ? 'comando não encontrado: ' : 'command not found: ') + esc(c) + (PT() ? ' · tente <span class="c">help</span>' : ' · try <span class="c">help</span>'), 'd')))(args);
+    tOut.scrollTop = tOut.scrollHeight;
+  });
+  tIn.addEventListener('keydown', e => {
+    if (e.key === 'ArrowUp'){ e.preventDefault(); if (tHi > 0){ tHi--; tIn.value = tHist[tHi]; } }
+    else if (e.key === 'ArrowDown'){ e.preventDefault(); if (tHi < tHist.length - 1){ tHi++; tIn.value = tHist[tHi]; } else { tHi = tHist.length; tIn.value = ''; } }
+    else if (e.key === 'Tab'){ e.preventDefault(); const v = norm(tIn.value); if (v && !v.includes(' ')){ const m = NAMES.filter(n => n.startsWith(v)); if (m.length === 1) tIn.value = m[0] + ' '; else if (m.length) line(m.join('  '), 'd'); } }
+    else if (e.key === 'Escape'){ e.preventDefault(); term.close(); }
+    else if (e.key.toLowerCase() === 'l' && e.ctrlKey){ e.preventDefault(); tOut.innerHTML = ''; }
+  });
+  document.getElementById('termX').addEventListener('click', () => term.close());
+  document.getElementById('statusPill').addEventListener('dblclick', openTerm);
+
+  // global shortcuts
+  addEventListener('keydown', e => {
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName) || (document.activeElement || {}).isContentEditable;
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'){ e.preventDefault(); if (term.isOpen()) term.close(); cmdk.isOpen() ? cmdk.close() : openCmdk(); return; }
+    if (typing) return;
+    if (e.key === '/'){ e.preventDefault(); openCmdk(); return; }
+    if (e.key === '`' || e.key === '~'){ e.preventDefault(); if (cmdk.isOpen()) cmdk.close(); openTerm(); return; }
+    if (e.key.length === 1 && !e.ctrlKey && !e.metaKey){
+      typed = (typed + e.key.toLowerCase()).slice(-6);
+      if (typed === 'flames'){ e.preventDefault(); typed = ''; if (cmdk.isOpen()) cmdk.close(); openTerm(); }
+    }
+  });
+  let typed = '';
+
+
+  /* ---------- interactions (mouse/trackpad only, never with reduced motion) ---------- */
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce;
+  if (fine){
+    // cursor drives the beam, the glass spotlights and the hero panel
+    let lastGlass = null;
+    const TILT = '.repo, .dash .card, .idcard, .feat .glass, .accentcard';
+    const hero = document.querySelector('.hero'), heroPanel = document.querySelector('.hero .flow');
+    addEventListener('pointermove', e => {
+      mouse.tx = e.clientX; mouse.ty = e.clientY; mouse.ts = 1;
+      const g = e.target.closest && e.target.closest('.glass, .accentcard');
+      if (lastGlass && lastGlass !== g) leave(lastGlass);
+      lastGlass = g;
+      if (g){
+        const r = g.getBoundingClientRect(), x = (e.clientX - r.left)/r.width, y = (e.clientY - r.top)/r.height;
+        g.style.setProperty('--mx', (x*100).toFixed(1) + '%'); g.style.setProperty('--my', (y*100).toFixed(1) + '%'); g.style.setProperty('--spot', 1);
+        if (g.matches(TILT) && !g.closest('.hero')){
+          g.style.transition = 'transform .12s ease-out, border-color .25s';
+          g.style.transform = `perspective(900px) rotateX(${((.5 - y)*7).toFixed(2)}deg) rotateY(${((x - .5)*9).toFixed(2)}deg) translateY(-3px)`;
+        }
+      }
+      if (heroPanel && e.clientY < hero.getBoundingClientRect().bottom){
+        heroPanel.style.setProperty('--px', ((e.clientX/innerWidth - .5)*2).toFixed(3));
+        heroPanel.style.setProperty('--py', ((e.clientY/innerHeight - .5)*2).toFixed(3));
+      }
+    }, {passive: true});
+    function leave(g){
+      g.style.setProperty('--spot', 0);
+      if (g.style.transform){ g.style.transition = 'transform .6s cubic-bezier(.2,.8,.2,1), border-color .25s'; g.style.transform = ''; }
+    }
+    document.documentElement.addEventListener('pointerleave', () => { mouse.ts = 0; if (lastGlass){ leave(lastGlass); lastGlass = null; } });
+
+    // magnetic buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('pointermove', e => {
+        const r = btn.getBoundingClientRect(), dx = e.clientX - (r.left + r.width/2), dy = e.clientY - (r.top + r.height/2);
+        btn.style.transition = 'transform .15s ease-out, box-shadow .2s, background .2s';
+        btn.style.transform = `translate(${(dx*.22).toFixed(1)}px, ${(dy*.32).toFixed(1)}px)`;
+      });
+      btn.addEventListener('pointerleave', () => { btn.style.transition = 'transform .5s cubic-bezier(.2,.8,.2,1), box-shadow .2s, background .2s'; btn.style.transform = ''; });
+    });
+  }
+
+  // drag the pipeline nodes around (works with touch too); connectors and labels follow
+  fb.querySelectorAll('.node').forEach(node => {
+    node.addEventListener('pointerdown', e => {
+      e.preventDefault(); node.setPointerCapture(e.pointerId); node.classList.add('dragging');
+      const sx = e.clientX, sy = e.clientY, ox = node.offsetLeft, oy = node.offsetTop;
+      const move = ev => {
+        const x = Math.max(0, Math.min(fb.clientWidth - node.offsetWidth, ox + ev.clientX - sx));
+        const y = Math.max(0, Math.min(fb.clientHeight - node.offsetHeight, oy + ev.clientY - sy));
+        node.style.left = x + 'px'; node.style.top = y + 'px'; drawFlow();
+      };
+      const up = () => { node.classList.remove('dragging'); node.removeEventListener('pointermove', move); node.removeEventListener('pointerup', up); node.removeEventListener('pointercancel', up); };
+      node.addEventListener('pointermove', move); node.addEventListener('pointerup', up); node.addEventListener('pointercancel', up);
+    });
+  });
 })();
 </script>
 </body>
