@@ -2,7 +2,7 @@
 
 # TopDarkFlames Portfolio
 
-Dark RGB portfolio built to present my developer profile, studies, stack, and live GitHub projects.
+Dark SaaS-style portfolio with a live WebGL fiber-optic light beam, built to present my developer profile, studies, stack, and live GitHub projects.
 
 [![Portfolio](https://img.shields.io/badge/OPEN_PORTFOLIO-DC143C?style=for-the-badge&logo=githubpages&logoColor=white)](https://topdarkflames.github.io/)
 [![GitHub Pages](https://img.shields.io/badge/GITHUB_PAGES-111111?style=for-the-badge&logo=github&logoColor=white)](https://topdarkflames.github.io/)
@@ -20,26 +20,23 @@ This repository powers my personal portfolio at:
 https://topdarkflames.github.io/
 ```
 
-The site is a static GitHub Pages project made with vanilla HTML, CSS, and JavaScript. It uses a real-time WebGL effect (blue light behind fluted glass), a monumental type hero, animated reveals, and a live repository showcase connected to the GitHub API, where every repo gets its own generated poster.
+The site is a single static `index.html` (vanilla HTML, CSS and JavaScript, no build step). Its signature is a real-time WebGL2 beam: hundreds of fine glowing fibers with light pulses flowing through them, depth of field, bloom and drifting particles, laid out as one continuous ribbon that runs down the whole page and bends as you scroll. Browsers without WebGL get a lighter animated fallback.
 
 ## Visual Identity
 
-The portfolio follows a **dark forge / RGB precision** style:
-
-- deep dark background
-- crimson, cyan, lime, and amber highlights
-- compact project cards
-- terminal-inspired profile panel
-- smooth scroll and reveal animations
-- clean portfolio navigation for projects, stack, journey, and contact
+- near-black background with an electric blue accent
+- fiber-optic light beam (WebGL2, additive blending, depth of field)
+- frosted glass panels, including a 3D-tilted pipeline card in the hero
+- serif italic accents in the headlines, monospace labels
+- scroll-driven reveals and an accent card that grows from the TF mark
 
 ## Features
 
 - Responsive layout for desktop and mobile
 - Live project cards loaded from public GitHub repositories
 - Repositories sorted by recent activity
-- Auto refresh while the page is open
-- Fallback project data if the GitHub API is unavailable
+- Weekly activity chart and main-language ring from the GitHub API
+- Link to the GitHub profile if the API is unavailable
 - GitHub Pages deploy with no build step
 
 ## Stack
@@ -68,9 +65,7 @@ When I update or publish a public repository, the portfolio can reflect the late
 
 ```text
 .
-|-- index.html
-|-- css/   tokens, hero, work (projetos), sections
-|-- js/    vfx (WebGL), main, hero, work, sections
+|-- index.html   whole site: markup, styles, WebGL beam and GitHub data
 `-- README.md
 ```
 
